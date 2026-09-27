@@ -143,7 +143,7 @@ body.light-mode .master-mode-hotspot{background:rgba(255,255,255,.56);color:rgba
 <body>
 <div class="top-fixed"><button id="themeBtn">☀️ Mode clair</button><button id="fullBtn">⛶ Plein écran</button></div>
 <main class="app">
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.5</span></div></header>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.6</span></div></header>
 
 <section id="menuScreen" class="panel menu-panel">
   <div class="section-title">Choisis les opérations</div>
@@ -399,8 +399,8 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
   };
 
   function levelFromText(t){const m=String(t||'').match(/Niveau\s*([123])/i);return m?Number(m[1]):null}
-  function normalLabel(level,isLocked){return `Niveau ${level}${isLocked?' (bloqué)':''}`}
-  function hardLabel(isLocked){return isLocked?'⚠ HARD (bloqué)':'⚠ Activer HARD'}
+  function normalLabel(level,isLocked){if(!isLocked)return `Niveau ${level}`;const req=level===2?'Niv1 80%':level===3?'Niv2 80%':'';return `Niveau ${level} (bloqué → ${req})`}
+  function hardLabel(isLocked){return isLocked?'⚠ HARD (bloqué → Niv1+2+3 100%)':'⚠ Activer HARD'}
 
   function refreshSelect(sel,p){
     if(!sel)return;
