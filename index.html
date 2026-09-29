@@ -292,11 +292,46 @@ body.light-mode .master-mode-reset-note{color:#8b5b54}
 }
 </style>
 
+
+<style id="menuCornerControlsPatch">
+.fullscreen-btn,
+.theme-toggle-btn{
+  position:absolute !important;
+  left:auto !important;
+  right:14px !important;
+  z-index:80 !important;
+}
+.fullscreen-btn{top:12px !important}
+.theme-toggle-btn{top:56px !important}
+
+.top-fixed{
+  position:absolute !important;
+  top:12px !important;
+  left:auto !important;
+  right:14px !important;
+  z-index:80 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-end !important;
+  gap:6px !important;
+}
+
+.app{padding-top:18px !important}
+header{padding-right:175px !important}
+
+@media(max-width:680px){
+  .fullscreen-btn{top:8px !important;right:8px !important}
+  .theme-toggle-btn{top:50px !important;right:8px !important}
+  .top-fixed{top:8px !important;right:8px !important}
+  header{padding-right:145px !important}
+}
+</style>
+
 </head>
 <body>
-<div class="top-fixed"><button id="themeBtn">☀️ Mode clair</button><button id="fullBtn">⛶ Plein écran</button></div>
+<div class="top-fixed"><button id="themeBtn">Mode clair</button><button id="fullBtn">⛶ Plein écran</button></div>
 <main class="app">
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.10</span></div></header>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.11</span></div></header>
 
 <section id="menuScreen" class="panel menu-panel">
   <div class="section-title">Choisis les opérations</div>
@@ -379,7 +414,7 @@ function chosenOp(list=settings.ops){return list[rand(0,list.length-1)]}
 function selectedMultipliers(){return settings.multipliers.length?settings.multipliers:[2]}
 
 /* theme/fullscreen */
-function setTheme(light){document.body.classList.toggle('light',light);$('themeBtn').textContent=light?'🌙 Mode sombre':'☀️ Mode clair';safeSet(STORE.theme,light?'light':'dark')}
+function setTheme(light){document.body.classList.toggle('light',light);$('themeBtn').textContent=light?'Mode sombre':'Mode clair';safeSet(STORE.theme,light?'light':'dark')}
 setTheme(safeGet(STORE.theme,'dark')==='light');$('themeBtn').onclick=()=>setTheme(!document.body.classList.contains('light'));$('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch{}};document.addEventListener('fullscreenchange',()=>$('fullBtn').textContent=document.fullscreenElement?'✕ Quitter plein écran':'⛶ Plein écran');
 
 /* settings */
