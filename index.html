@@ -252,11 +252,51 @@ body.light-mode .master-mode-reset-note{color:#8b5b54}
 }
 </style>
 
+
+<style id="topLeftControlsPatch">
+/* Plein écran + thème : zone fixe et compacte dans le coin supérieur gauche. */
+.fullscreen-btn,
+.theme-toggle-btn{
+  position:fixed !important;
+  left:10px !important;
+  right:auto !important;
+  z-index:2400 !important;
+  max-width:160px !important;
+}
+.fullscreen-btn{top:10px !important}
+.theme-toggle-btn{top:54px !important}
+
+/* Mélange de calculs utilise un conteneur commun. */
+.top-fixed{
+  position:fixed !important;
+  top:10px !important;
+  left:10px !important;
+  right:auto !important;
+  z-index:2400 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:6px !important;
+}
+.top-fixed button{
+  min-width:0 !important;
+  max-width:160px !important;
+  padding:8px 11px !important;
+}
+
+/* Les commandes restent dans leur coin, sans pousser le contenu latéralement. */
+@media(max-width:680px){
+  .fullscreen-btn{top:8px !important;left:8px !important;right:auto !important}
+  .theme-toggle-btn{top:50px !important;left:8px !important;right:auto !important}
+  .top-fixed{top:8px !important;left:8px !important;right:auto !important}
+}
+</style>
+
 </head>
 <body>
 <div class="top-fixed"><button id="themeBtn">☀️ Mode clair</button><button id="fullBtn">⛶ Plein écran</button></div>
 <main class="app">
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.9</span></div></header>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.10</span></div></header>
 
 <section id="menuScreen" class="panel menu-panel">
   <div class="section-title">Choisis les opérations</div>
