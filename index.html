@@ -139,11 +139,124 @@ body.light-mode .master-mode-input{background:#fff;color:#173047;border-color:#c
 body.light-mode .master-mode-hotspot{background:rgba(255,255,255,.56);color:rgba(25,48,71,.40);border-color:rgba(25,48,71,.12)}
 
 </style>
+
+<style id="masterModeResetStyle">
+.master-mode-input{
+  -webkit-text-security:disc;
+  text-security:disc;
+  letter-spacing:.16em;
+}
+.master-mode-action.master-reset{
+  background:linear-gradient(180deg,#8b3b32,#6e2924)!important;
+  border-color:rgba(255,164,150,.35)!important;
+}
+.master-mode-action.master-reset:hover{
+  filter:brightness(1.08);
+}
+.master-mode-reset-note{
+  margin-top:7px;
+  font-size:.67rem;
+  line-height:1.3;
+  color:#c9a7a2;
+}
+body.light-mode .master-mode-reset-note{color:#8b5b54}
+</style>
+
+
+<style id="uiConsistencyPatch">
+/* Les commandes globales restent attachées au viewport, jamais au contenu défilant. */
+.fullscreen-btn,
+.theme-toggle-btn{
+  position:fixed !important;
+  right:12px !important;
+  z-index:12000 !important;
+}
+.fullscreen-btn{top:10px !important}
+.theme-toggle-btn{top:56px !important}
+
+.top-fixed{
+  position:fixed !important;
+  top:10px !important;
+  right:12px !important;
+  z-index:12000 !important;
+}
+
+/* Le contenu réservé au Master mode ne peut jamais apparaître quand il est inactif. */
+.master-mode-row[hidden],
+.master-mode-reset-note[hidden]{
+  display:none !important;
+}
+
+/* Scores : présents et lisibles, mais moins massifs. */
+#sessionScore{
+  font-size:1.12rem !important;
+  font-weight:900 !important;
+  padding:8px 12px !important;
+}
+.score-memory{
+  font-size:.88rem !important;
+  font-weight:800 !important;
+}
+.score-line strong{
+  font-size:.98rem !important;
+  font-weight:900 !important;
+}
+.hard-session-score:not(.no-score),
+.hard-score:not(.no-score){
+  min-width:118px !important;
+  padding:8px 12px !important;
+  font-size:clamp(1.65rem,3.4vw,2.55rem) !important;
+  line-height:1 !important;
+}
+.hard-record-value{
+  min-width:74px !important;
+  height:60px !important;
+  font-size:clamp(1.9rem,3.5vw,2.65rem) !important;
+}
+
+/* Effet "soleil" plus discret. */
+.sun-score{
+  border-color:rgba(255,209,102,.52) !important;
+  background:rgba(102,72,9,.20) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,209,102,.07),
+    0 0 10px rgba(255,209,102,.10) !important;
+}
+.sun-score::before{
+  inset:-7px !important;
+  opacity:.28 !important;
+}
+.menu-best-sun{
+  padding:2px 6px !important;
+  border-color:rgba(248,214,109,.45) !important;
+  background:rgba(122,86,9,.13) !important;
+  box-shadow:0 0 7px rgba(248,214,109,.09) !important;
+}
+.menu-best-sun::after{
+  margin-left:4px !important;
+  font-size:.72rem !important;
+  opacity:.65 !important;
+}
+.last-work-main.sun-score{
+  padding:5px 8px !important;
+}
+.hard-score.sun::before{
+  inset:-7px !important;
+  opacity:.28 !important;
+}
+
+@media(max-width:680px){
+  .fullscreen-btn{top:8px !important;right:8px !important}
+  .theme-toggle-btn{top:52px !important;right:8px !important}
+  .top-fixed{top:8px !important;right:8px !important}
+}
+</style>
+
 </head>
 <body>
 <div class="top-fixed"><button id="themeBtn">☀️ Mode clair</button><button id="fullBtn">⛶ Plein écran</button></div>
 <main class="app">
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.6</span></div></header>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="version">v1.9</span></div></header>
 
 <section id="menuScreen" class="panel menu-panel">
   <div class="section-title">Choisis les opérations</div>
@@ -348,17 +461,42 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
 <script>
 (()=>{
   const PROGRESSION_KEY='mathas_progression_melange_de_calculs_v1';
-  const empty=()=>({level2:false,level3:false,perfect1:false,perfect2:false,perfect3:false,hard:false});
-  function loadProgression(){
+  const empty=()=>({
+    level2:false,level3:false,
+    sudden1:false,sudden2:false,sudden3:false,
+    perfect1:false,perfect2:false,perfect3:false,
+    hard:false
+  });
+
+  function loadProgression(raw=false){
     try{
       const d=JSON.parse(localStorage.getItem(PROGRESSION_KEY));
       const p=d&&typeof d==='object'?{...empty(),...d}:empty();
-      // HARD dépend désormais uniquement d'un sans-faute en 10 ou 20 calculs
-      // obtenu au moins une fois dans chacun des trois niveaux normaux.
+
+      // Migration douce : les anciens déblocages prouvent déjà la réussite à 80 %
+      // du niveau précédent. Un ancien sans-faute au N3 prouve aussi son 80 %.
+      p.sudden1=!!(p.sudden1||p.level2);
+      p.sudden2=!!(p.sudden2||p.level3);
+      p.sudden3=!!(p.sudden3||p.perfect3);
+
+      // HARD : sans-faute (10/10 ou 20/20) dans chacun des trois niveaux.
       p.hard=!!(p.perfect1&&p.perfect2&&p.perfect3);
-      if(window.__masterMode){p.level2=true;p.level3=true;p.hard=true}
+
+      // Master mode ne fait que contourner visuellement les verrous.
+      // raw=true est utilisé lors de l'enregistrement d'une vraie progression.
+      if(!raw&&window.__masterMode){
+        p.level2=true;p.level3=true;p.hard=true;
+        p.sudden1=true;p.sudden2=true;p.sudden3=true
+      }
       return p
-    }catch{const p=empty();if(window.__masterMode){p.level2=true;p.level3=true;p.hard=true}return p}
+    }catch{
+      const p=empty();
+      if(!raw&&window.__masterMode){
+        p.level2=true;p.level3=true;p.hard=true;
+        p.sudden1=true;p.sudden2=true;p.sudden3=true
+      }
+      return p
+    }
   }
   function saveProgression(d){try{localStorage.setItem(PROGRESSION_KEY,JSON.stringify(d))}catch{}}
   function unlocked(level,p=loadProgression()){
@@ -366,6 +504,9 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
     if(level===2)return !!p.level2;
     if(level===3)return !!p.level3;
     return false
+  }
+  function suddenUnlocked(level,p=loadProgression()){
+    return !!p[`sudden${Number(level)}`]
   }
   function qualifying(score,total){
     score=Number(score);total=Number(total);
@@ -375,26 +516,91 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
     score=Number(score);total=Number(total);
     return (total===10||total===20)&&score===total
   }
+
+  /* ---------- animation de déblocage ---------- */
+  let unlockQueue=[],unlockTimer=null,unlockBusy=false;
+  function ensureUnlockStyles(){
+    if(document.getElementById('mathasProgressUnlockStyle'))return;
+    const st=document.createElement('style');st.id='mathasProgressUnlockStyle';
+    st.textContent=`
+      .progress-sudden-locked{opacity:.42!important;filter:grayscale(.55) saturate(.45)!important;cursor:not-allowed!important;box-shadow:none!important}
+      .progress-unlock-layer{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;pointer-events:none;overflow:hidden;background:radial-gradient(circle at 50% 48%,rgba(34,211,238,.10),transparent 48%)}
+      .progress-unlock-card{position:relative;z-index:3;min-width:min(88vw,430px);padding:24px 30px;border-radius:26px;text-align:center;color:#f8ffff;background:linear-gradient(145deg,rgba(18,46,58,.97),rgba(28,32,55,.97));border:2px solid rgba(153,246,228,.74);box-shadow:0 24px 80px rgba(0,0,0,.42),0 0 45px rgba(94,234,212,.20);animation:progressUnlockPop .72s cubic-bezier(.18,.88,.25,1.18) both}
+      .progress-unlock-layer.sudden .progress-unlock-card{border-color:rgba(251,113,133,.80);box-shadow:0 24px 80px rgba(0,0,0,.42),0 0 45px rgba(251,113,133,.20)}
+      .progress-unlock-layer.hard .progress-unlock-card{border-color:rgba(251,191,36,.86);background:linear-gradient(145deg,rgba(75,31,21,.98),rgba(70,15,31,.98));box-shadow:0 24px 80px rgba(0,0,0,.48),0 0 52px rgba(251,146,60,.26)}
+      .progress-unlock-icon{font-size:clamp(2.5rem,8vw,5rem);line-height:1;margin-bottom:9px;animation:progressUnlockIcon .85s ease both}
+      .progress-unlock-title{font-size:clamp(1.55rem,5vw,2.85rem);font-weight:1000;line-height:1.08;text-wrap:balance}
+      .progress-unlock-sub{margin-top:8px;font-size:.94rem;font-weight:850;color:#bfe9e5}
+      .progress-unlock-layer.sudden .progress-unlock-sub{color:#fecdd3}.progress-unlock-layer.hard .progress-unlock-sub{color:#fed7aa}
+      .progress-unlock-spark{position:absolute;left:50%;top:50%;width:9px;height:15px;border-radius:3px;background:var(--spark,#5eead4);opacity:0;animation:progressUnlockSpark 1.35s ease-out var(--delay,0s) forwards}
+      @keyframes progressUnlockPop{0%{opacity:0;transform:translateY(26px) scale(.62)}58%{opacity:1;transform:translateY(-4px) scale(1.07)}100%{opacity:1;transform:none}}
+      @keyframes progressUnlockIcon{0%{transform:scale(.2) rotate(-16deg);opacity:0}60%{transform:scale(1.2) rotate(4deg);opacity:1}100%{transform:scale(1);opacity:1}}
+      @keyframes progressUnlockSpark{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(0)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot))}}
+    `;
+    document.head.appendChild(st)
+  }
+  function displayUnlock(item){
+    ensureUnlockStyles();
+    document.querySelectorAll('.progress-unlock-layer').forEach(x=>x.remove());
+    const layer=document.createElement('div');layer.className=`progress-unlock-layer ${item.kind||'level'}`;
+    const card=document.createElement('div');card.className='progress-unlock-card';
+    const icon=document.createElement('div');icon.className='progress-unlock-icon';
+    icon.textContent=item.kind==='hard'?'🔥':item.kind==='sudden'?'⚡':'🌟';
+    const title=document.createElement('div');title.className='progress-unlock-title';title.textContent=item.text;
+    const sub=document.createElement('div');sub.className='progress-unlock-sub';
+    sub.textContent=item.kind==='hard'?'Tous les niveaux HARD sont maintenant accessibles.':item.kind==='sudden'?'Tu peux maintenant tenter la Mort subite à ce niveau.':'Un nouveau niveau est maintenant accessible.';
+    card.append(icon,title,sub);layer.appendChild(card);
+    const palette=item.kind==='hard'?['#fb923c','#fbbf24','#fb7185']:item.kind==='sudden'?['#fb7185','#fda4af','#fbbf24']:['#5eead4','#67e8f9','#c4b5fd','#fbbf24'];
+    for(let i=0;i<34;i++){
+      const s=document.createElement('i');s.className='progress-unlock-spark';
+      const a=Math.random()*Math.PI*2,r=90+Math.random()*260;
+      s.style.setProperty('--dx',`${Math.cos(a)*r}px`);s.style.setProperty('--dy',`${Math.sin(a)*r}px`);
+      s.style.setProperty('--rot',`${Math.round((Math.random()-.5)*900)}deg`);
+      s.style.setProperty('--delay',`${Math.random()*.18}s`);s.style.setProperty('--spark',palette[i%palette.length]);layer.appendChild(s)
+    }
+    document.body.appendChild(layer);
+    setTimeout(()=>{layer.remove();unlockBusy=false;runUnlockQueue()},2350)
+  }
+  function runUnlockQueue(){
+    if(unlockBusy||!unlockQueue.length)return;
+    unlockBusy=true;displayUnlock(unlockQueue.shift())
+  }
+  function queueUnlocks(items){
+    if(!items?.length)return;
+    unlockQueue.push(...items);
+    if(unlockTimer)clearTimeout(unlockTimer);
+    // Les animations de fin/record des applis durent environ 2,2 à 3,2 s.
+    unlockTimer=setTimeout(()=>{unlockTimer=null;runUnlockQueue()},3500)
+  }
+
   window.__progressionUnlockRecord=(level,score,total)=>{
     level=Number(level);score=Number(score);total=Number(total);
-    const p=loadProgression();let changed=false;
+    const p=loadProgression(true);let changed=false;const notices=[];
 
-    // Les niveaux normaux gardent la règle 8/10 ou 16/20.
     if(qualifying(score,total)){
-      if(level===1&&!p.level2){p.level2=true;changed=true}
-      else if(level===2&&!p.level3){p.level3=true;changed=true}
+      // La Mort subite se débloque avec 80 % DANS le niveau concerné.
+      const sk=`sudden${level}`;let suddenNew=false;
+      if(level>=1&&level<=3&&!p[sk]){
+        p[sk]=true;changed=true;suddenNew=true
+      }
+      // Les niveaux 2 et 3 gardent la règle de 80 % au niveau précédent.
+      if(level===1&&!p.level2){p.level2=true;changed=true;notices.push({kind:'level',text:'Niveau 2 débloqué !'})}
+      else if(level===2&&!p.level3){p.level3=true;changed=true;notices.push({kind:'level',text:'Niveau 3 débloqué !'})}
+      if(suddenNew)notices.push({kind:'sudden',text:`Mort subite du Niveau ${level} débloquée !`})
     }
 
-    // Un 4/4 ne compte jamais pour le HARD : seuls 10/10 et 20/20 comptent.
     if(level>=1&&level<=3&&perfectQualifying(score,total)){
       const key=`perfect${level}`;
       if(!p[key]){p[key]=true;changed=true}
     }
 
+    const hardWas=!!p.hard;
     const hardNow=!!(p.perfect1&&p.perfect2&&p.perfect3);
-    if(p.hard!==hardNow){p.hard=hardNow;changed=true}
+    p.hard=hardNow;
+    if(hardNow&&!hardWas){changed=true;notices.push({kind:'hard',text:'HARD débloqué !'})}
 
     if(changed){saveProgression(p);refreshProgressionLocks()}
+    queueUnlocks(notices);
     return changed
   };
 
@@ -460,18 +666,47 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
       const hb=menu.querySelector('.level-option.hard');
       if(hb){hb.disabled=!p.hard;hb.classList.toggle('progress-locked',!p.hard);hb.textContent=hardLabel(!p.hard);hb.title=!p.hard?'Débloque HARD avec 10/10 ou 20/20 aux Niveaux 1, 2 et 3.':''}
     }
-    const btn=document.getElementById('levelBtn');if(btn)btn.textContent=`Niveau ${sel.value}`;
-    // Synchronise les réglages internes des applis qui écoutent le select.
-    sel.dispatchEvent(new Event('change',{bubbles:true}));
+    const btn=document.getElementById('levelBtn');if(btn)btn.textContent=`Niveau ${sel.value}`
+  }
+
+  function currentSelectedLevel(){
+    const ids=['levelSelect','trainingLevel','classicLevel','suddenLevel','trainingMaxDigits','classicMaxDigits','suddenMaxDigits'];
+    for(const id of ids){
+      const sel=document.getElementById(id);if(!sel)continue;
+      const txt=sel.selectedOptions?.[0]?.textContent||'';
+      const m=txt.match(/Niveau\s*([123])/i);if(m)return Number(m[1]);
+      const v=Number(sel.value);if(v>=1&&v<=3)return v
+    }
+    return 1
+  }
+  function suddenButton(){return document.getElementById('startSudden')||document.getElementById('suddenBtn')}
+  function refreshSuddenLock(p=loadProgression()){
+    ensureUnlockStyles();
+    const btn=suddenButton();if(!btn)return;
+    const level=currentSelectedLevel();
+    const locked=!suddenUnlocked(level,p);
+    const textTarget=btn.querySelector('span')||btn;
+    if(!btn.dataset.progressOpenLabel)btn.dataset.progressOpenLabel=textTarget.textContent.trim()||'Lancer la mort subite';
+    btn.disabled=locked;
+    btn.classList.toggle('progress-sudden-locked',locked);
+    textTarget.textContent=locked?`Mort subite (bloquée → Niv${level} 80%)`:btn.dataset.progressOpenLabel;
+    btn.title=locked?`Réussis au moins 8/10 ou 16/20 au Niveau ${level} pour débloquer sa Mort subite.`:''
   }
 
   function refreshProgressionLocks(){
     const p=loadProgression();
     const selects=[...document.querySelectorAll('#menuScreen select')].filter(s=>[...s.options].filter(o=>levelFromText(o.textContent)).length>=3);
     selects.forEach(s=>refreshSelect(s,p));
-    refreshMixed(p)
+    refreshMixed(p);
+    refreshSuddenLock(p)
   }
   window.__refreshProgressionLocks=refreshProgressionLocks;
+
+  // Les sélecteurs graphiques ne déclenchent pas tous un change natif :
+  // on resynchronise aussi après un clic dans le menu.
+  document.addEventListener('change',e=>{if(e.target?.closest?.('#menuScreen'))setTimeout(()=>refreshSuddenLock(loadProgression()),0)});
+  document.addEventListener('click',e=>{if(e.target?.closest?.('#menuScreen'))setTimeout(()=>refreshSuddenLock(loadProgression()),0)});
+
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(refreshProgressionLocks,0));
   else setTimeout(refreshProgressionLocks,0);
 })();
@@ -483,12 +718,14 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
   <div class="master-mode-title">Master mode</div>
   <div class="master-mode-note">Accès de test temporaire. Les scores continuent d’être enregistrés normalement.</div>
   <div class="master-mode-row" id="masterModeLoginRow">
-    <input class="master-mode-input" id="masterModePassword" type="password" autocomplete="off" placeholder="Mot de passe">
+    <input class="master-mode-input" id="masterModePassword" type="password" autocomplete="new-password" spellcheck="false" autocapitalize="off" placeholder="Mot de passe">
     <button class="master-mode-action" id="masterModeUnlock" type="button">Activer</button>
   </div>
   <div class="master-mode-row" id="masterModeActiveRow" hidden>
     <button class="master-mode-action master-off" id="masterModeDisable" type="button">Désactiver le Master mode</button>
+    <button class="master-mode-action master-reset" id="masterModeReset" type="button">Remise à zéro</button>
   </div>
+  <div class="master-mode-reset-note" id="masterModeResetNote" hidden>La remise à zéro efface les scores des séries et les déblocages. Les records de Mort subite sont conservés.</div>
   <div class="master-mode-status" id="masterModeStatus"></div>
 </div>
 
@@ -507,12 +744,16 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
   const loginRow=document.getElementById('masterModeLoginRow');
   const activeRow=document.getElementById('masterModeActiveRow');
   const status=document.getElementById('masterModeStatus');
+  const reset=document.getElementById('masterModeReset');
+  const resetNote=document.getElementById('masterModeResetNote');
+  const MASTER_RESET_KEYS=["mixcalc_classic_v1", "mixcalc_last_v1", "mathas_progression_melange_de_calculs_v1"];
 
   function syncMasterUI(message=''){
     const active=!!window.__masterMode;
     hotspot?.classList.toggle('master-active',active);
     if(loginRow)loginRow.hidden=active;
     if(activeRow)activeRow.hidden=!active;
+    if(resetNote)resetNote.hidden=!active;
     if(status){status.classList.remove('bad');status.textContent=message||(active?'MASTER actif · tous les niveaux sont accessibles.':'')}
   }
   function refreshLocks(){setTimeout(()=>window.__refreshProgressionLocks?.(),0)}
@@ -532,10 +773,28 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
     syncMasterUI('Master mode désactivé.');
     refreshLocks()
   }
+  function resetToZero(){
+    if(!window.__masterMode)return;
+    const ok=window.confirm(
+      'Remise à zéro ?\n\nLes scores des séries et tous les déblocages seront effacés.\nLes records de Mort subite seront conservés.'
+    );
+    if(!ok)return;
+    try{
+      MASTER_RESET_KEYS.forEach(k=>localStorage.removeItem(k));
+    }catch{}
+    window.__masterMode=false;
+    try{sessionStorage.removeItem(MASTER_SESSION_KEY)}catch{}
+    if(status){
+      status.classList.remove('bad');
+      status.textContent='Remise à zéro effectuée. Les records de Mort subite sont conservés.';
+    }
+    setTimeout(()=>window.location.reload(),280)
+  }
   hotspot?.addEventListener('click',()=>{if(panel){panel.hidden=!panel.hidden;if(!panel.hidden&&!window.__masterMode)setTimeout(()=>input?.focus(),0)}syncMasterUI()});
   unlock?.addEventListener('click',activate);
   input?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();activate()}});
   disable?.addEventListener('click',deactivate);
+  reset?.addEventListener('click',resetToZero);
   document.addEventListener('pointerdown',e=>{
     if(!panel||panel.hidden)return;
     if(e.target===hotspot||panel.contains(e.target))return;
