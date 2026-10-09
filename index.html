@@ -3220,7 +3220,7 @@ html.mathas-handheld-portrait #menuScreen .mathas-menu-zone-tech,
 html.mathas-handheld-portrait #menuScreen .mathas-menu-zone-settings { min-width:0!important;max-width:100%!important; }
 </style>
 <script id="mathas-v534t-navigation-guard">
-/* V5.4.1 — protège le choix manuel d'une case contre les déplacements différés. */
+/* V5.4.2 — protège le choix manuel d'une case contre les déplacements différés. */
 window.mathasEntryNavigation=(()=>{
   let epoch=0;
   const target='input.answer-input,input.carry-input,input.adjust-input,input.side-carry-input,input.side-input,input.hard-answer,input.hard-carry,input.hard-adjust,input.hard-side-carry,input.m2-partial-input,input.m2-sum-input,input.m2-carry-input,input[data-kind]';
@@ -3254,7 +3254,7 @@ window.mathasEntryNavigation=(()=>{
   </div>
 </div>
 
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V5</span><span class="mathas-version-detail">.4.1</span></span></div>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V5</span><span class="mathas-version-detail">.4.2</span></span></div>
 </header>
 
 <section id="menuScreen" class="panel menu-panel">
@@ -3311,9 +3311,9 @@ window.mathasEntryNavigation=(()=>{
 
 <section id="hardGame" class="hidden"><div class="hard-game"><div class="hard-bar"><div><div class="hard-title" id="hardTitle">Mélange de calculs · HARD</div><div class="hard-sub" id="hardMeta"></div></div><div class="hard-score sun" id="hardScore">Score 0</div><div class="hard-counter" id="hardCounter">Calcul 1</div></div><div class="hard-work"><div><div class="hard-calc" id="hardCalc"></div><div class="hard-feedback" id="hardFeedback"></div><div class="hard-controls"><button class="btn btn-danger" id="hardClear">Effacer le calcul</button><button class="btn btn-success" id="hardPrimary">Valider</button><button class="btn btn-secondary" id="hardExit">← HARD</button></div></div><div class="hard-numpad" id="hardNumpad"><button class="hard-key" data-key="1">1</button><button class="hard-key" data-key="2">2</button><button class="hard-key" data-key="3">3</button><button class="hard-key" data-key="4">4</button><button class="hard-key" data-key="5">5</button><button class="hard-key" data-key="6">6</button><button class="hard-key" data-key="7">7</button><button class="hard-key" data-key="8">8</button><button class="hard-key" data-key="9">9</button><button class="hard-key back" data-key="back">→</button><button class="hard-key" data-key="0">0</button><button class="hard-key check" data-key="check">✓</button><button class="hard-key hard-borrow hidden" id="hardBorrow" data-key="borrow">↙ Faire un emprunt</button></div></div></div></section>
 </main>
-<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V5.4.1","assets":{"favicon":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png","wordmark":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
+<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V5.4.2","assets":{"favicon":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png","wordmark":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
 <script id="mathas-v533T-reconcile-history">
-/* V5.4.1 : réconciliation non destructive des meilleurs scores existants.
+/* V5.4.2 : réconciliation non destructive des meilleurs scores existants.
    Temporaire : relit les preuves enregistrées à chaque ouverture de l'application.
    Ne déduit jamais un résultat manquant d'une simple progression ou d'un score global. */
 (()=>{
@@ -3433,7 +3433,7 @@ window.mathasEntryNavigation=(()=>{
   }
   const oldT=JSON.stringify(rawT);
   if(repaired||Object.keys(rawT).length&&JSON.stringify(trophy)!==oldT)write(trophyKey,trophy);
-  window.MathasTransition={version:'V5.4.1',proofCount:found,recovered:repaired,
+  window.MathasTransition={version:'V5.4.2',proofCount:found,recovered:repaired,
     progressionRepaired:JSON.stringify(progress)!==oldP};
 })();
 </script>
@@ -3530,7 +3530,7 @@ function borrowAction(hard=false){const t=hard?hardActive:active,s=stateFor(t.ca
 
 /* input */
 
-  // V5.4.1 — Vérification automatique uniquement après remplissage complet
+  // V5.4.2 — Vérification automatique uniquement après remplissage complet
   let mathasAutoNormalTimer=0;
   function mathasScheduleNormal(){
     if(phase!=='answering'||!session||!states?.length)return;
@@ -3542,7 +3542,7 @@ function borrowAction(hard=false){const t=hard?hardActive:active,s=stateFor(t.ca
     },100);
   }
 
-  // V5.4.1 — Même règle sur l'unique calcul affiché en HARD
+  // V5.4.2 — Même règle sur l'unique calcul affiché en HARD
   let mathasAutoHardTimer=0;
   function mathasScheduleHard(){
     if(hardPhase!=='answering'||!hardState||!hardSession)return;
@@ -7461,7 +7461,7 @@ makeUI();render();syncUnlockGold();setInterval(watch,650);document.addEventListe
 </style>
 
 <script id="mathas-v535-summary-script">
-/* V5.4.1 — Un tableau de progrès, alimenté par les sauvegardes existantes.
+/* V5.4.2 — Un tableau de progrès, alimenté par les sauvegardes existantes.
    Conserve tous les noeuds des exercices et leurs gestionnaires d'événements. */
 (()=>{
  'use strict';
@@ -7559,10 +7559,7 @@ makeUI();render();syncUnlockGold();setInterval(watch,650);document.addEventListe
    // Une seule ligne HARD : chaque badge nomme sa difficulté, sans en-tête.
    const hardByLevel=Object.fromEntries(data.hardRows.map(r=>[r.level,r.score]));
    const hardRows=data.hardUnlocked?`<tr class="mathas-v535-hard-row"><td class="mathas-v535-level-label mathas-v535-hard-label">HARD</td><td colspan="4"><div class="mathas-v540-hard-records">${[1,2,3].map(i=>`<span class="mathas-v540-hard-badge" title="Meilleur score en mort subite HARD ${i}"><span>H${i}</span> <strong>${hardByLevel[i]==null?'—':esc(hardByLevel[i])}</strong></span>`).join('')}</div></td></tr>`:'';
-   const methodNote=cfg.family==='subtraction'?' · deux techniques':'';
-   panel.innerHTML=`<div class="mathas-v535-summary-header"><span class="mathas-v535-summary-symbol" aria-hidden="true">📊</span><div><h3 class="mathas-v535-summary-title">Mes résultats</h3><div class="mathas-v535-summary-description">Records débloqués${methodNote}</div></div></div>
-     <table class="mathas-v535-table" aria-label="Récapitulatif des résultats"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody>${normalRows}${hardRows}</tbody></table>
-     <div class="mathas-v535-summary-footer">💀 = record de mort subite</div>`;
+   panel.innerHTML=`<table class="mathas-v535-table" aria-label="Récapitulatif des résultats"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody>${normalRows}${hardRows}</tbody></table>`;
  }
  function install(){
    const menu=document.getElementById('menuScreen');
@@ -7582,7 +7579,9 @@ makeUI();render();syncUnlockGold();setInterval(watch,650);document.addEventListe
      if(!wrapper.querySelector('.mode-card,.mathas-v531-level-stack'))wrapper.classList.add('mathas-v535-empty');
    }
    panel=grid.querySelector('.mathas-v535-summary');
-   if(!panel){panel=document.createElement('section');panel.className='mathas-v535-summary';panel.setAttribute('aria-label','Tableau récapitulatif');grid.appendChild(panel)}
+   if(!panel){panel=document.createElement('section');panel.className='mathas-v535-summary';panel.setAttribute('aria-label','Tableau récapitulatif')}
+   // La carte Calculs accueille elle-même le tableau, après tous ses boutons.
+   if(panel.parentElement!==classic)classic.appendChild(panel);
    render();
  }
  function start(){
@@ -7596,7 +7595,7 @@ makeUI();render();syncUnlockGold();setInterval(watch,650);document.addEventListe
    let attempts=0;
    const boot=setInterval(()=>{
      install();
-     if(document.querySelector('#menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary')||++attempts>=50)clearInterval(boot);
+     if(document.querySelector('#menuScreen .mode-card.classic > .mathas-v535-summary')||++attempts>=50)clearInterval(boot);
    },160);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
@@ -8794,7 +8793,7 @@ body.light #mathasTrophiesStrip.is-platinum .mathas-platinum-caption,body.light-
 
 
 <style id="mathas-v530-refinements">
-/* V5.4.1 : halos des cartes d'action suivant la véritable couleur des bordures,
+/* V5.4.2 : halos des cartes d'action suivant la véritable couleur des bordures,
    sans modifier les couleurs des six applications ni perturber les clics. */
 html body #menuScreen .mode-card.classic.mode-card,
 html body #menuScreen .mode-card.sudden.mode-card {
@@ -8877,7 +8876,7 @@ body.light-mode #mathasTrophiesStrip .mathas-platinum-progress{color:#315a81}
 
 
 <style id="mathas-v531-action-halos-and-score-placement">
-/* V5.4.1 : halo nettement renforcé, de la couleur actuelle du cadre.
+/* V5.4.2 : halo nettement renforcé, de la couleur actuelle du cadre.
    La bordure colorée reste la référence : ne crée aucune nouvelle palette. */
 html body #menuScreen .mode-card.classic.mode-card,
 html body #menuScreen .mode-card.sudden.mode-card{
@@ -9167,7 +9166,7 @@ html.mathas-p29-scores-off.mathas-p29-trophies-off body #menuScreen .mathas-v531
 </style>
 
 <style id="mathas-v535-three-columns">
-/* V5.4.1 — Trois zones : Niveau et trophées / Actions / Récapitulatif. */
+/* V5.4.2 — Trois zones : Niveau et trophées / Actions / Récapitulatif. */
 #menuScreen .mode-grid.mathas-v535-grid{
   display:grid!important;grid-template-columns:minmax(220px,.85fr) minmax(275px,1.15fr) minmax(348px,1.36fr)!important;
   align-items:start!important;align-content:start!important;gap:clamp(12px,1.4vw,21px)!important;
@@ -9322,7 +9321,7 @@ body.light #menuScreen .mathas-v535-score-badge,body.light-mode #menuScreen .mat
 </style>
 
 <style id="mathas-v540-compact-progress">
-/* V5.4.1 — tableau plus étroit, sans en-tête, HARD sur une seule ligne. */
+/* V5.4.2 — tableau plus étroit, sans en-tête, HARD sur une seule ligne. */
 @media (min-width:851px){
   html body #menuScreen .mode-grid.mathas-v535-grid{
     grid-template-columns:minmax(205px,.8fr) minmax(310px,1.65fr) minmax(228px,270px)!important;
@@ -9367,7 +9366,7 @@ body.light #menuScreen .mathas-v540-hard-badge strong,body.light-mode #menuScree
 </style>
 
 <style id="mathas-v541-two-lines-and-cups">
-/* V5.4.1 : les trois cartes d'action en haut ; tableau compact en dessous. */
+/* V5.4.2 : les trois cartes d'action en haut ; tableau compact en dessous. */
 @media(min-width:900px){
  html body #menuScreen .mode-grid.mathas-v535-grid{display:grid!important;grid-template-columns:minmax(205px,.80fr) minmax(285px,1.23fr) minmax(260px,1.08fr)!important;column-gap:clamp(12px,1.5vw,22px)!important;row-gap:22px!important;align-items:stretch!important}
  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v531-level-stack{grid-column:1!important;grid-row:1!important;order:1!important}
@@ -9412,17 +9411,35 @@ body.light #mathasPointsDetail .mathas-v541-record-hint,body.light-mode #mathasP
 @media(max-width:440px){#mathasPointsDetail .mathas-v541-place{padding:9px 3px;gap:3px;flex-direction:column}#mathasPointsDetail .mathas-v541-cup{width:27px;height:29px}#mathasPointsDetail .mathas-v541-place-label{font-size:.63rem}#mathasPointsDetail .mathas-v541-place-score{font-size:.98rem}}
 </style>
 
-<style id="mathas-v541-layout-final-alignment">
-/* Sur les écrans larges, le tableau commence réellement à la ligne suivante. */
-@media(min-width:900px){
- html body #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{
-   grid-column:1/-1!important;grid-row:2!important;order:4!important;
-   justify-self:center!important;width:min(100%,480px)!important;margin:0 auto!important;
- }
+
+<style id="mathas-v542-results-inside-calculs">
+/* Le tableau récapitulatif est intégré à Calculs, sans cadre autonome ni légende. */
+#menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary{
+  box-sizing:border-box!important;position:relative!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin:clamp(13px,1.2vw,20px) 0 0!important;
+  padding:clamp(10px,1.1vw,14px) 0 0!important;
+  border:0!important;border-top:1px solid rgba(180,160,255,.26)!important;
+  border-radius:0!important;
+  background:none!important;box-shadow:none!important;
+  align-self:stretch!important;grid-column:1/-1!important;justify-self:stretch!important;
 }
-/* Le grand écart venait du gap entre deux rangées de la carte. */
-#menuScreen .mathas-v535-actions > .mode-card.classic{row-gap:0!important;column-gap:8px!important}
-#menuScreen .mathas-v535-actions > .mode-card.classic .classic-count-wrap,
-#menuScreen .mathas-v535-actions > .mode-card.classic .classic-count-picker,
-#menuScreen .mathas-v535-actions > .mode-card.classic .classic-launch-grid{margin-top:0!important}
+/* En thème clair, garder une séparation discrète. */
+body.light #menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary,
+body.light-mode #menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary{
+  background:transparent!important;box-shadow:none!important;
+  border-top-color:rgba(68,87,146,.25)!important;
+}
+#menuScreen .mode-card.classic > .mathas-v535-summary .mathas-v535-table{
+  width:100%!important;margin:0!important;border-spacing:0 4px!important;
+}
+#menuScreen .mode-card.classic > .mathas-v535-summary .mathas-v535-table td{
+  font-size:clamp(.66rem,.78vw,.78rem)!important;
+  padding:4px 1px!important;
+}
+@media(max-width:699px){
+  #menuScreen .mode-card.classic > .mathas-v535-summary .mathas-v535-table td{
+    font-size:clamp(.65rem,2.6vw,.83rem)!important;
+  }
+}
 </style>
