@@ -3220,7 +3220,7 @@ html.mathas-handheld-portrait #menuScreen .mathas-menu-zone-tech,
 html.mathas-handheld-portrait #menuScreen .mathas-menu-zone-settings { min-width:0!important;max-width:100%!important; }
 </style>
 <script id="mathas-v534t-navigation-guard">
-/* V5.3.4T — protège le choix manuel d'une case contre les déplacements différés. */
+/* V5.4.0 — protège le choix manuel d'une case contre les déplacements différés. */
 window.mathasEntryNavigation=(()=>{
   let epoch=0;
   const target='input.answer-input,input.carry-input,input.adjust-input,input.side-carry-input,input.side-input,input.hard-answer,input.hard-carry,input.hard-adjust,input.hard-side-carry,input.m2-partial-input,input.m2-sum-input,input.m2-carry-input,input[data-kind]';
@@ -3254,7 +3254,7 @@ window.mathasEntryNavigation=(()=>{
   </div>
 </div>
 
-<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V5</span><span class="mathas-version-detail">.3.4T</span></span></div>
+<header><h1>Mélange de calculs</h1><div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V5</span><span class="mathas-version-detail">.4.0</span></span></div>
 </header>
 
 <section id="menuScreen" class="panel menu-panel">
@@ -3311,9 +3311,9 @@ window.mathasEntryNavigation=(()=>{
 
 <section id="hardGame" class="hidden"><div class="hard-game"><div class="hard-bar"><div><div class="hard-title" id="hardTitle">Mélange de calculs · HARD</div><div class="hard-sub" id="hardMeta"></div></div><div class="hard-score sun" id="hardScore">Score 0</div><div class="hard-counter" id="hardCounter">Calcul 1</div></div><div class="hard-work"><div><div class="hard-calc" id="hardCalc"></div><div class="hard-feedback" id="hardFeedback"></div><div class="hard-controls"><button class="btn btn-danger" id="hardClear">Effacer le calcul</button><button class="btn btn-success" id="hardPrimary">Valider</button><button class="btn btn-secondary" id="hardExit">← HARD</button></div></div><div class="hard-numpad" id="hardNumpad"><button class="hard-key" data-key="1">1</button><button class="hard-key" data-key="2">2</button><button class="hard-key" data-key="3">3</button><button class="hard-key" data-key="4">4</button><button class="hard-key" data-key="5">5</button><button class="hard-key" data-key="6">6</button><button class="hard-key" data-key="7">7</button><button class="hard-key" data-key="8">8</button><button class="hard-key" data-key="9">9</button><button class="hard-key back" data-key="back">→</button><button class="hard-key" data-key="0">0</button><button class="hard-key check" data-key="check">✓</button><button class="hard-key hard-borrow hidden" id="hardBorrow" data-key="borrow">↙ Faire un emprunt</button></div></div></div></section>
 </main>
-<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V5.3.4T","assets":{"favicon":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png","wordmark":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
+<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V5.4.0","assets":{"favicon":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png","wordmark":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
 <script id="mathas-v533T-reconcile-history">
-/* V5.3.4T : réconciliation non destructive des meilleurs scores existants.
+/* V5.4.0 : réconciliation non destructive des meilleurs scores existants.
    Temporaire : relit les preuves enregistrées à chaque ouverture de l'application.
    Ne déduit jamais un résultat manquant d'une simple progression ou d'un score global. */
 (()=>{
@@ -3433,7 +3433,7 @@ window.mathasEntryNavigation=(()=>{
   }
   const oldT=JSON.stringify(rawT);
   if(repaired||Object.keys(rawT).length&&JSON.stringify(trophy)!==oldT)write(trophyKey,trophy);
-  window.MathasTransition={version:'V5.3.4T',proofCount:found,recovered:repaired,
+  window.MathasTransition={version:'V5.4.0',proofCount:found,recovered:repaired,
     progressionRepaired:JSON.stringify(progress)!==oldP};
 })();
 </script>
@@ -3530,7 +3530,7 @@ function borrowAction(hard=false){const t=hard?hardActive:active,s=stateFor(t.ca
 
 /* input */
 
-  // V5.3.4T — Vérification automatique uniquement après remplissage complet
+  // V5.4.0 — Vérification automatique uniquement après remplissage complet
   let mathasAutoNormalTimer=0;
   function mathasScheduleNormal(){
     if(phase!=='answering'||!session||!states?.length)return;
@@ -3542,7 +3542,7 @@ function borrowAction(hard=false){const t=hard?hardActive:active,s=stateFor(t.ca
     },100);
   }
 
-  // V5.3.4T — Même règle sur l'unique calcul affiché en HARD
+  // V5.4.0 — Même règle sur l'unique calcul affiché en HARD
   let mathasAutoHardTimer=0;
   function mathasScheduleHard(){
     if(hardPhase!=='answering'||!hardState||!hardSession)return;
@@ -7451,6 +7451,150 @@ makeUI();render();syncUnlockGold();setInterval(watch,650);document.addEventListe
 }
 @media(prefers-reduced-motion:reduce){#menuScreen button[data-count].classic-count-btn,#menuScreen button[data-count].countBtn{transition:none!important}}
 </style>
+
+<script id="mathas-v535-summary-script">
+/* V5.4.0 — Un tableau de progrès, alimenté par les sauvegardes existantes.
+   Conserve tous les noeuds des exercices et leurs gestionnaires d'événements. */
+(()=>{
+ 'use strict';
+ const cfg=window.MathasAppConfig,store=cfg?.storage;
+ if(!store?.normal)return;
+ const read=k=>{try{return k?JSON.parse(localStorage.getItem(k)||'null'):null}catch{return null}};
+ const appId=String(cfg.appId||'').replace(/[^\w-]/g,'_');
+ const classKey=store.normal.classic,suddenKey=store.normal.sudden,hardKey=store.hardRecords;
+ const counts=[4,10,20];
+ const trophyKey='mathas_trophies_v3_'+appId;
+ let panel=null,previous='',lastRefresh=0;
+ const bestVal=(raw)=>{
+   const n=Number(raw&&typeof raw==='object'?(raw.score??raw.best??raw.value):raw);
+   return Number.isFinite(n)&&n>=0?n:null;
+ };
+ const validScore=(score,count)=>score!=null&&Number.isInteger(score)&&score>=0&&score<=count;
+ const rowClassic=Array.from({length:3},()=>({}));
+ const rowSudden=Array(3).fill(null);
+ function records(){
+   const classic=read(classKey)||{},sudden=read(suddenKey)||{},hard=read(hardKey)||{};
+   const master=read(trophyKey)||read('mathas_trophies_v2_'+appId)||read('mathas_trophies_v1_'+appId)||{};
+   const classics=Array.from({length:3},()=>({})),suddens=Array(3).fill(null),hardRows=[];
+   const keep=(l,c,n)=>{if(l<1||l>3||!counts.includes(c)||!validScore(n,c))return;classics[l-1][c]=Math.max(classics[l-1][c]??-1,n)};
+   const keepSud=(l,n)=>{if(l<1||l>3||n==null||!Number.isFinite(n)||n<0)return;suddens[l-1]=Math.max(suddens[l-1]??-1,n)};
+   const normal=store.normal;
+   const family=cfg.family||'';
+   const simpleAddition=family==='addition'||family==='subtraction';
+   if(simpleAddition){
+     const groups=(classic.addBottom||classic.takeTop)?[classic.addBottom||{},classic.takeTop||{}]:[classic];
+     for(const group of groups){for(const [key,val] of Object.entries(group||{})){
+       const level={3:1,5:2,7:3}[key];if(!level)continue;
+       if(val&&typeof val==='object'){for(const c of counts)if(val[c]!=null)keep(level,c,bestVal(val[c]));}
+       else if(val!=null)keep(level,20,bestVal(val));
+     }}
+     const sgroups=(sudden.addBottom||sudden.takeTop)?[sudden.addBottom||{},sudden.takeTop||{}]:[sudden];
+     for(const group of sgroups)for(const [key,val] of Object.entries(group||{})){
+       const level={3:1,5:2,7:3}[key];if(level)keepSud(level,bestVal(val));
+     }
+   }else{
+     for(const [key,val] of Object.entries(classic)){
+       const level=Number(key.split('|')[0]);
+       if(!val||typeof val!=='object')continue;
+       keep(level,Number(val.total),bestVal(val));
+     }
+     for(const [key,val] of Object.entries(sudden)){
+       const level=Number(key.split('|')[0]);keepSud(level,bestVal(val));
+     }
+   }
+   // Récompenses de maîtrise déjà gagnées : preuve fiable d'une série parfaite.
+   for(let i=0;i<3;i++)for(const c of counts)if(master.mastery?.[c]?.[i]===true)keep(i+1,c,c);
+   // Dernière partie terminée, lorsque la longueur et le niveau sont explicitement indiqués.
+   const last=read(store.lastWork)||{};
+   if(/^Calculs\s*[·\-]\s*Niveau\s*[123]\b/i.test(String(last.label||''))){
+     const level=Number(last.label.match(/Niveau\s*([123])/i)?.[1]);
+     const m=String(last.score||'').match(/^(\d+)\s*\/\s*(4|10|20)$/);
+     if(m)keep(level,Number(m[2]),Number(m[1]));
+   }
+   const history=read('mathas_scores_'+window.location.pathname.toLowerCase());
+   for(const candidate of [history?.dernier,history?.meilleur]){
+     if(!candidate||!/Niveau\s*[123]/i.test(String(candidate.niveau||'')))continue;
+     const level=Number(candidate.niveauRang||String(candidate.niveau).match(/Niveau\s*([123])/i)?.[1]);
+     keep(level,Number(candidate.total),bestVal(candidate.score));
+   }
+   for(let i=1;i<=3;i++){
+     if(!Object.prototype.hasOwnProperty.call(hard,String(i)))continue;
+     const value=bestVal(hard[String(i)]);
+     if(value!==null)hardRows.push({level:i,score:value});
+   }
+   const progress=read(store.progression)||{};
+   // Seuls les déblocages obtenus par l'élève comptent (jamais le Master temporaire).
+   const visibleLevels=[true,!!(progress.level2||progress.level3),!!progress.level3];
+   const hardUnlocked=!!(progress.hard||(progress.perfect1&&progress.perfect2&&progress.perfect3)||hardRows.length);
+   return {classics,suddens,hardRows,visibleLevels,hardUnlocked};
+ }
+ const esc=v=>String(v).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ function tone(c){
+   const btn=document.querySelector(`#menuScreen button[data-count="${c}"].classic-count-btn,#menuScreen button[data-count="${c}"].countBtn`);
+   const color=btn?getComputedStyle(btn).borderTopColor:'';
+   return /^(rgb|#|hsl)/i.test(color)?color:{4:'#9fbad8',10:'#65d69b',20:'#eac06b'}[c];
+ }
+ function render(){
+   if(!panel)return;
+   const data=records(),scoresOn=!document.documentElement.classList.contains('mathas-p29-scores-off');
+   if(!scoresOn){panel.hidden=true;return}else panel.hidden=false;
+   const signature=JSON.stringify(data)+String(document.body.className);
+   if(signature===previous)return;previous=signature;
+   const colors=Object.fromEntries(counts.map(c=>[c,tone(c)]));
+   // Même une case vide indique son format : —/4, —/10 ou —/20.
+   const shown=(value,c)=>`<span class="mathas-v535-score-badge${value==null?' mathas-v540-empty':''}" data-count="${c}" style="--mathas-v535-tone:${colors[c]}" title="${value==null?'Pas encore de résultat':'Meilleur résultat'} sur ${c} calculs">${value==null?'—':esc(value)}/${c}</span>`;
+   const normalRows=data.classics.map((row,i)=>{
+     if(!data.visibleLevels[i])return '';
+     const sudden=data.suddens[i];
+     return `<tr><td class="mathas-v535-level-label">Niv. ${i+1}</td>${counts.map(c=>`<td>${shown(row[c],c)}</td>`).join('')}<td title="Record en mort subite, niveau ${i+1}"><span class="mathas-v540-skull" aria-hidden="true">💀</span> ${sudden==null?'<span class="mathas-v535-absent">—</span>':`<strong class="mathas-v535-sudden-best">${esc(sudden)}</strong>`}</td></tr>`;
+   }).join('');
+   // Une seule ligne HARD : chaque badge nomme sa difficulté, sans en-tête.
+   const hardByLevel=Object.fromEntries(data.hardRows.map(r=>[r.level,r.score]));
+   const hardRows=data.hardUnlocked?`<tr class="mathas-v535-hard-row"><td class="mathas-v535-level-label mathas-v535-hard-label">HARD</td><td colspan="4"><div class="mathas-v540-hard-records">${[1,2,3].map(i=>`<span class="mathas-v540-hard-badge" title="Meilleur score en mort subite HARD ${i}"><span>H${i}</span> <strong>${hardByLevel[i]==null?'—':esc(hardByLevel[i])}</strong></span>`).join('')}</div></td></tr>`:'';
+   const methodNote=cfg.family==='subtraction'?' · deux techniques':'';
+   panel.innerHTML=`<div class="mathas-v535-summary-header"><span class="mathas-v535-summary-symbol" aria-hidden="true">📊</span><div><h3 class="mathas-v535-summary-title">Mes résultats</h3><div class="mathas-v535-summary-description">Records débloqués${methodNote}</div></div></div>
+     <table class="mathas-v535-table" aria-label="Récapitulatif des résultats"><colgroup><col/><col/><col/><col/><col/></colgroup><tbody>${normalRows}${hardRows}</tbody></table>
+     <div class="mathas-v535-summary-footer">💀 = record de mort subite</div>`;
+ }
+ function install(){
+   const menu=document.getElementById('menuScreen');
+   const grid=menu?.querySelector('.mode-grid');
+   const level=menu?.querySelector('.mathas-v531-level-stack');
+   const classic=menu?.querySelector('.mode-card.classic');
+   const sudden=menu?.querySelector('.mode-card.sudden');
+   if(!grid||!level||!classic||!sudden)return;
+   grid.classList.add('mathas-v535-grid');
+   const actions=grid.querySelector('.mathas-v535-actions')||document.createElement('div');
+   actions.className='mathas-v535-actions';
+   if(actions.parentNode!==grid)grid.appendChild(actions);
+   if(classic.parentNode!==actions)actions.appendChild(classic);
+   if(sudden.parentNode!==actions)actions.appendChild(sudden);
+   if(level.parentNode!==grid)grid.appendChild(level);
+   for(const wrapper of grid.querySelectorAll('.addition-left-stack,.addition-right-stack')){
+     if(!wrapper.querySelector('.mode-card,.mathas-v531-level-stack'))wrapper.classList.add('mathas-v535-empty');
+   }
+   panel=grid.querySelector('.mathas-v535-summary');
+   if(!panel){panel=document.createElement('section');panel.className='mathas-v535-summary';panel.setAttribute('aria-label','Tableau récapitulatif');grid.appendChild(panel)}
+   render();
+ }
+ function start(){
+   install();
+   setInterval(()=>{const m=document.getElementById('menuScreen');if(m&&!m.classList.contains('hidden'))render()},1400);
+   document.addEventListener('visibilitychange',()=>{if(!document.hidden){previous='';render()}});
+   window.addEventListener('storage',()=>{previous='';render()});
+   window.addEventListener('focus',()=>{previous='';render()});
+   // Les modules anciens créent parfois la carte Niveau après le DOMContentLoaded.
+   // Réessayer jusqu’à son installation, puis arrêter immédiatement la boucle.
+   let attempts=0;
+   const boot=setInterval(()=>{
+     install();
+     if(document.querySelector('#menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary')||++attempts>=50)clearInterval(boot);
+   },160);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
+
+</script>
 </body>
 </html>
 
@@ -8642,7 +8786,7 @@ body.light #mathasTrophiesStrip.is-platinum .mathas-platinum-caption,body.light-
 
 
 <style id="mathas-v530-refinements">
-/* V5.3.4T : halos des cartes d'action suivant la véritable couleur des bordures,
+/* V5.4.0 : halos des cartes d'action suivant la véritable couleur des bordures,
    sans modifier les couleurs des six applications ni perturber les clics. */
 html body #menuScreen .mode-card.classic.mode-card,
 html body #menuScreen .mode-card.sudden.mode-card {
@@ -8725,7 +8869,7 @@ body.light-mode #mathasTrophiesStrip .mathas-platinum-progress{color:#315a81}
 
 
 <style id="mathas-v531-action-halos-and-score-placement">
-/* V5.3.4T : halo nettement renforcé, de la couleur actuelle du cadre.
+/* V5.4.0 : halo nettement renforcé, de la couleur actuelle du cadre.
    La bordure colorée reste la référence : ne crée aucune nouvelle palette. */
 html body #menuScreen .mode-card.classic.mode-card,
 html body #menuScreen .mode-card.sudden.mode-card{
@@ -9012,4 +9156,204 @@ body.light-mode #menuScreen .mathas-v531-results > #mathasTrophiesStrip.is-plati
 html.mathas-p29-scores-off body #menuScreen .mathas-v531-level-stack .mathas-v531-results > #mathasPointsQuick{display:none!important}
 html.mathas-p29-trophies-off body #menuScreen .mathas-v531-level-stack .mathas-v531-results > #mathasTrophiesStrip{display:none!important}
 html.mathas-p29-scores-off.mathas-p29-trophies-off body #menuScreen .mathas-v531-level-stack .mathas-v531-results{display:none!important}
+</style>
+
+<style id="mathas-v535-three-columns">
+/* V5.4.0 — Trois zones : Niveau et trophées / Actions / Récapitulatif. */
+#menuScreen .mode-grid.mathas-v535-grid{
+  display:grid!important;grid-template-columns:minmax(220px,.85fr) minmax(275px,1.15fr) minmax(348px,1.36fr)!important;
+  align-items:start!important;align-content:start!important;gap:clamp(12px,1.4vw,21px)!important;
+  width:100%!important;min-width:0!important;
+}
+#menuScreen .mode-grid.mathas-v535-grid > .mathas-zone-heading,
+#menuScreen .mode-grid.mathas-v535-grid > .menu-heading{
+  grid-column:1/-1!important;grid-row:auto!important;order:0!important;
+}
+#menuScreen .mode-grid.mathas-v535-grid > .mathas-v531-level-stack{
+  grid-column:1!important;grid-row:auto!important;order:1!important;
+  min-width:0!important;max-width:100%!important;
+}
+#menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-actions{
+  grid-column:2!important;grid-row:auto!important;order:2!important;
+}
+#menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{
+  grid-column:3!important;grid-row:auto!important;order:3!important;
+}
+#menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-empty{display:none!important}
+#menuScreen .mathas-v535-actions{
+  min-width:0!important;width:100%!important;max-width:100%!important;
+  display:flex!important;flex-direction:column!important;gap:20px!important;
+  padding:9px 2px 2px!important;margin:0!important;
+}
+#menuScreen .mathas-v535-actions > .mode-card{
+  min-width:0!important;max-width:100%!important;width:100%!important;
+  height:auto!important;margin:0!important;grid-column:auto!important;
+  grid-row:auto!important;position:relative!important;
+}
+#menuScreen .mathas-v535-actions > .mode-card.sudden{min-height:0!important}
+#menuScreen .mathas-v535-summary{
+  min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+  border:1px solid rgba(103,172,213,.36)!important;
+  border-radius:19px!important;
+  padding:17px clamp(10px,1.1vw,18px) 15px!important;
+  background:linear-gradient(157deg,rgba(25,52,80,.58),rgba(16,32,53,.40))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 10px 24px rgba(2,10,27,.15)!important;
+  align-self:start!important;
+}
+#menuScreen .mathas-v535-summary-header{display:flex;align-items:center;gap:9px;margin:0 0 13px}
+#menuScreen .mathas-v535-summary-symbol{font-size:1.3rem;line-height:1}
+#menuScreen .mathas-v535-summary-title{font-size:1.08rem;line-height:1.2;font-weight:900;letter-spacing:.02em;margin:0;color:#e6f6ff}
+#menuScreen .mathas-v535-summary-description{font-size:.70rem;color:#9fbed6;margin-top:4px;line-height:1.3}
+#menuScreen .mathas-v535-table{width:100%!important;min-width:0!important;border-collapse:separate;border-spacing:0 5px;table-layout:fixed}
+#menuScreen .mathas-v535-table col:first-child{width:23%}
+#menuScreen .mathas-v535-table col:nth-child(2),
+#menuScreen .mathas-v535-table col:nth-child(3),
+#menuScreen .mathas-v535-table col:nth-child(4){width:18.5%}
+#menuScreen .mathas-v535-table col:last-child{width:21.5%}
+#menuScreen .mathas-v535-table th,#menuScreen .mathas-v535-table td{
+  padding:5px 2px!important;box-sizing:border-box!important;
+  text-align:center!important;vertical-align:middle!important;
+  overflow:hidden!important;white-space:nowrap!important;font-size:clamp(.67rem,.83vw,.85rem)!important;
+}
+#menuScreen .mathas-v535-table thead th{font-weight:850!important;color:#aac4db!important;padding:1px 2px 7px!important}
+#menuScreen .mathas-v535-table td:first-child,#menuScreen .mathas-v535-table th:first-child{text-align:left!important}
+#menuScreen .mathas-v535-table .mathas-v535-level-label{font-weight:850;color:#e9f6ff;letter-spacing:.005em}
+#menuScreen .mathas-v535-table .mathas-v535-hard-label{color:#ffbb94!important}
+#menuScreen .mathas-v535-table tbody tr{background:rgba(107,140,168,.09)}
+#menuScreen .mathas-v535-table tbody tr td:first-child{border-radius:8px 0 0 8px;padding-left:6px!important}
+#menuScreen .mathas-v535-table tbody tr td:last-child{border-radius:0 8px 8px 0}
+#menuScreen .mathas-v535-table .mathas-v535-hard-row td{border-top:1px solid rgba(233,138,98,.27)}
+#menuScreen .mathas-v535-score-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:0;max-width:100%;box-sizing:border-box;padding:5px 3px;
+  font-size:inherit;font-weight:900;line-height:1.2;white-space:nowrap;
+  border-radius:7px;
+  border:1px solid color-mix(in srgb,var(--mathas-v535-tone) 66%,transparent);
+  background:color-mix(in srgb,var(--mathas-v535-tone) 23%,rgba(5,18,33,.32));
+  color:color-mix(in srgb,var(--mathas-v535-tone) 48%,#fff);
+}
+#menuScreen .mathas-v535-score-badge[data-count="4"]{--mathas-v535-tone:#9fbad8}
+#menuScreen .mathas-v535-score-badge[data-count="10"]{--mathas-v535-tone:#65d69b}
+#menuScreen .mathas-v535-score-badge[data-count="20"]{--mathas-v535-tone:#eac06b}
+#menuScreen .mathas-v535-absent{opacity:.43;font-size:.85em}
+#menuScreen .mathas-v535-sudden-best{display:inline-block;font-weight:950;color:#ffabb6;font-variant-numeric:tabular-nums;font-size:1.08em}
+#menuScreen .mathas-v535-sudden-best.mathas-v535-hard-best{color:#ffca93}
+#menuScreen .mathas-v535-summary-footer{margin:9px 2px 0;font-size:.69rem;color:#a9bbcc;line-height:1.4}
+#menuScreen .mathas-v535-summary .ruler-used-score,#menuScreen .mathas-v535-summary .tables-aid-used-score,
+#menuScreen .mathas-v535-summary .aid-used-score{ text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px }
+/* Toutes les anciennes zones de records restent en mémoire, mais ne sont plus affichées ici. */
+#menuScreen #bestClassicScore,#menuScreen #bestSuddenScore,
+#menuScreen #classicScores,#menuScreen #suddenScores{display:none!important}
+html.mathas-p29-scores-off body #menuScreen .mathas-v535-summary{display:none!important}
+/* Atténuation légère des halos existants : on garde leurs couleurs et le contour. */
+#menuScreen button[data-count="10"].classic-count-btn,
+#menuScreen button[data-count="10"].classic-count-btn.active,
+#menuScreen button[data-count="10"].classic-count-btn[aria-pressed="true"],
+#menuScreen button[data-count="10"].countBtn,
+#menuScreen button[data-count="10"].countBtn.active,
+#menuScreen button[data-count="10"].countBtn[aria-pressed="true"]{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 5px 0 rgba(0,0,0,.18),
+    0 0 12px 4px rgba(60,224,137,.52),0 0 27px 10px rgba(60,224,137,.28),
+    0 0 42px 14px rgba(60,224,137,.11)!important;
+}
+#menuScreen button[data-count="20"].classic-count-btn,
+#menuScreen button[data-count="20"].classic-count-btn.active,
+#menuScreen button[data-count="20"].classic-count-btn[aria-pressed="true"],
+#menuScreen button[data-count="20"].countBtn,
+#menuScreen button[data-count="20"].countBtn.active,
+#menuScreen button[data-count="20"].countBtn[aria-pressed="true"]{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.19),0 5px 0 rgba(0,0,0,.2),
+    0 0 13px 4px rgba(250,178,55,.56),0 0 28px 10px rgba(250,178,55,.30),
+    0 0 44px 15px rgba(250,178,55,.12)!important;
+}
+body.light #menuScreen .mathas-v535-summary,body.light-mode #menuScreen .mathas-v535-summary{
+  background:linear-gradient(145deg,rgba(243,249,255,.93),rgba(223,238,249,.87))!important;
+  border-color:rgba(76,135,175,.39)!important;box-shadow:0 9px 22px rgba(44,77,112,.10)!important
+}
+body.light #menuScreen .mathas-v535-summary-title,body.light-mode #menuScreen .mathas-v535-summary-title,
+body.light #menuScreen .mathas-v535-table .mathas-v535-level-label,body.light-mode #menuScreen .mathas-v535-table .mathas-v535-level-label{color:#1c405c!important}
+body.light #menuScreen .mathas-v535-summary-description,body.light-mode #menuScreen .mathas-v535-summary-description,
+body.light #menuScreen .mathas-v535-summary-footer,body.light-mode #menuScreen .mathas-v535-summary-footer{color:#42627c!important}
+body.light #menuScreen .mathas-v535-table thead th,body.light-mode #menuScreen .mathas-v535-table thead th{color:#48677e!important}
+body.light #menuScreen .mathas-v535-table tbody tr,body.light-mode #menuScreen .mathas-v535-table tbody tr{background:rgba(90,135,160,.12)!important}
+body.light #menuScreen .mathas-v535-sudden-best,body.light-mode #menuScreen .mathas-v535-sudden-best{color:#ad4057!important}
+body.light #menuScreen .mathas-v535-sudden-best.mathas-v535-hard-best,
+body.light-mode #menuScreen .mathas-v535-sudden-best.mathas-v535-hard-best{color:#a84e1f!important}
+body.light #menuScreen .mathas-v535-score-badge,body.light-mode #menuScreen .mathas-v535-score-badge{
+  color:color-mix(in srgb,var(--mathas-v535-tone) 42%,#163a4f)!important;
+  background:color-mix(in srgb,var(--mathas-v535-tone) 24%,white)!important;
+}
+@media (min-width:700px) and (max-width:1080px){
+  html body #menuScreen .mode-grid.mathas-v535-grid{grid-template-columns:minmax(210px,.82fr) minmax(290px,1.2fr)!important}
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v531-level-stack{grid-column:1!important;order:1!important}
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-actions{grid-column:2!important;order:2!important}
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{grid-column:1/-1!important;order:3!important}
+}
+@media (max-width:699px){
+  html body #menuScreen .mode-grid.mathas-v535-grid{display:flex!important;flex-direction:column!important;gap:14px!important}
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-actions{
+    order:1!important;grid-column:auto!important;grid-row:auto!important;
+    padding:5px 4px!important;gap:18px!important
+  }
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v531-level-stack{
+    order:2!important;grid-column:auto!important;grid-row:auto!important;
+    width:100%!important
+  }
+  #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{
+    order:3!important;grid-column:auto!important;grid-row:auto!important;
+    width:100%!important;padding:13px 11px!important
+  }
+  #menuScreen .mathas-v535-table th,#menuScreen .mathas-v535-table td{
+    font-size:clamp(.63rem,2.65vw,.78rem)!important;padding:4px 1px!important
+  }
+  #menuScreen .mathas-v535-table .mathas-v535-level-label{font-size:clamp(.60rem,2.65vw,.77rem)!important}
+  #menuScreen .mathas-v535-score-badge{padding:5px 2px;border-radius:6px}
+}
+@media(prefers-reduced-motion:reduce){#menuScreen .mathas-v535-score-badge{transition:none!important}}
+
+</style>
+
+<style id="mathas-v540-compact-progress">
+/* V5.4.0 — tableau plus étroit, sans en-tête, HARD sur une seule ligne. */
+@media (min-width:851px){
+  html body #menuScreen .mode-grid.mathas-v535-grid{
+    grid-template-columns:minmax(205px,.8fr) minmax(310px,1.65fr) minmax(228px,270px)!important;
+    column-gap:clamp(11px,1.1vw,18px)!important;
+  }
+  html body #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{
+    grid-column:3!important;grid-row:auto!important;order:3!important;
+    width:100%!important;justify-self:stretch!important;
+  }
+}
+#menuScreen .mathas-v535-summary{padding:13px 9px 12px!important}
+#menuScreen .mathas-v535-summary-header{margin-bottom:8px!important;gap:7px!important}
+#menuScreen .mathas-v535-summary-description{font-size:.65rem!important}
+#menuScreen .mathas-v535-table{border-spacing:0 5px!important}
+#menuScreen .mathas-v535-table col:first-child{width:21%!important}
+#menuScreen .mathas-v535-table col:nth-child(2){width:18%!important}
+#menuScreen .mathas-v535-table col:nth-child(3){width:19%!important}
+#menuScreen .mathas-v535-table col:nth-child(4){width:20%!important}
+#menuScreen .mathas-v535-table col:last-child{width:22%!important}
+#menuScreen .mathas-v535-table td{padding:4px 1px!important;font-size:clamp(.66rem,.78vw,.78rem)!important}
+#menuScreen .mathas-v535-table tbody tr td:first-child{padding-left:4px!important}
+#menuScreen .mathas-v535-score-badge{padding:5px 2px!important;border-radius:6px!important}
+#menuScreen .mathas-v535-score-badge.mathas-v540-empty{opacity:.64}
+#menuScreen .mathas-v540-skull{font-size:.87em}
+#menuScreen .mathas-v540-hard-records{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;width:100%}
+#menuScreen .mathas-v535-hard-row td[colspan]{padding-left:2px!important;padding-right:2px!important}
+#menuScreen .mathas-v540-hard-badge{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-width:0;
+ padding:5px 2px;border:1px solid rgba(253,175,104,.38);border-radius:7px;
+ background:rgba(222,111,43,.12);font-size:.88em;font-weight:850;color:#ffc79e;white-space:nowrap}
+#menuScreen .mathas-v540-hard-badge strong{font-size:1.07em;color:#ffe2ba}
+#menuScreen .mathas-v535-summary-footer{margin-top:7px!important;font-size:.66rem!important}
+body.light #menuScreen .mathas-v540-hard-badge,body.light-mode #menuScreen .mathas-v540-hard-badge{color:#99511f!important;background:rgba(237,154,76,.16)!important}
+body.light #menuScreen .mathas-v540-hard-badge strong,body.light-mode #menuScreen .mathas-v540-hard-badge strong{color:#814114!important}
+@media (min-width:700px) and (max-width:850px){
+ html body #menuScreen .mode-grid.mathas-v535-grid{grid-template-columns:minmax(205px,.82fr) minmax(320px,1.3fr)!important}
+ #menuScreen .mode-grid.mathas-v535-grid > .mathas-v535-summary{justify-self:end!important;width:min(100%,285px)!important;grid-column:1/-1!important}
+}
+@media (max-width:699px){
+ #menuScreen .mathas-v535-summary{padding:13px 9px!important}
+ #menuScreen .mathas-v535-table td{font-size:clamp(.66rem,2.72vw,.8rem)!important}
+}
 </style>
