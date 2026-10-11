@@ -60,8 +60,8 @@
 })();
 </script>
 <title>Mélange de calculs</title>
-<link id="mathas-favicon" rel="icon" type="image/png" href="https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png">
-<link rel="shortcut icon" type="image/png" href="https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png">
+<link id="mathas-favicon" rel="icon" type="image/png" href="./assets/images/logo-m.png">
+<link rel="shortcut icon" type="image/png" href="./assets/images/logo-m.png">
 <style>
 :root{
   --bg:#111820;--bg2:#18222d;--panel:rgba(27,38,49,.91);--panel2:rgba(33,45,58,.90);
@@ -3395,7 +3395,7 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 <body>
 <main class="app">
 <div class="mathas-top-cluster" data-mathas-ui="header-tools" data-mathas-layer="L4-content">
-  <img class="mathas-wordmark" src="https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png" alt="Math'as" draggable="false">
+  <img class="mathas-wordmark" src="./assets/images/logo-mot.webp" alt="Math'as" draggable="false">
   <div class="mathas-top-actions">
     <button id="fullBtn">⛶ Plein écran</button>
     <button id="themeBtn">Mode clair</button>
@@ -3405,10 +3405,10 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 <header class="mathas-illustrated-header">
   <div class="mathas-header-copy">
   <h1>Mélange de calculs</h1>
-  <div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V6</span><span class="mathas-version-detail">.0.0</span></span></div>
+  <div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V6</span><span class="mathas-version-detail">.0.1</span></span></div>
   </div>
   <div class="mathas-header-art mathas-header-art--machine">
-    <img src="https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/illustrations/melange-de-calculs-illu-1791570200196-h58eiu.png" alt="Machine à trois leviers pour addition, soustraction et multiplication." decoding="async" fetchpriority="low" draggable="false" onerror="this.parentElement.style.display='none'">
+    <img src="./assets/images/illustration.webp" alt="Machine à trois leviers pour addition, soustraction et multiplication." decoding="async" fetchpriority="low" draggable="false" onerror="this.parentElement.style.display='none'">
   </div>
 </header>
 
@@ -3466,7 +3466,7 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 
 <section id="hardGame" class="hidden"><div class="hard-game"><div class="hard-bar"><div><div class="hard-title" id="hardTitle">Mélange de calculs · HARD</div><div class="hard-sub" id="hardMeta"></div></div><div class="hard-score sun" id="hardScore">Score 0</div><div class="hard-counter" id="hardCounter">Calcul 1</div></div><div class="hard-work"><div><div class="hard-calc" id="hardCalc"></div><div class="hard-feedback" id="hardFeedback"></div><div class="hard-controls"><button class="btn btn-danger" id="hardClear">Effacer le calcul</button><button class="btn btn-success" id="hardPrimary">Valider</button><button class="btn btn-secondary" id="hardExit">← HARD</button></div></div><div class="hard-numpad" id="hardNumpad"><button class="hard-key" data-key="1">1</button><button class="hard-key" data-key="2">2</button><button class="hard-key" data-key="3">3</button><button class="hard-key" data-key="4">4</button><button class="hard-key" data-key="5">5</button><button class="hard-key" data-key="6">6</button><button class="hard-key" data-key="7">7</button><button class="hard-key" data-key="8">8</button><button class="hard-key" data-key="9">9</button><button class="hard-key back" data-key="back">→</button><button class="hard-key" data-key="0">0</button><button class="hard-key check" data-key="check">✓</button><button class="hard-key hard-borrow hidden" id="hardBorrow" data-key="borrow">↙ Faire un emprunt</button></div></div></div></section>
 </main>
-<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V6.0.0","assets":{"favicon":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png","wordmark":"https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-mot-1791065255634-jznxux.png"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
+<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V6.0.1","assets":{"favicon":"./assets/images/logo-m.png","wordmark":"./assets/images/logo-mot.webp"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
 <script id="mathas-v533T-reconcile-history">
 /* V5.4.16 : réconciliation non destructive des meilleurs scores existants.
    Temporaire : relit les preuves enregistrées à chaque ouverture de l'application.
@@ -4197,7 +4197,7 @@ loadSettings();refreshScores();refreshLast();renderHardMenu();
 </script>
 
 
-<button class="master-mode-hotspot" id="masterModeHotspot" type="button" aria-label="Master mode" title="Master mode"><img class="mathas-master-logo" src="https://jftzuslpelgzbdrftszw.supabase.co/storage/v1/object/public/mathas-images/logos/logo-m-1791065253498-qussoz.png" alt="" aria-hidden="true" draggable="false"></button>
+<button class="master-mode-hotspot" id="masterModeHotspot" type="button" aria-label="Master mode" title="Master mode"><img class="mathas-master-logo" src="./assets/images/logo-m.png" alt="" aria-hidden="true" draggable="false"></button>
 <div class="master-mode-panel" id="masterModePanel" hidden>
   <div class="master-mode-title">Master mode</div>
   <div class="master-mode-note">Accès de test temporaire. Les scores continuent d’être enregistrés normalement.</div>
@@ -7818,7 +7818,7 @@ body.light #menuScreen .mode-card.sudden.mode-card,body.light-mode #menuScreen .
 </style>
 
 <style id="mathas-v600-master-aid-sliders">
-/* V6.0.0 : mêmes interrupteurs que « Scores et trophées », en bleu pour les aides. */
+/* V6.0.1 : mêmes interrupteurs que « Scores et trophées », en bleu pour les aides. */
 #masterModePanel #masterAidSettings {
   background:rgba(91,163,197,.09);
   border:1px solid rgba(139,191,219,.28);
@@ -10087,7 +10087,7 @@ html body #menuScreen .mode-card.sudden.mode-card{
 </style>
 
 <style id="mathas-v600-uniform-sudden-description">
-/* V6.0.0 — Mort subite : typographie identique à Soustraction.
+/* V6.0.1 — Mort subite : typographie identique à Soustraction.
    Conserve le retour à la ligne PC, le petit format portrait GSM
    et les couleurs adaptées aux deux thèmes. */
 #menuScreen .mode-card.sudden .mode-description,
