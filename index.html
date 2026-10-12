@@ -3391,6 +3391,24 @@ body.light-mode #hardMenu .hard-welcome-v6 strong,
 body.light #hardMenuScreen .hard-welcome-v6 strong,
 body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 </style>
+<style id="mathas-v602-trophees-records">
+.mathas-v602-trophy-cup{--cup:#ffd56a;--cup-dark:#b7791e;--cup-gloss:#fff0b1;display:inline-flex;vertical-align:middle;flex:none;width:1em;height:1.05em;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+.mathas-v602-trophy-cup svg{width:100%;height:100%;display:block;overflow:visible}
+.mathas-v602-trophy-cup[data-trophy-color="bronze"]{--cup:#dda076;--cup-dark:#995937;--cup-gloss:#f6c4a0}
+.mathas-v602-trophy-cup[data-trophy-color="silver"]{--cup:#d7e5f5;--cup-dark:#869eb7;--cup-gloss:#fcffff}
+.mathas-v602-trophy-cup[data-trophy-color="gold"]{--cup:#ffd56a;--cup-dark:#b7791e;--cup-gloss:#fff0b1}
+.mathas-v602-trophy-cup[data-trophy-color="platinum"]{--cup:#c8e9fa;--cup-dark:#7495b9;--cup-gloss:#fff;filter:drop-shadow(0 0 8px rgba(179,239,255,.75)) drop-shadow(0 3px 5px rgba(15,31,57,.5))}
+#mathasTrophiesStrip .mathas-trophy-medal{display:inline-flex;align-items:center;justify-content:center}
+.mathas-trophy-section-title .mathas-v602-trophy-cup{font-size:1.24rem}
+.mathas-celebration-icon .mathas-v602-trophy-cup,.mathas-trophy-dock-symbol .mathas-v602-trophy-cup,.mathas-trophy-flyer .mathas-v602-trophy-cup{font-size:inherit}
+#mathasPointsDetail .mathas-v602-record-medal{display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:31px;line-height:1.15;filter:drop-shadow(0 2px 3px rgba(0,0,0,.27))}
+.mathas-platinum-art .mathas-v602-trophy-cup{font-size:clamp(86px,12vw,125px);filter:drop-shadow(0 0 8px rgba(204,245,255,.67)) drop-shadow(0 6px 9px rgba(3,17,44,.45))}
+.mathas-platinum-entry .mathas-v602-trophy-cup{font-size:65px;opacity:.64}
+.mathas-platinum-entry.is-done .mathas-v602-trophy-cup{opacity:1;filter:drop-shadow(0 0 8px rgba(204,245,255,.7))}
+@media(max-width:440px){#mathasPointsDetail .mathas-v602-record-medal{font-size:27px}}
+@media(max-width:390px){.mathas-platinum-art .mathas-v602-trophy-cup{font-size:82px}}
+@media(max-width:360px){.mathas-platinum-entry .mathas-v602-trophy-cup{font-size:53px}}
+</style>
 </head>
 <body>
 <main class="app">
@@ -3405,7 +3423,7 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 <header class="mathas-illustrated-header">
   <div class="mathas-header-copy">
   <h1>Mélange de calculs</h1>
-  <div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V6</span><span class="mathas-version-detail">.0.1</span></span></div>
+  <div class="subtitle-row"><span class="app-version"><span class="mathas-version-main">V6</span><span class="mathas-version-detail">.0.2</span></span></div>
   </div>
   <div class="mathas-header-art mathas-header-art--machine">
     <img src="./illustration.webp" alt="Machine à trois leviers pour addition, soustraction et multiplication." decoding="async" fetchpriority="low" draggable="false" onerror="this.parentElement.style.display='none'">
@@ -3466,7 +3484,7 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
 
 <section id="hardGame" class="hidden"><div class="hard-game"><div class="hard-bar"><div><div class="hard-title" id="hardTitle">Mélange de calculs · HARD</div><div class="hard-sub" id="hardMeta"></div></div><div class="hard-score sun" id="hardScore">Score 0</div><div class="hard-counter" id="hardCounter">Calcul 1</div></div><div class="hard-work"><div><div class="hard-calc" id="hardCalc"></div><div class="hard-feedback" id="hardFeedback"></div><div class="hard-controls"><button class="btn btn-danger" id="hardClear">Effacer le calcul</button><button class="btn btn-success" id="hardPrimary">Valider</button><button class="btn btn-secondary" id="hardExit">← HARD</button></div></div><div class="hard-numpad" id="hardNumpad"><button class="hard-key" data-key="1">1</button><button class="hard-key" data-key="2">2</button><button class="hard-key" data-key="3">3</button><button class="hard-key" data-key="4">4</button><button class="hard-key" data-key="5">5</button><button class="hard-key" data-key="6">6</button><button class="hard-key" data-key="7">7</button><button class="hard-key" data-key="8">8</button><button class="hard-key" data-key="9">9</button><button class="hard-key back" data-key="back">→</button><button class="hard-key" data-key="0">0</button><button class="hard-key check" data-key="check">✓</button><button class="hard-key hard-borrow hidden" id="hardBorrow" data-key="borrow">↙ Faire un emprunt</button></div></div></div></section>
 </main>
-<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V6.0.1","assets":{"favicon":"./logo-m.png","wordmark":"./logo-mot.webp"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
+<script>window.MathasAppConfig={"appId":"melange-calculs","title":"Mélange de calculs","family":"mixed","visibleVersion":"V6.0.2","assets":{"favicon":"./logo-m.png","wordmark":"./logo-mot.webp"},"storage":{"normal":{"settings":"mixcalc_settings_v1","classic":"mixcalc_classic_v1","sudden":"mixcalc_sudden_v1"},"theme":"mixcalc_theme_v1","hardRecords":"mixcalc_hard_v1","hardThree":"mix_hard_three_v1","lastWork":"mixcalc_last_v1","progression":"mathas_progression_melange_de_calculs_v1","aids":"mathas_aids_melange_v1","masterReset":["mixcalc_classic_v1","mixcalc_last_v1","mathas_progression_melange_de_calculs_v1","mix_hard_three_v1","mathas_recent_two_scores_v1_melange-calculs"]},"aids":{"defaults":{"ruler":true,"tables":true},"controls":{}},"normal":{"levelDigits":{"1":3,"2":5,"3":7},"shorterByOneChance":0.15,"carryBorrowTargetChance":0.8,"multipliers":[2,3,4,5,6,7,8,9],"defaultSettings":{"ops":["add","sub","mul"],"level":1,"subMethod":"addBottom","mulMethod":"top","tensFirst":false},"sourceContracts":{"add":"addition-simple-v4-gold","sub":"soustraction-v4-gold","mul":"multiplication-simple-v4-gold","uiAddMulti":"addition-plusieurs-nombres-v4-gold","uiMulMulti":"multiplication-plusieurs-chiffres-v4-gold"}},"hard":{"type":"mixed","title":"Mélange de calculs","levelDigits":{"1":10,"2":12,"3":16},"multipliers":[2,3,4,5,6,7,8,9],"exactDigits":false,"operations":["add","sub","mul"]},"layers":{"L2":"#menuScreen.menu-panel, #menuScreen .mathas-menu-zone, #gameScreen > .card","L3":".calc-box, .mode-card, .tech-box, .settings-box, .method-card, .choice-card, .level-wrap, .numpad, .hard-numpad, .instruction, .session-bar","L4":"button, input, select, .digit, .digit-cell, .operator, .answer-input, .carry-input, .side-carry-input"}};</script>
 <script id="mathas-v533T-reconcile-history">
 /* V5.4.16 : réconciliation non destructive des meilleurs scores existants.
    Temporaire : relit les preuves enregistrées à chaque ouverture de l'application.
@@ -3548,7 +3566,7 @@ body.light-mode #hardMenuScreen .hard-welcome-v6 strong {color:#9d3046;}
   if(progress.perfect1&&progress.perfect2&&progress.perfect3)progress.hard=true;
   if(JSON.stringify(progress)!==oldP)write(storage.progression,progress);
 
-  // Préserver les médailles existantes, y compris si elles sont encore sous un ancien schéma.
+  // Préserver les trophées déjà acquis, y compris si elles sont encore sous un ancien schéma.
   const rawT=read(trophyKey)||read('mathas_trophies_v2_'+appId)||read('mathas_trophies_v1_'+appId)||{};
   const trophy={...rawT,version:3,
     mastery:{4:[false,false,false],10:[false,false,false],20:[false,false,false]},
@@ -7082,24 +7100,24 @@ function setFeature(feature,enabled){
 const day=(d=new Date())=>{const a=d instanceof Date?d:new Date(d);return `${a.getFullYear()}-${String(a.getMonth()+1).padStart(2,'0')}-${String(a.getDate()).padStart(2,'0')}`};
 const fresh=()=>({day:day(),top:[],bestOne:null,bestThree:[]});
 const TROPHY_SPEC={
-  bronze:{icon:'🥉',mastery:{level:1,label:'Niveau 1 : 4/4, 10/10 et 20/20'},sudden:{level:1,label:'25 en mort subite · Niveau 1'},scoreOne:{value:200,label:'200 pts sur une partie'},hardThreshold:3},
-  silver:{icon:'🥈',mastery:{level:2,label:'Niveau 2 : 4/4, 10/10 et 20/20'},sudden:{level:2,label:'25 en mort subite · Niveau 2'},scoreOne:{value:400,label:'400 pts sur une partie'},hardThreshold:5},
-  gold:{icon:'🥇',mastery:{level:3,label:'Niveau 3 : 4/4, 10/10 et 20/20'},sudden:{level:3,label:'25 en mort subite · Niveau 3'},scoreOne:{value:600,label:'600 pts sur une partie'},hardThreshold:10}
+  bronze:{icon:'🏆',mastery:{level:1,label:'Niveau 1 : 4/4, 10/10 et 20/20'},sudden:{level:1,label:'25 en mort subite · Niveau 1'},scoreOne:{value:200,label:'200 pts sur une partie'},hardThreshold:3},
+  silver:{icon:'🏆',mastery:{level:2,label:'Niveau 2 : 4/4, 10/10 et 20/20'},sudden:{level:2,label:'25 en mort subite · Niveau 2'},scoreOne:{value:400,label:'400 pts sur une partie'},hardThreshold:5},
+  gold:{icon:'🏆',mastery:{level:3,label:'Niveau 3 : 4/4, 10/10 et 20/20'},sudden:{level:3,label:'25 en mort subite · Niveau 3'},scoreOne:{value:600,label:'600 pts sur une partie'},hardThreshold:10}
 };
 const TROPHY_ORDER=['bronze','silver','gold'];
-const PLATINUM_SVG=`<svg class="mathas-platinum-emblem" viewBox="0 0 180 174" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mathasPlatinumMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9ffff"/><stop offset=".25" stop-color="#98bcd3"/><stop offset=".48" stop-color="#f2ffff"/><stop offset=".76" stop-color="#9da5de"/><stop offset="1" stop-color="#d6eeff"/></linearGradient><radialGradient id="mathasPlatinumCore"><stop stop-color="#eefeff"/><stop offset=".5" stop-color="#b4d9ff"/><stop offset="1" stop-color="#6578c0"/></radialGradient></defs><path d="M67 12 92 46 113 12 132 26 120 76H60L48 26Z" fill="url(#mathasPlatinumMetal)" stroke="#e6ffff" stroke-width="3"/><path d="M90 45 101 61 122 58 129 78 154 90 142 111 147 131 119 137 106 160 90 147 74 160 61 137 33 131 38 111 26 90 51 78 58 58 79 61Z" fill="url(#mathasPlatinumMetal)" stroke="#f9ffff" stroke-width="3"/><circle cx="90" cy="104" r="39" fill="url(#mathasPlatinumCore)" stroke="#fff" stroke-width="4"/><path d="m90 69 10 23 25 3-19 17 6 26-22-13-22 13 6-26-19-17 25-3Z" fill="#efffff" opacity=".93"/><path d="m90 79 6 17 19 1-15 13 5 18-15-10-15 10 5-18-15-13 19-1Z" fill="#5876ae" opacity=".78"/><path d="m90 45 4 10-4 10-4-10Z" fill="#fff"/><circle cx="141" cy="61" r="4" fill="#faffff"/><circle cx="38" cy="48" r="3" fill="#faffff"/></svg>`;
-// Seules les 19 médailles officielles sont comptées (plus la récompense Platine).
+const PLATINUM_SVG=cupSvg('platinum');
+// Seules les 19 trophées officiels sont comptées (plus la récompense Platine).
 function displayMaximum(color){return color==='gold'?7:6}
 function trophyDisplayCounts(real){return trophyCounts(real)}
-// Compteurs animés: les trophées sont acquis immédiatement, mais apparaissent au rythme des médailles.
+// Compteurs animés: les trophées sont acquis immédiatement et leur compteur suit leur arrivée animée.
 let visualTrophyCounts=null;
-let pendingMedalCount=0;
+let pendingTrophyCount=0;
 function viewCounts(real){return visualTrophyCounts?{...visualTrophyCounts}:trophyDisplayCounts(real)}
-function countMedalArrival(color){
+function countTrophyArrival(color){
   if(visualTrophyCounts)visualTrophyCounts[color]++;
-  if(pendingMedalCount>0)pendingMedalCount--;
+  if(pendingTrophyCount>0)pendingTrophyCount--;
   render();
-  if(pendingMedalCount===0){visualTrophyCounts=null;render()}
+  if(pendingTrophyCount===0){visualTrophyCounts=null;render()}
 }
 
 function freshTrophies(){return {version:3,mastery:{4:[false,false,false],10:[false,false,false],20:[false,false,false]},sudden:[false,false,false],hardAwards:{bronze:[false,false,false],silver:[false,false,false],gold:[false,false,false]},scoreOne:{bronze:false,silver:false,gold:false},unlockedGold:false}}
@@ -7143,7 +7161,8 @@ function platinumDone(t){return trophyTotal(t)===19}
 const sum=arr=>arr.reduce((s,v)=>s+(Number(v.points)||0),0);
 const sameRun=(a,b)=>a?.at===b?.at&&a?.label===b?.label&&Number(a?.points)===Number(b?.points);
 function bestThree(rows){return rows.filter(x=>x&&Number.isFinite(Number(x.points))&&Number(x.points)>=0).filter((x,i,arr)=>arr.findIndex(y=>sameRun(x,y))===i).sort((a,b)=>Number(b.points)-Number(a.points)||Number(a.aid)-Number(b.aid)).slice(0,3)}
-function cupSvg(color){return `<span class="mathas-v541-cup" data-medal="${color}" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 50"><path d="M12 5h24v12c0 11-5 18-12 18S12 28 12 17V5Z" fill="var(--cup)" stroke="var(--cup-dark)" stroke-width="2"/><path d="M13 10H5v6c0 10 6 13 12 13M35 10h8v6c0 10-6 13-12 13" stroke="var(--cup-dark)" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M18 9h4v18c-4-2-6-9-4-18Z" fill="var(--cup-gloss)" opacity=".83"/><path d="M22 33h4v8h-4Z" fill="var(--cup-dark)"/><path d="M14 44h20v4H14Z" fill="var(--cup)" stroke="var(--cup-dark)" stroke-width="2"/></svg></span>`}
+function cupSvg(color){return `<span class="mathas-v602-trophy-cup" data-trophy-color="${color}" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 50"><path d="M12 5h24v12c0 11-5 18-12 18S12 28 12 17V5Z" fill="var(--cup)" stroke="var(--cup-dark)" stroke-width="2"/><path d="M13 10H5v6c0 10 6 13 12 13M35 10h8v6c0 10-6 13-12 13" stroke="var(--cup-dark)" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M18 9h4v18c-4-2-6-9-4-18Z" fill="var(--cup-gloss)" opacity=".83"/><path d="M22 33h4v8h-4Z" fill="var(--cup-dark)"/><path d="M14 44h20v4H14Z" fill="var(--cup)" stroke="var(--cup-dark)" stroke-width="2"/></svg></span>`}
+const SCORE_MEDALS={gold:'🥇',silver:'🥈',bronze:'🥉'};
 function todayTop(obj){return (Array.isArray(obj.top)?obj.top:[]).filter(x=>x&&Number.isFinite(Number(x.points))&&Number(x.points)>=0).slice().sort((a,b)=>b.points-a.points||((a.aid===b.aid)?0:(a.aid?1:-1))).slice(0,3)}
 const badge=ok=>ok?'<span class="mathas-points-record">Record !</span>':'';
 function trophyCounts(t){const v={};for(const color of TROPHY_ORDER){const spec=TROPHY_SPEC[color];v[color]=Number(masteryDone(t,spec.mastery.level))+Number(t.sudden[spec.sudden.level-1])+Number(t.scoreOne[color])+t.hardAwards[color].filter(Boolean).length+(color==='gold'&&t.unlockedGold?1:0)}return v}
@@ -7151,7 +7170,7 @@ function trophyTotal(t){const c=trophyCounts(t);return c.bronze+c.silver+c.gold}
 function ensurePopover(){
   if(document.getElementById('mathasTrophiesPopover'))return;
   const pop=document.createElement('div');pop.className='mathas-trophies-popover';pop.id='mathasTrophiesPopover';pop.setAttribute('aria-hidden','true');
-  pop.innerHTML='<div class="mathas-trophies-popover-panel" role="dialog" aria-modal="true" aria-labelledby="mathasTrophiesTitle"><div class="mathas-trophies-popover-head"><div><h3 class="mathas-trophies-popover-title" id="mathasTrophiesTitle">🏅 Trophées</h3><p class="mathas-trophies-popover-sub">Débloque-les au fil de tes meilleures performances.</p></div><button type="button" class="mathas-trophies-close" aria-label="Fermer">✕</button></div><div class="mathas-trophies-sections" data-trophies="sections"></div></div>';
+  pop.innerHTML='<div class="mathas-trophies-popover-panel" role="dialog" aria-modal="true" aria-labelledby="mathasTrophiesTitle"><div class="mathas-trophies-popover-head"><div><h3 class="mathas-trophies-popover-title" id="mathasTrophiesTitle">🏆 Trophées</h3><p class="mathas-trophies-popover-sub">Débloque-les au fil de tes meilleures performances.</p></div><button type="button" class="mathas-trophies-close" aria-label="Fermer">✕</button></div><div class="mathas-trophies-sections" data-trophies="sections"></div></div>';
   document.body.appendChild(pop);
   pop.addEventListener('click',e=>{if(e.target===pop||e.target.closest('.mathas-trophies-close'))closePopover()});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closePopover()});
@@ -7169,14 +7188,14 @@ function makeUI(){
   }
   if(level&&!document.getElementById('mathasTrophiesStrip')){
     const strip=document.createElement('button');strip.type='button';strip.className='mathas-trophies-strip';strip.id='mathasTrophiesStrip';strip.setAttribute('aria-haspopup','dialog');strip.setAttribute('aria-expanded','false');
-    strip.innerHTML='<div class="mathas-trophies-badges" aria-hidden="true"><div class="mathas-trophy-badge" data-color="bronze"><span class="mathas-trophy-name">Bronze</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">🥉</span><span class="mathas-trophy-count" data-trophies="bronze">0/6</span></span></div><div class="mathas-trophy-badge" data-color="silver"><span class="mathas-trophy-name">Argent</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">🥈</span><span class="mathas-trophy-count" data-trophies="silver">0/6</span></span></div><div class="mathas-trophy-badge" data-color="gold"><span class="mathas-trophy-name">Or</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">🥇</span><span class="mathas-trophy-count" data-trophies="gold">0/7</span></span></div></div><div class="mathas-trophies-footer"><span class="mathas-trophies-total"><span data-trophies="total">0</span><small>/20</small></span><span class="mathas-trophies-hint">Touchez pour voir les défis</span></div><div class="mathas-platinum-panel"><span class="mathas-platinum-art"><svg class="mathas-platinum-emblem" viewBox="0 0 180 174" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="mathasPlatinumMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9ffff"/><stop offset=".25" stop-color="#98bcd3"/><stop offset=".48" stop-color="#f2ffff"/><stop offset=".76" stop-color="#9da5de"/><stop offset="1" stop-color="#d6eeff"/></linearGradient><radialGradient id="mathasPlatinumCore"><stop stop-color="#eefeff"/><stop offset=".5" stop-color="#b4d9ff"/><stop offset="1" stop-color="#6578c0"/></radialGradient></defs><path d="M67 12 92 46 113 12 132 26 120 76H60L48 26Z" fill="url(#mathasPlatinumMetal)" stroke="#e6ffff" stroke-width="3"/><path d="M90 45 101 61 122 58 129 78 154 90 142 111 147 131 119 137 106 160 90 147 74 160 61 137 33 131 38 111 26 90 51 78 58 58 79 61Z" fill="url(#mathasPlatinumMetal)" stroke="#f9ffff" stroke-width="3"/><circle cx="90" cy="104" r="39" fill="url(#mathasPlatinumCore)" stroke="#fff" stroke-width="4"/><path d="m90 69 10 23 25 3-19 17 6 26-22-13-22 13 6-26-19-17 25-3Z" fill="#efffff" opacity=".93"/><path d="m90 79 6 17 19 1-15 13 5 18-15-10-15 10 5-18-15-13 19-1Z" fill="#5876ae" opacity=".78"/><path d="m90 45 4 10-4 10-4-10Z" fill="#fff"/><circle cx="141" cy="61" r="4" fill="#faffff"/><circle cx="38" cy="48" r="3" fill="#faffff"/></svg></span><span class="mathas-platinum-copy"><span class="mathas-platinum-heading">PLATINE</span><span class="mathas-platinum-caption">Toutes les 19 médailles officielles obtenues !</span><span class="mathas-platinum-progress">20/20 récompenses</span><span class="mathas-platinum-action">Touchez pour voir les défis</span></span></div>';
+    strip.innerHTML=`<div class="mathas-trophies-badges" aria-hidden="true"><div class="mathas-trophy-badge" data-color="bronze"><span class="mathas-trophy-name">Bronze</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">${cupSvg('bronze')}</span><span class="mathas-trophy-count" data-trophies="bronze">0/6</span></span></div><div class="mathas-trophy-badge" data-color="silver"><span class="mathas-trophy-name">Argent</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">${cupSvg('silver')}</span><span class="mathas-trophy-count" data-trophies="silver">0/6</span></span></div><div class="mathas-trophy-badge" data-color="gold"><span class="mathas-trophy-name">Or</span><span class="mathas-trophy-face"><span class="mathas-trophy-medal">${cupSvg('gold')}</span><span class="mathas-trophy-count" data-trophies="gold">0/7</span></span></div></div><div class="mathas-trophies-footer"><span class="mathas-trophies-total"><span data-trophies="total">0</span><small>/20</small></span><span class="mathas-trophies-hint">Touchez pour voir les défis</span></div><div class="mathas-platinum-panel"><span class="mathas-platinum-art">${PLATINUM_SVG}</span><span class="mathas-platinum-copy"><span class="mathas-platinum-heading">PLATINE</span><span class="mathas-platinum-caption">Les 19 trophées officiels ont été obtenus !</span><span class="mathas-platinum-progress">20/20 récompenses</span><span class="mathas-platinum-action">Touchez pour voir les défis</span></span></div>`;
     strip.addEventListener('click',()=>{openPopover();strip.setAttribute('aria-expanded','true')});
     strip.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openPopover();strip.setAttribute('aria-expanded','true')}});
     const anchor=document.getElementById('mathasPointsQuick')||level;anchor.insertAdjacentElement('afterend',strip);
   }
   if(!document.getElementById('mathasPointsDetail')){
     const detail=document.createElement('section');detail.className='mathas-points-detail';detail.id='mathasPointsDetail';detail.setAttribute('aria-label','Trois meilleurs records personnels de points');
-    detail.innerHTML='<div class="mathas-points-records-title">🏆 Mes 3 meilleurs records</div><div class="mathas-v541-podium" data-points="allThree"></div><div class="mathas-v541-record-hint">Trois meilleures parties, toutes dates confondues.</div>';
+    detail.innerHTML='<div class="mathas-points-records-title">🏅 Mes 3 meilleurs records</div><div class="mathas-v541-podium" data-points="allThree"></div><div class="mathas-v541-record-hint">Trois meilleures parties, toutes dates confondues.</div>';
     menu.appendChild(detail);
   }
   ensurePopover();
@@ -7195,10 +7214,10 @@ function renderTrophySections(t){
       ...[1,2,3].map((level,i)=>({ok:t.hardAwards[color][i],label:`Mort subite HARD ${level}`,detail:`${spec.hardThreshold} réussites consécutives au HARD ${level}`}))
     ];
     if(color==='gold')rows.push({ok:t.unlockedGold,label:'Tout débloqué',detail:'Accès à tous les niveaux, aux trois morts subites normales et aux trois niveaux HARD'});
-    return `<section class="mathas-trophy-section" data-color="${color}"><div class="mathas-trophy-section-head"><div class="mathas-trophy-section-title">${spec.icon} ${labels[color]}</div><div class="mathas-trophy-section-score">${earned}/${displayMaximum(color)}</div></div><div class="mathas-trophy-list">${rows.map(r=>`<div class="mathas-trophy-line${r.ok?' is-done':''}"><span class="mathas-trophy-check">${r.ok?'✓':'○'}</span><div class="mathas-trophy-line-label">${r.label}<span class="mathas-trophy-line-detail">${r.detail}</span></div></div>`).join('')}</div></section>`;
+    return `<section class="mathas-trophy-section" data-color="${color}"><div class="mathas-trophy-section-head"><div class="mathas-trophy-section-title">${cupSvg(color)} ${labels[color]}</div><div class="mathas-trophy-section-score">${earned}/${displayMaximum(color)}</div></div><div class="mathas-trophy-list">${rows.map(r=>`<div class="mathas-trophy-line${r.ok?' is-done':''}"><span class="mathas-trophy-check">${r.ok?'✓':'○'}</span><div class="mathas-trophy-line-label">${r.label}<span class="mathas-trophy-line-detail">${r.detail}</span></div></div>`).join('')}</div></section>`;
   }).join('');
   // Le Platine est la 20e recompense officielle, toujours visible en fin de liste.
-  wrap.innerHTML+=`<section class="mathas-trophy-section mathas-platinum-entry${platinum?' is-done':''}" data-color="platinum"><div class="mathas-platinum-entry-content">${PLATINUM_SVG}<div class="mathas-platinum-entry-copy"><div class="mathas-platinum-entry-title">💠 PLATINE · Récompense ultime</div><div class="mathas-platinum-entry-description">Obtiens les 19 médailles officielles (6 bronze, 6 argent et 7 or).</div><div class="mathas-platinum-entry-state">${platinum?'✓ Obtenu · 20/20 récompenses !':'○ À débloquer · 19 médailles requises'}</div></div></div></section>`;
+  wrap.innerHTML+=`<section class="mathas-trophy-section mathas-platinum-entry${platinum?' is-done':''}" data-color="platinum"><div class="mathas-platinum-entry-content">${PLATINUM_SVG}<div class="mathas-platinum-entry-copy"><div class="mathas-platinum-entry-title">🏆 PLATINE · Trophée ultime</div><div class="mathas-platinum-entry-description">Obtiens les 19 trophées officiels (6 bronze, 6 argent et 7 or).</div><div class="mathas-platinum-entry-state">${platinum?'✓ Obtenu · 20/20 récompenses !':'○ À débloquer · 19 trophées requis'}</div></div></div></section>`;
 }
 function render(){
   makeUI();syncGamificationVisibility();const obj=read(),top=todayTop(obj),one=top[0],trophies=readTrophies();
@@ -7206,16 +7225,16 @@ function render(){
   const setT=(name,html)=>document.querySelectorAll(`[data-trophies="${name}"]`).forEach(el=>{if(el.innerHTML!==html)el.innerHTML=html});
   const under=p=>p?.aid?'mathas-points-aid':'';
   set('daily',one?`<span class="${under(one)}">${fmt(one.points)}</span>${badge(obj.bestOne&&one.points>0&&one.points>=obj.bestOne.points)}`:'0');
-  set('allThree',['gold','silver','bronze'].map((color,i)=>{const r=obj.bestThree?.[i];return `<div class="mathas-v541-place" aria-label="${['Premier','Deuxième','Troisième'][i]} meilleur score"><span>${cupSvg(color)}</span><span class="mathas-v541-place-info"><span class="mathas-v541-place-label">${['1er','2e','3e'][i]} record</span><strong class="mathas-v541-place-score ${under(r)}">${r?fmt(r.points):'—'}${r?'<small> pts</small>':''}</strong></span></div>`}).join(''));
-  const counts=viewCounts(trophies),medalTotal=counts.bronze+counts.silver+counts.gold;
+  set('allThree',['gold','silver','bronze'].map((color,i)=>{const r=obj.bestThree?.[i];return `<div class="mathas-v541-place" aria-label="${['Premier','Deuxième','Troisième'][i]} meilleur score"><span><span class="mathas-v602-record-medal" aria-hidden="true">${SCORE_MEDALS[color]}</span></span><span class="mathas-v541-place-info"><span class="mathas-v541-place-label">${['1er','2e','3e'][i]} record</span><strong class="mathas-v541-place-score ${under(r)}">${r?fmt(r.points):'—'}${r?'<small> pts</small>':''}</strong></span></div>`}).join(''));
+  const counts=viewCounts(trophies),trophyTotalDisplayed=counts.bronze+counts.silver+counts.gold;
   for(const color of TROPHY_ORDER)setT(color,`${counts[color]}/${displayMaximum(color)}`);
-  const platinumPresented=platinumDone(trophies)&&pendingMedalCount===0&&!visualTrophyCounts;
-  setT('total',`${medalTotal+(platinumPresented?1:0)}`);
+  const platinumPresented=platinumDone(trophies)&&pendingTrophyCount===0&&!visualTrophyCounts;
+  setT('total',`${trophyTotalDisplayed+(platinumPresented?1:0)}`);
   document.querySelectorAll('#mathasTrophiesStrip .mathas-trophy-badge').forEach(card=>card.classList.toggle('is-complete',counts[card.dataset.color]===displayMaximum(card.dataset.color)));
   const totalDenom=document.querySelector('#mathasTrophiesStrip .mathas-trophies-total small');if(totalDenom)totalDenom.textContent='/20';
   const strip=document.getElementById('mathasTrophiesStrip');
   // L'effet ultime ne s'active qu'après l'arrivée animée de la dernière médaille.
-  strip?.classList.toggle('is-platinum',platinumDone(trophies)&&pendingMedalCount===0&&!visualTrophyCounts);
+  strip?.classList.toggle('is-platinum',platinumDone(trophies)&&pendingTrophyCount===0&&!visualTrophyCounts);
   renderTrophySections(trophies);
 }
 function parse(item){
@@ -7255,20 +7274,20 @@ function addSparks(parent,count,palette,distance){
   }
 }
 function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
-function medalDock(color){
-  let dock=document.getElementById('mathasMedalDock');
-  if(!dock){dock=document.createElement('div');dock.id='mathasMedalDock';dock.className='mathas-medal-dock';dock.setAttribute('aria-live','polite');document.body.appendChild(dock)}
+function trophyDock(color){
+  let dock=document.getElementById('mathasTrophyDock');
+  if(!dock){dock=document.createElement('div');dock.id='mathasTrophyDock';dock.className='mathas-trophy-dock';dock.setAttribute('aria-live','polite');document.body.appendChild(dock)}
   const names={bronze:'BRONZE',silver:'ARGENT',gold:'OR'};
   dock.dataset.color=color;
-  dock.innerHTML=`<span class="mathas-medal-dock-symbol">${TROPHY_SPEC[color].icon}</span><span class="mathas-medal-dock-text">${names[color]}</span><strong class="mathas-medal-dock-count">${visualTrophyCounts?.[color]??trophyDisplayCounts(readTrophies())[color]}/${displayMaximum(color)}</strong>`;
+  dock.innerHTML=`<span class="mathas-trophy-dock-symbol">${cupSvg(color)}</span><span class="mathas-trophy-dock-text">${names[color]}</span><strong class="mathas-trophy-dock-count">${visualTrophyCounts?.[color]??trophyDisplayCounts(readTrophies())[color]}/${displayMaximum(color)}</strong>`;
   dock.classList.remove('is-blinking');dock.classList.add('is-shown');
   return dock;
 }
-async function flyMedal(sourceEl,color){
-  const dock=medalDock(color),target=dock.querySelector('.mathas-medal-dock-symbol');
+async function flyTrophy(sourceEl,color){
+  const dock=trophyDock(color),target=dock.querySelector('.mathas-trophy-dock-symbol');
   await wait(reducedMotion()?50:130);
   const from=sourceEl.getBoundingClientRect(),to=target.getBoundingClientRect();
-  const flyer=document.createElement('div');flyer.className='mathas-medal-flyer';flyer.dataset.color=color;flyer.textContent=TROPHY_SPEC[color].icon;
+  const flyer=document.createElement('div');flyer.className='mathas-trophy-flyer';flyer.dataset.color=color;flyer.innerHTML=cupSvg(color);
   flyer.style.left=`${from.left+from.width/2}px`;flyer.style.top=`${from.top+from.height/2}px`;
   document.body.appendChild(flyer);
   sourceEl.style.visibility='hidden';
@@ -7280,11 +7299,11 @@ async function flyMedal(sourceEl,color){
   }else await wait(100);
   flyer.remove();
   if(!trophiesOn()){dock.remove();return}
-  countMedalArrival(color);
-  const count=dock.querySelector('.mathas-medal-dock-count');if(count)count.textContent=`${viewCounts(readTrophies())[color]}/${displayMaximum(color)}`;
+  countTrophyArrival(color);
+  const count=dock.querySelector('.mathas-trophy-dock-count');if(count)count.textContent=`${viewCounts(readTrophies())[color]}/${displayMaximum(color)}`;
   dock.classList.remove('is-blinking');void dock.offsetWidth;dock.classList.add('is-blinking');
   const card=document.querySelector(`#mathasTrophiesStrip .mathas-trophy-badge[data-color="${color}"]`);
-  if(card){card.classList.remove('is-medal-arrival');void card.offsetWidth;card.classList.add('is-medal-arrival');setTimeout(()=>card.classList.remove('is-medal-arrival'),850)}
+  if(card){card.classList.remove('is-trophy-arrival');void card.offsetWidth;card.classList.add('is-trophy-arrival');setTimeout(()=>card.classList.remove('is-trophy-arrival'),850)}
   const palette=color==='bronze'?['#f4b278','#ffda9e']:color==='silver'?['#ebfaff','#aaddff']:['#fff0a2','#ffd149'];
   addSparks(dock,color==='gold'?24:color==='silver'?16:10,palette,65);
   await wait(reducedMotion()?140:color==='gold'?850:600);
@@ -7295,11 +7314,11 @@ function runCelebrations(){
   if(celebrateActive)return;
   while(celebrateQueue.length&&!allowedCelebration(celebrateQueue[0].kind)){
     const skipped=celebrateQueue.shift();
-    if(skipped.medal&&pendingMedalCount>0)pendingMedalCount--;
+    if(skipped.medal&&pendingTrophyCount>0)pendingTrophyCount--;
   }
   const c=celebrateQueue.shift();
   if(!c){
-    if(pendingMedalCount===0&&visualTrophyCounts){visualTrophyCounts=null;render()}
+    if(pendingTrophyCount===0&&visualTrophyCounts){visualTrophyCounts=null;render()}
     while(idleWaiters.length){try{idleWaiters.shift()()}catch{}}
     return;
   }
@@ -7310,8 +7329,8 @@ function runCelebrations(){
     kind.includes('top')?['#76f2ff','#d3fdff','#8cadff']:
     ['#fff5ad','#fbd34d','#ffad54'];
   const el=document.createElement('div');el.className='mathas-celebration';el.dataset.kind=kind;
-  if(c.medal)el.classList.add('is-medal-celebration');
-  const icon=document.createElement('span');icon.className='mathas-celebration-icon';icon.textContent=c.icon;
+  if(c.trophy)el.classList.add('is-trophy-celebration');
+  const icon=document.createElement('span');icon.className='mathas-celebration-icon';if(c.trophy||kind==='platinum'||kind.startsWith('collection-'))icon.innerHTML=cupSvg(kind==='platinum'?'platinum':kind.replace('collection-',''));else icon.textContent=c.icon;
   el.style.setProperty('--icon-size',kind==='gold'||kind==='collection-gold'?'4.5rem':kind==='silver'?'3.9rem':kind==='bronze'?'3.5rem':kind.startsWith('absolute-')?'2.8rem':'2.2rem');
   const title=document.createElement('div');title.className='mathas-celebration-title';title.textContent=c.title;
   const detail=document.createElement('div');detail.className='mathas-celebration-detail';detail.textContent=c.detail;
@@ -7319,18 +7338,18 @@ function runCelebrations(){
   addSparks(el,kind.includes('gold')?38:kind.startsWith('collection')?30:kind.startsWith('absolute')?28:kind.includes('silver')?22:kind.includes('bronze')?12:7,palette,kind.includes('gold')?260:kind.startsWith('absolute')?225:145);
   document.body.appendChild(el);
   (async()=>{
-    const duration=reducedMotion()?340:(c.medal?(kind==='bronze'?980:kind==='silver'?1180:1480):kind==='daily'||kind==='top'?1300:kind.startsWith('collection')?2400:2200);
+    const duration=reducedMotion()?340:(c.trophy?(kind==='bronze'?980:kind==='silver'?1180:1480):kind==='daily'||kind==='top'?1300:kind.startsWith('collection')?2400:2200);
     await wait(duration);
-    if(c.medal&&trophiesOn()){
+    if(c.trophy&&trophiesOn()){
       // Le badge part du centre vers le coin supérieur gauche : le compteur s'incrémente à l'arrivée.
-      await flyMedal(icon,kind);
-    }else if(c.medal&&pendingMedalCount>0){pendingMedalCount--}
+      await flyTrophy(icon,kind);
+    }else if(c.trophy&&pendingTrophyCount>0){pendingTrophyCount--}
     el.classList.add('is-leaving');await wait(reducedMotion()?0:220);
-  })().catch(error=>{console.warn('Animation trophée :',error);if(c.medal){if(pendingMedalCount>0)pendingMedalCount--;visualTrophyCounts=null;render()}}).finally(()=>{el.remove();celebrateActive=false;runCelebrations()});
+  })().catch(error=>{console.warn('Animation trophée :',error);if(c.trophy){if(pendingTrophyCount>0)pendingTrophyCount--;visualTrophyCounts=null;render()}}).finally(()=>{el.remove();celebrateActive=false;runCelebrations()});
 }
 function celebrate(kind,icon,title,detail,options={}){
   if(!allowedCelebration(kind))return;
-  celebrateQueue.push({kind,icon,title,detail,medal:options.medal===true});runCelebrations();
+  celebrateQueue.push({kind,icon,title,detail,trophy:options.trophy===true});runCelebrations();
 }
 function whenCelebrationsIdle(fn){if(!celebrateActive&&!celebrateQueue.length)fn();else idleWaiters.push(fn)}
 let activePulse=null;
@@ -7403,10 +7422,10 @@ function updateTrophies(points,obj,trophiesBefore,allowScoreAwards=true){
   if(allowScoreAwards)for(const color of TROPHY_ORDER)if(points.points>=TROPHY_SPEC[color].scoreOne.value)t.scoreOne[color]=true;
   if(allModesUnlocked())t.unlockedGold=true;
   put(TROPHY_KEY,t);
-  const oldFlags=trophyFlags(before),newFlags=trophyFlags(t),labels={mastery:'maîtrise',sudden:'mort subite',scoreOne:'meilleur score'},colors={bronze:'bronze',silver:'argent',gold:'or'},gained=[];
-  for(const family of ['mastery','sudden','scoreOne'])for(const color of TROPHY_ORDER)if(newFlags[family][color]&&!oldFlags[family][color])gained.push(`${TROPHY_SPEC[color].icon} ${colors[color]} · ${labels[family]}`);
-  for(let level=1;level<=3;level++)for(const color of TROPHY_ORDER){const k=`${color}-${level}`;if(newFlags.hard[k]&&!oldFlags.hard[k])gained.push(`${TROPHY_SPEC[color].icon} ${colors[color]} · mort subite HARD ${level}`)}
-  if(t.unlockedGold&&!before.unlockedGold)gained.push('🥇 or · Tout débloqué');
+  const oldFlags=trophyFlags(before),newFlags=trophyFlags(t),labels={mastery:'maîtrise',sudden:'mort subite',scoreOne:'meilleur score'},gained=[];
+  for(const family of ['mastery','sudden','scoreOne'])for(const color of TROPHY_ORDER)if(newFlags[family][color]&&!oldFlags[family][color])gained.push({color,detail:labels[family]});
+  for(let level=1;level<=3;level++)for(const color of TROPHY_ORDER){const k=`${color}-${level}`;if(newFlags.hard[k]&&!oldFlags.hard[k])gained.push({color,detail:`mort subite HARD ${level}`})}
+  if(t.unlockedGold&&!before.unlockedGold)gained.push({color:'gold',detail:'Tout débloqué'});
   return gained;
 }
 function record(item){
@@ -7427,26 +7446,24 @@ function record(item){
   }
   const gained=awards?updateTrophies(points,obj,trophiesBefore,scoring):[];
   const officialAfter=awards?trophyCounts(readTrophies()):null;
-  const newMedals=[];
-  if(awards)for(const color of TROPHY_ORDER){
-    for(const text of gained)if(text.startsWith(TROPHY_SPEC[color].icon))newMedals.push({color,detail:text.split('·').slice(1).join('·').trim()||'Nouvelle récompense'});
-  }
-  if(newMedals.length){if(!visualTrophyCounts)visualTrophyCounts={...countsBefore};pendingMedalCount+=newMedals.length}
+  const newTrophies=[];
+  if(awards)for(const award of gained)newTrophies.push(award);
+  if(newTrophies.length){if(!visualTrophyCounts)visualTrophyCounts={...countsBefore};pendingTrophyCount+=newTrophies.length}
   render();
   if(scoring){
-    if(points.points>oldOne)celebrate('daily','⚡','MEILLEUR SCORE DU JOUR',`${fmt(points.points)} points`);
-    if(points.points>oldRecord)celebrate('absolute-one','👑','RECORD ABSOLU · UNE PARTIE',`${fmt(points.points)} points`);
+    if(points.points>oldOne)celebrate('daily','🏅','MEILLEUR SCORE DU JOUR',`${fmt(points.points)} points`);
+    if(points.points>oldRecord)celebrate('absolute-one','🥇','RECORD ABSOLU · UNE PARTIE',`${fmt(points.points)} points`);
   }
   if(awards)for(const color of TROPHY_ORDER){
-    for(const award of newMedals){
-      if(award.color===color)celebrate(color,TROPHY_SPEC[color].icon,`MÉDAILLE ${awardNames[color].toUpperCase()} GAGNÉE !`,award.detail,{medal:true});
+    for(const award of newTrophies){
+      if(award.color===color)celebrate(color,TROPHY_SPEC[color].icon,`TROPHÉE ${awardNames[color].toUpperCase()} GAGNÉ !`,award.detail,{trophy:true});
     }
     // Collection officielle complète : la médaille finale arrive avant la célébration 6/6.
     if(officialBefore[color]<displayMaximum(color)&&officialAfter[color]===displayMaximum(color))
-      celebrate('collection-'+color,TROPHY_SPEC[color].icon,`COLLECTION ${awardNames[color].toUpperCase()} COMPLÈTE !`,`${displayMaximum(color)} trophées officiels sur ${displayMaximum(color)} !`);
+      celebrate('collection-'+color,TROPHY_SPEC[color].icon,`COLLECTION DE TROPHÉES ${awardNames[color].toUpperCase()} COMPLÈTE !`,`${displayMaximum(color)} trophées officiels sur ${displayMaximum(color)} !`);
   }
   if(awards&&!platinumDone(trophiesBefore)&&platinumDone(readTrophies()))
-    celebrate('platinum','💠','PLATINE !','Les 19 médailles officielles sont réunies !');
+    celebrate('platinum','🏆','TROPHÉE PLATINE !','Les 19 trophées officiels sont réunis !');
 }
 // Un déblocage peut se produire après le résultat ou lors d'une migration de version.
 // On le détecte sans passer par les records de parties et sans dépendre du mode Master.
@@ -7456,10 +7473,10 @@ function syncUnlockGold(){
   const counts=trophyDisplayCounts(before),oldTotal=trophyTotal(before);
   before.unlockedGold=true;put(TROPHY_KEY,before);
   if(!visualTrophyCounts)visualTrophyCounts={...counts};
-  pendingMedalCount++;
+  pendingTrophyCount++;
   render();
-  celebrate('gold','🥇','MÉDAILLE D’OR GAGNÉE !','Tout débloqué · tous les niveaux et HARD',{medal:true});
-  if(oldTotal===18)celebrate('platinum','💠','PLATINE !','Les 19 médailles officielles sont réunies !');
+  celebrate('gold','🏆','TROPHÉE D’OR GAGNÉ !','Tout débloqué · tous les niveaux et HARD',{trophy:true});
+  if(oldTotal===18)celebrate('platinum','🏆','TROPHÉE PLATINE !','Les 19 trophées officiels sont réunis !');
 }
 const signature=i=>i?`${i.at||''}|${i.label||''}|${i.score||''}`:'';let seen=signature(get(LAST));let helpUsed=false;
 document.addEventListener('click',e=>{const btn=e.target?.closest?.('button');if(!btn)return;if(btn.matches('#hintBtn,#aidBtn,#scoreRulerBtn,#tablesBtn,#hardTablesBtn,#hardHintBtn,#guideBtn,#hardGuideBtn'))helpUsed=true;if(btn.matches('.countBtn,.hard-start,.hard-three,.hard-sudden,.mathas-post-activity-btn,#trainingBtn,#suddenBtn,#startSudden,#startClassic,[data-mode="challenge"],[data-mode="sudden"]'))helpUsed=false},true);
@@ -8864,25 +8881,25 @@ body.light #masterGamificationSettings .mathas-p29-setting-note,body.light-mode 
 
 
 <style id="mathas-p210-medal-flight-style">
-/* Animation des médailles officielles. */
-.mathas-celebration.is-medal-celebration .mathas-celebration-icon{font-size:var(--icon-size,4rem);filter:drop-shadow(0 0 16px var(--aura));}
-.mathas-medal-dock{position:fixed;z-index:31080;top:clamp(12px,3vh,30px);left:clamp(12px,2.5vw,30px);display:flex;align-items:center;gap:9px;min-width:165px;max-width:calc(100vw - 24px);padding:11px 14px;border-radius:17px;background:linear-gradient(145deg,#142e41,#0a1f2d);border:2px solid #e5b26b;color:#fff6d9;box-shadow:0 9px 30px rgba(0,0,0,.45),0 0 23px rgba(252,193,97,.2);pointer-events:none;opacity:0;transform:translateY(-10px) scale(.91);transition:opacity .17s,transform .17s;isolation:isolate}
-.mathas-medal-dock.is-shown{opacity:1;transform:none}
-.mathas-medal-dock[data-color="silver"]{border-color:#cce4f6;box-shadow:0 9px 30px rgba(0,0,0,.4),0 0 23px rgba(181,218,253,.24)}
-.mathas-medal-dock[data-color="gold"]{border-color:#ffe17e;box-shadow:0 9px 30px rgba(0,0,0,.45),0 0 32px rgba(255,211,65,.3)}
-.mathas-medal-dock-symbol{font-size:2rem;line-height:1;flex:none}
-.mathas-medal-dock-text{font-size:.83rem;letter-spacing:.04em;font-weight:950}
-.mathas-medal-dock-count{font-size:1.2rem;font-variant-numeric:tabular-nums;white-space:nowrap}
-.mathas-medal-dock.is-blinking{animation:mathas-medal-dock-bling .78s ease-out both}
-.mathas-medal-dock.is-blinking .mathas-medal-dock-count{animation:mathas-medal-count-pop .78s cubic-bezier(.18,1.7,.32,1) both}
-.mathas-medal-flyer{position:fixed;z-index:31090;font-size:clamp(2.8rem,9vw,5.2rem);line-height:1;pointer-events:none;filter:drop-shadow(0 0 16px rgba(255,221,113,.85));will-change:transform}
-#mathasTrophiesStrip .mathas-trophy-badge.is-medal-arrival{animation:mathas-medal-badge-pop .82s cubic-bezier(.2,1.5,.38,1)}
-@keyframes mathas-medal-dock-bling{0%,100%{filter:brightness(1)}32%{filter:brightness(2.4)}56%{filter:brightness(1.35)}}
-@keyframes mathas-medal-count-pop{0%{transform:scale(1)}38%{transform:scale(2.6);color:#fff6ab;text-shadow:0 0 13px #ffe784}70%{transform:scale(1.24)}100%{transform:scale(1)}}
-@keyframes mathas-medal-badge-pop{0%,100%{transform:scale(1)}36%{transform:scale(1.1);filter:brightness(1.75)}70%{transform:scale(1.02)}}
-@media(max-width:400px){.mathas-medal-dock{min-width:0;padding:9px 10px;gap:6px}.mathas-medal-dock-symbol{font-size:1.7rem}.mathas-medal-dock-count{font-size:1.06rem}.mathas-medal-dock-text{font-size:.69rem}}
-@media(prefers-reduced-motion:reduce){.mathas-medal-dock,.mathas-medal-dock.is-blinking,.mathas-medal-dock.is-blinking .mathas-medal-dock-count,#mathasTrophiesStrip .mathas-trophy-badge.is-medal-arrival{animation:none!important;transition:none!important}}
-html.mathas-p29-trophies-off .mathas-medal-dock,html.mathas-p29-trophies-off .mathas-medal-flyer{display:none!important}
+/* Animation des trophées officiels. */
+.mathas-celebration.is-trophy-celebration .mathas-celebration-icon{font-size:var(--icon-size,4rem);filter:drop-shadow(0 0 16px var(--aura));}
+.mathas-trophy-dock{position:fixed;z-index:31080;top:clamp(12px,3vh,30px);left:clamp(12px,2.5vw,30px);display:flex;align-items:center;gap:9px;min-width:165px;max-width:calc(100vw - 24px);padding:11px 14px;border-radius:17px;background:linear-gradient(145deg,#142e41,#0a1f2d);border:2px solid #e5b26b;color:#fff6d9;box-shadow:0 9px 30px rgba(0,0,0,.45),0 0 23px rgba(252,193,97,.2);pointer-events:none;opacity:0;transform:translateY(-10px) scale(.91);transition:opacity .17s,transform .17s;isolation:isolate}
+.mathas-trophy-dock.is-shown{opacity:1;transform:none}
+.mathas-trophy-dock[data-color="silver"]{border-color:#cce4f6;box-shadow:0 9px 30px rgba(0,0,0,.4),0 0 23px rgba(181,218,253,.24)}
+.mathas-trophy-dock[data-color="gold"]{border-color:#ffe17e;box-shadow:0 9px 30px rgba(0,0,0,.45),0 0 32px rgba(255,211,65,.3)}
+.mathas-trophy-dock-symbol{font-size:2rem;line-height:1;flex:none}
+.mathas-trophy-dock-text{font-size:.83rem;letter-spacing:.04em;font-weight:950}
+.mathas-trophy-dock-count{font-size:1.2rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mathas-trophy-dock.is-blinking{animation:mathas-trophy-dock-bling .78s ease-out both}
+.mathas-trophy-dock.is-blinking .mathas-trophy-dock-count{animation:mathas-trophy-count-pop .78s cubic-bezier(.18,1.7,.32,1) both}
+.mathas-trophy-flyer{position:fixed;z-index:31090;font-size:clamp(2.8rem,9vw,5.2rem);line-height:1;pointer-events:none;filter:drop-shadow(0 0 16px rgba(255,221,113,.85));will-change:transform}
+#mathasTrophiesStrip .mathas-trophy-badge.is-trophy-arrival{animation:mathas-trophy-badge-pop .82s cubic-bezier(.2,1.5,.38,1)}
+@keyframes mathas-trophy-dock-bling{0%,100%{filter:brightness(1)}32%{filter:brightness(2.4)}56%{filter:brightness(1.35)}}
+@keyframes mathas-trophy-count-pop{0%{transform:scale(1)}38%{transform:scale(2.6);color:#fff6ab;text-shadow:0 0 13px #ffe784}70%{transform:scale(1.24)}100%{transform:scale(1)}}
+@keyframes mathas-trophy-badge-pop{0%,100%{transform:scale(1)}36%{transform:scale(1.1);filter:brightness(1.75)}70%{transform:scale(1.02)}}
+@media(max-width:400px){.mathas-trophy-dock{min-width:0;padding:9px 10px;gap:6px}.mathas-trophy-dock-symbol{font-size:1.7rem}.mathas-trophy-dock-count{font-size:1.06rem}.mathas-trophy-dock-text{font-size:.69rem}}
+@media(prefers-reduced-motion:reduce){.mathas-trophy-dock,.mathas-trophy-dock.is-blinking,.mathas-trophy-dock.is-blinking .mathas-trophy-dock-count,#mathasTrophiesStrip .mathas-trophy-badge.is-trophy-arrival{animation:none!important;transition:none!important}}
+html.mathas-p29-trophies-off .mathas-trophy-dock,html.mathas-p29-trophies-off .mathas-trophy-flyer{display:none!important}
 </style>
 
 <style id="mathas-v501-compact-master-and-scores">
