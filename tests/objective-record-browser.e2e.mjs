@@ -62,12 +62,20 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   assert.equal(observed.size,7);
   assert.notEqual(observed.get('add,sub'),observed.get('add,mul'));
   assert.notEqual(observed.get('add'),observed.get('sub'));
-  // Les trois niveaux changent l'aperçu, via le véritable sélecteur visible.
-  for(const level of [1,2,3]){
-   await frame.locator('#levelBtn').click();
-   await frame.locator('#levelMenu .level-option:not(.hard)').nth(level-1).click();
+  // Le moteur natif verrouille les niveaux 2 et 3 sans progression.
+  // Le banc de test ne les debloque PAS dans le jeu.
+  await frame.locator('#levelBtn').click();
+  assert.equal(await frame.locator('#levelMenu .level-option:not(.hard)').nth(1).isDisabled(),true);
+  // Tester les trois combinaisons de l'APERÇU FICTIF par changement DOM
+  // uniquement ; aucun niveau ne devient disponible pour le vrai joueur.
+  for(const [level,expected] of [[1,76],[2,78],[3,80]]){
+   await frame.locator('#levelSelect').evaluate((el,n)=>{
+    el.value=String(n);el.dispatchEvent(new Event('change',{bubbles:true}));
+   },level);
+   await frame.locator('.countBtn[data-count="20"] .classic-xp-remaining')
+    .filter({hasText:'Reste '+expected+' XP'}).waitFor({timeout:3000});
    const displayed=await frame.locator('.countBtn[data-count="20"] .classic-xp-remaining').textContent();
-   assert.match(displayed,/^Reste \d+ XP$/);
+   assert.equal(displayed,'Reste '+expected+' XP');
   }
   await page.locator('#xpMode').selectOption('zero');
   assert.deepEqual(await frame.locator('.classic-xp-remaining').allTextContents(),['Reste 0 XP','Reste 0 XP','Reste 0 XP']);
