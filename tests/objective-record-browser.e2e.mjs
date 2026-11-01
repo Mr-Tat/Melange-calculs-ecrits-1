@@ -48,7 +48,7 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
     if(await button.evaluate(el=>el.classList.contains('active')))await button.click();
    }
    const selected=await frame.locator('#opsSelector .op-toggle.active').evaluateAll(nodes=>
-    nodes.map(el=>el.dataset.op).sort().join(','));
+    nodes.map(el=>el.dataset.op).join(','));
    assert.equal(selected,wanted.join(','),'Les opérations cochées doivent correspondre');
    // Le parent actualise l'aperçu par setTimeout(0) après le clic dans l'iframe.
    // Une lecture immédiate attrape parfois la valeur précédente (CI flaky).
