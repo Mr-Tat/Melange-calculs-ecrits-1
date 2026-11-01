@@ -93,6 +93,20 @@ test('Mélange : moteur réel, 3 cœurs dans le bandeau, PC et téléphone 320 p
    await page.goto(host,{waitUntil:'domcontentloaded'});
    const frame=page.frameLocator('#game');
    await frame.locator('#startThreeLives').waitFor({timeout:20000});
+   // Les séries doivent rester compactes à 320 px, avec les XP fictifs,
+   // et afficher le nombre à côté du mot « calculs ».
+   await page.locator('#xpMode').selectOption('fake');
+   const compact=await frame.locator('#menuScreen .countBtn[data-count]')
+    .evaluateAll(buttons=>buttons.map(b=>({label:b.firstChild?.textContent?.trim(),
+     height:b.getBoundingClientRect().height,whiteSpace:getComputedStyle(b).whiteSpace,
+     scrollWidth:b.scrollWidth,clientWidth:b.clientWidth})));
+   assert.equal(compact.length,3);
+   for(const [i,c] of compact.entries()){
+    assert.equal(c.label,['4 calculs','10 calculs','20 calculs'][i]);
+    assert.equal(c.whiteSpace,'nowrap');
+    assert.ok(c.height<=70,'Bouton '+c.label+' trop haut : '+c.height+' px');
+    assert.ok(c.scrollWidth<=c.clientWidth+2,'Bouton '+c.label+' déborde');
+   }
    const left=await frame.locator('#startThreeLives').boundingBox();
    const right=await frame.locator('#suddenBtn').boundingBox();
    assert.ok(left&&right,'Les 2 boutons doivent être visibles');
