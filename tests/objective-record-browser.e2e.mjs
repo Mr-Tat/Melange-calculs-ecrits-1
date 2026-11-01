@@ -29,6 +29,36 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   await frame.locator('#opsSelector [data-op="mul"]').click();
   const two=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
   assert.notEqual(prev,two);
+  // Vérifier les sept choix réellement cochés, sans confondre deux couples
+  // ayant la même taille ; montants fictifs de l'aperçu, jamais droits serveur.
+  const combinations=[
+   ['add'],['sub'],['mul'],['add','sub'],['add','mul'],['sub','mul'],['add','sub','mul']
+  ];
+  const observed=new Map();
+  for(const wanted of combinations){
+   // Activer d'abord toutes les opérations voulues : jamais zéro opération.
+   for(const op of wanted){
+    const button=frame.locator('#opsSelector [data-op="'+op+'"]');
+    if(!await button.evaluate(el=>el.classList.contains('active')))await button.click();
+   }
+   for(const op of ['add','sub','mul'].filter(op=>!wanted.includes(op))){
+    const button=frame.locator('#opsSelector [data-op="'+op+'"]');
+    if(await button.evaluate(el=>el.classList.contains('active')))await button.click();
+   }
+   const shown=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
+   assert.match(shown,/^Reste \d+ XP$/);
+   observed.set(wanted.join(','),shown);
+  }
+  assert.equal(observed.size,7);
+  assert.notEqual(observed.get('add,sub'),observed.get('add,mul'));
+  assert.notEqual(observed.get('add'),observed.get('sub'));
+  // Les trois niveaux changent l'aperçu, via le véritable sélecteur visible.
+  for(const level of [1,2,3]){
+   await frame.locator('#levelBtn').click();
+   await frame.locator('#levelMenu .level-option:not(.hard)').nth(level-1).click();
+   const displayed=await frame.locator('.countBtn[data-count="20"] .classic-xp-remaining').textContent();
+   assert.match(displayed,/^Reste \d+ XP$/);
+  }
   await page.locator('#xpMode').selectOption('zero');
   assert.deepEqual(await frame.locator('.classic-xp-remaining').allTextContents(),['Reste 0 XP','Reste 0 XP','Reste 0 XP']);
   await page.locator('#xpMode').selectOption('free');
