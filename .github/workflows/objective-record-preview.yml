@@ -5,6 +5,7 @@ on:
       - 'essai-objectif-record-3-vies.html'
       - 'essai-mode-score-3-vies.html'
       - 'tests/objective-record-preview.test.mjs'
+      - 'tests/objective-record-browser.e2e.mjs'
       - '.github/workflows/objective-record-preview.yml'
   workflow_dispatch:
 permissions:
@@ -19,3 +20,20 @@ jobs:
           node-version: '22'
       - name: Vérifier la démo sur le moteur exact (Node, pas E2E)
         run: node --test tests/objective-record-preview.test.mjs
+
+  chromium-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Playwright Chromium (isolé, sans connexion Connect)
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Vrai navigateur PC et téléphone
+        run: |
+          python3 -m http.server 8123 --bind 127.0.0.1 >/tmp/record-http.log 2>&1 &
+          node --test tests/objective-record-browser.e2e.mjs
