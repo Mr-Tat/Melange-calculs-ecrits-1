@@ -1,0 +1,21 @@
+name: Objectif record — aperçu isolé (aucun déploiement)
+on:
+  pull_request:
+    paths:
+      - 'essai-objectif-record-3-vies.html'
+      - 'essai-mode-score-3-vies.html'
+      - 'tests/objective-record-preview.test.mjs'
+      - '.github/workflows/objective-record-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Vérifier la démo sur le moteur exact (Node, pas E2E)
+        run: node --test tests/objective-record-preview.test.mjs
