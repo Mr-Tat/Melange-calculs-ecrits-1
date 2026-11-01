@@ -9,6 +9,14 @@ function renderPreview(){
  const level=String(doc.querySelector('#levelSelect')?.value||'1');
  const amounts=fakeValues[level]?.[selected],visible=selector.value!=='free'&&Array.isArray(amounts);
  for(const button of doc.querySelectorAll('#menuScreen .countBtn[data-count]')){
+  // Le CSS natif du menu impose parfois un retour à la ligne avec une
+  // spécificité supérieure. Le style inline ne concerne que cet essai.
+  for(const [name,value] of [
+   ['box-sizing','border-box'],['display','flex'],['flex-direction','row'],
+   ['align-items','center'],['justify-content','center'],['white-space','nowrap'],
+   ['min-height','56px'],['font-size','clamp(.73rem,3vw,1rem)'],
+   ['line-height','1.12'],['padding',visible?'5px 3px 20px':'5px 3px 7px']
+  ])button.style.setProperty(name,value,'important');
   let span=button.querySelector('.classic-xp-remaining');
   if(!visible){span?.remove();continue}
   if(!span){span=doc.createElement('span');span.className='classic-xp-remaining';button.appendChild(span)}
