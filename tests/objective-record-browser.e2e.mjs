@@ -99,13 +99,13 @@ test('Mélange : moteur réel, 3 cœurs dans le bandeau, PC et téléphone 320 p
    const compact=await frame.locator('#menuScreen .countBtn[data-count]')
     .evaluateAll(buttons=>buttons.map(b=>({label:b.textContent.replace(/Reste \d+ XP/g,'').replace(/\s+/g,' ').trim(),
      height:b.getBoundingClientRect().height,whiteSpace:getComputedStyle(b).whiteSpace,
-     scrollWidth:b.scrollWidth,clientWidth:b.clientWidth})));
+     scrollWidth:b.scrollWidth,clientWidth:b.clientWidth,font:getComputedStyle(b).fontSize,parentWidth:b.parentElement?.getBoundingClientRect().width,outer:b.outerHTML.slice(0,380)})));
    assert.equal(compact.length,3);
    for(const [i,c] of compact.entries()){
     assert.equal(c.label,['4 calculs','10 calculs','20 calculs'][i]);
     assert.equal(c.whiteSpace,'nowrap');
     assert.ok(c.height<=70,'Bouton '+c.label+' trop haut : '+c.height+' px');
-    assert.ok(c.scrollWidth<=c.clientWidth+2,'Bouton '+c.label+' déborde');
+    assert.ok(c.scrollWidth<=c.clientWidth+2,'Bouton '+c.label+' déborde : '+JSON.stringify(c));
    }
    const left=await frame.locator('#startThreeLives').boundingBox();
    const right=await frame.locator('#suddenBtn').boundingBox();
