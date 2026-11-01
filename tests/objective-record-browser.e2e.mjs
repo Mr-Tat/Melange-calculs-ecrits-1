@@ -97,7 +97,7 @@ test('Mélange : moteur réel, 3 cœurs dans le bandeau, PC et téléphone 320 p
    // et afficher le nombre à côté du mot « calculs ».
    await page.locator('#xpMode').selectOption('fake');
    const compact=await frame.locator('#menuScreen .countBtn[data-count]')
-    .evaluateAll(buttons=>buttons.map(b=>({label:b.firstChild?.textContent?.trim(),
+    .evaluateAll(buttons=>buttons.map(b=>({label:b.textContent.replace(/Reste \d+ XP/g,'').replace(/\s+/g,' ').trim(),
      height:b.getBoundingClientRect().height,whiteSpace:getComputedStyle(b).whiteSpace,
      scrollWidth:b.scrollWidth,clientWidth:b.clientWidth})));
    assert.equal(compact.length,3);
