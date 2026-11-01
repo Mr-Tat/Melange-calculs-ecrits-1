@@ -34,6 +34,8 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   const combinations=[
    ['add'],['sub'],['mul'],['add','sub'],['add','mul'],['sub','mul'],['add','sub','mul']
   ];
+  // Valeurs d'aperçu fictives du niveau 1, jamais les droits XP Connect.
+  const expected4={'add':7,'sub':6,'mul':8,'add,sub':14,'add,mul':15,'sub,mul':16,'add,sub,mul':28};
   const observed=new Map();
   for(const wanted of combinations){
    // Activer d'abord toutes les opérations voulues : jamais zéro opération.
@@ -45,9 +47,17 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
     const button=frame.locator('#opsSelector [data-op="'+op+'"]');
     if(await button.evaluate(el=>el.classList.contains('active')))await button.click();
    }
+   const selected=await frame.locator('#opsSelector .op-toggle.active').evaluateAll(nodes=>
+    nodes.map(el=>el.dataset.op).sort().join(','));
+   assert.equal(selected,wanted.join(','),'Les opérations cochées doivent correspondre');
+   // Le parent actualise l'aperçu par setTimeout(0) après le clic dans l'iframe.
+   // Une lecture immédiate attrape parfois la valeur précédente (CI flaky).
+   const key=wanted.join(',');
+   await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining')
+    .filter({hasText:'Reste '+expected4[key]+' XP'}).waitFor({timeout:3000});
    const shown=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
-   assert.match(shown,/^Reste \d+ XP$/);
-   observed.set(wanted.join(','),shown);
+   assert.equal(shown,'Reste '+expected4[key]+' XP');
+   observed.set(key,shown);
   }
   assert.equal(observed.size,7);
   assert.notEqual(observed.get('add,sub'),observed.get('add,mul'));
