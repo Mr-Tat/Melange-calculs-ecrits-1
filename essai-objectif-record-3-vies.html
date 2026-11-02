@@ -22,7 +22,7 @@ function renderPreview(){
    ['line-height','1.12'],['padding',visible?'5px 3px 20px':'5px 3px 7px']
   ])button.style.setProperty(name,value,'important');
   let span=button.querySelector('.classic-xp-remaining');
-  if(!visible){span?.remove();continue}
+  if(!visible){if(!window.parent?.MathasPilotState?.active)span?.remove();continue}
   if(!span){span=doc.createElement('span');span.className='classic-xp-remaining';button.appendChild(span)}
   const index=['4','10','20'].indexOf(button.dataset.count);
   span.textContent='Reste '+(selector.value==='zero'?0:amounts[index])+' XP';
@@ -30,7 +30,7 @@ function renderPreview(){
  for(const [id,i] of [['startThreeLives',3],['suddenBtn',4]]){
   const meta=doc.querySelector('#'+id+' .score-mode-meta');if(!meta)continue;
   let span=meta.querySelector('.score-mode-detail');
-  if(!visible){span?.remove();continue}
+  if(!visible){if(!window.parent?.MathasPilotState?.active)span?.remove();continue}
   if(!span){span=doc.createElement('span');span.className='score-mode-detail';meta.appendChild(span)}
   span.textContent='Reste '+(selector.value==='zero'?0:amounts[i])+' XP';
  }
