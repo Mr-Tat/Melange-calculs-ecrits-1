@@ -34,6 +34,11 @@ function labUI(){
     }
     let t;try{t=window.MathasPoints?.readTrophies?.()}catch{return}
     if(!t)return;
+    // Les cinq gabarits ont des CSS tardifs : priorite stable au texte 4/10/20.
+    document.querySelectorAll("#menuScreen .classic-count-btn[data-count],#menuScreen .countBtn[data-count]").forEach(button=>{
+      button.style.setProperty("font-size","clamp(.83rem,2.1vw,1.125rem)","important");
+      button.style.setProperty("line-height","1.12","important");
+    });
     // La coupe de maîtrise n'est plus dans le tableau des records : elle ne
     // doit ni élargir ses cellules, ni changer la taille des boutons 4/10/20.
     document.querySelectorAll("#menuScreen .mathas-v535-table .mlab-mastery,#menuScreen .mlab-mastery-fallback").forEach(node=>node.remove());
@@ -185,7 +190,7 @@ function labUI(){
    ".mlab-pair>button:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}",
    "@media(max-width:380px){.mlab-cup{width:23px;height:25px}.mlab-pair>button{font-size:.68rem}}",
    "/* LAB V4 : typography, trophy spacing, burgundy three-lives accents. */",
-   "#menuScreen .mode-card.classic .classic-count-btn[data-count],#menuScreen .mode-card.classic .countBtn[data-count]{font-size:clamp(.83rem,2.1vw,1.125rem)!important;line-height:1.12!important}",
+   "html body #menuScreen .classic-count-btn[data-count],html body #menuScreen .countBtn[data-count]{font-size:clamp(.83rem,2.1vw,1.125rem)!important;line-height:1.12!important}",
    "#menuScreen .mlab-mastery-under-series{flex:0 0 auto!important;height:23px!important;min-height:23px!important;max-height:23px!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}",
    "html body #menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary{margin-top:6px!important;padding-top:6px!important}",
    "#menuScreen .mode-card.sudden .score-mode-options > #startThreeLives,#menuScreen #startThreeLives{background:linear-gradient(165deg,#602d49 0%,#371c35 100%)!important;border-color:#a16c86!important;box-shadow:inset 0 1px 0 #ffffff17,inset 0 -2px 0 #281423b8,0 4px 0 #281826,0 7px 13px #0004!important}",
