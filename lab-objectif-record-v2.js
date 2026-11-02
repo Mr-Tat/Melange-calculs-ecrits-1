@@ -120,7 +120,7 @@ function labUI(){
    ".mlab-pair>.hard-sudden,.mlab-pair>.hard-start[data-mode='sudden']{background:linear-gradient(155deg,#a32b47,#7e253b)!important;border:1px solid #ec889a!important}",
    ".mlab-pair>button:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}",
    "@media(max-width:380px){.mlab-cup{width:23px;height:25px}.mlab-pair>button{font-size:.68rem}}"
-  ].join("\n");document.head.appendChild(css);
+  ].join("\n");document.body.appendChild(css);
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",trophies);else trophies();
   setInterval(()=>{if(!document.hidden)trophies()},850);
 }
