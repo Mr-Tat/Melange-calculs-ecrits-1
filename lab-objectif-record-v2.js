@@ -176,7 +176,13 @@ function labUI(){
    ".mlab-pair>.mlab-three{background:linear-gradient(155deg,#754287,#502963)!important;border:1px solid #b28ace!important}",
    ".mlab-pair>.hard-sudden,.mlab-pair>.hard-start[data-mode='sudden']{background:linear-gradient(155deg,#a32b47,#7e253b)!important;border:1px solid #ec889a!important}",
    ".mlab-pair>button:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}",
-   "@media(max-width:380px){.mlab-cup{width:23px;height:25px}.mlab-pair>button{font-size:.68rem}}"
+   "@media(max-width:380px){.mlab-cup{width:23px;height:25px}.mlab-pair>button{font-size:.68rem}}",
+   "/* LAB V4 : typography, trophy spacing, burgundy three-lives accents. */",
+   "#menuScreen .mode-card.classic .classic-count-btn[data-count],#menuScreen .mode-card.classic .countBtn[data-count]{font-size:clamp(.83rem,2.1vw,1.125rem)!important;line-height:1.12!important}",
+   "#menuScreen .mlab-mastery-under-series{flex:0 0 auto!important;height:23px!important;min-height:23px!important;max-height:23px!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}",
+   "#menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary{margin-top:6px!important;padding-top:6px!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > #startThreeLives,#menuScreen #startThreeLives{background:linear-gradient(165deg,#602d49 0%,#371c35 100%)!important;border-color:#a16c86!important;box-shadow:inset 0 1px 0 #ffffff17,inset 0 -2px 0 #281423b8,0 4px 0 #281826,0 7px 13px #0004!important}",
+   "#hardMenuScreen .mlab-pair > .mlab-three,#hardMenu .mlab-pair > .mlab-three{background:linear-gradient(155deg,#602d49,#371c35)!important;border-color:#a16c86!important}"
   ].join("\n");document.body.appendChild(css);
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",trophies);else trophies();
   setInterval(()=>{if(!document.hidden)trophies()},850);
