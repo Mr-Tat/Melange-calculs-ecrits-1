@@ -63,12 +63,24 @@ function labUI(){
     const btn=document.getElementById("startSudden")||document.getElementById("suddenBtn");
     if(btn){
       const meta=btn.querySelector(".score-mode-meta")||btn;
-      let slot=meta.querySelector(".mlab-sudden");if(!slot){slot=document.createElement("span");slot.className="mlab-sudden";meta.appendChild(slot)}
+      let slot=btn.querySelector(":scope > .mlab-sudden");if(!slot){slot=document.createElement("span");slot.className="mlab-sudden";btn.appendChild(slot)}
       upd(slot,keys.map((_,i)=>cup(i,t.sudden?.[i]===true,"Mort subite niveau "+(i+1)+" : 25 calculs")).join(""));
       let bonus=btn.querySelector(".score-mode-bonus");
       if(!bonus){bonus=document.createElement("span");bonus.className="score-mode-foot score-mode-bonus";meta.prepend(bonus)}
       if(bonus.textContent!=="Score ×2")bonus.textContent="Score ×2";
       if(btn.getAttribute("aria-label")?.includes("20 pour cent"))btn.setAttribute("aria-label","Mort subite · Score ×2");
+    }
+    // Le mode 3 vies n'a pas de trophée : inutile de répéter "Sans trophée"
+    // dans une sous-carte sombre. La seule annotation reste le crédit XP.
+    const three=document.getElementById("startThreeLives");
+    three?.querySelectorAll(".score-mode-foot:not(.score-mode-bonus)").forEach(node=>node.remove());
+    // Trois coupes de score (200, 400 et 600 points) dans la carte du score.
+    const scoreCard=document.querySelector("#menuScreen #mathasPointsQuick .mathas-points-quick-item--best");
+    if(scoreCard){
+      let scoreSlot=scoreCard.querySelector(".mlab-score-awards");
+      if(!scoreSlot){scoreSlot=document.createElement("span");scoreSlot.className="mlab-score-awards";scoreCard.appendChild(scoreSlot)}
+      upd(scoreSlot,keys.map((c,i)=>cup(i,t.scoreOne?.[c]===true,"Défi de score : "+[200,400,600][i]+" points sur une partie")).join(""));
+
     }
     document.querySelectorAll("#hardMenuScreen .hard-level-card,#hardMenu .hard-level-card,#hardMenu .hard-card").forEach((card,i)=>{
       const level=Number((card.querySelector("h3")?.textContent||"").match(/[123]/)?.[0]||i+1);
@@ -81,14 +93,26 @@ function labUI(){
   }
   const css=document.createElement("style");
   css.textContent=[
-   ".mlab-cup{width:27px;height:29px;display:inline-flex;position:relative;flex:none;vertical-align:middle;margin:0 2px;filter:drop-shadow(0 1px 2px #0009)}",
+   ".mlab-cup{width:16px;height:18px;display:inline-flex;position:relative;flex:none;vertical-align:middle;margin:0 1px;filter:drop-shadow(0 1px 2px #0009)}",
    ".mlab-cup svg{display:block;width:100%;height:100%}",
-   ".mlab-cup b{position:absolute;right:-3px;bottom:-2px;border-radius:50%;background:#173b2e;color:#bcffd0;border:1px solid #6cba8c;width:14px;height:14px;font:900 11px system-ui;display:grid;place-items:center}",
+   ".mlab-cup b{position:absolute;right:-2px;bottom:-2px;border-radius:50%;background:#173b2e;color:#bcffd0;border:1px solid #6cba8c;width:10px;height:10px;font:900 8px system-ui;display:grid;place-items:center}",
    "#menuScreen .mlab-mastery-under-series{display:flex!important;align-items:center!important;justify-content:flex-end!important;grid-column:1/-1!important;flex:0 0 100%!important;min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;min-height:34px!important;padding:1px clamp(18px,2vw,32px) 2px!important;margin:2px 0 0!important;pointer-events:none}",
-   "#menuScreen .mlab-mastery-under-series .mlab-cup{width:30px;height:33px;margin:0;pointer-events:auto}",
+   "#menuScreen .mlab-mastery-under-series .mlab-cup{width:18px;height:20px;margin:0;pointer-events:auto}",
    ".mlab-mastery-fallback{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:6px 0 0;color:#c3d2e4;font:700 11px system-ui}",
-   ".mlab-sudden,.mlab-hard{display:flex;align-items:center;justify-content:center;gap:3px}",
-   ".mlab-sudden{margin-top:4px;flex-wrap:nowrap}.mlab-hard{margin-top:10px}",
+   ".mlab-sudden,.mlab-hard,.mlab-score-awards{display:flex;align-items:center;justify-content:flex-end;gap:2px}",
+   "#menuScreen .mode-card.sudden .score-mode-options > button{position:relative!important;isolation:isolate!important;padding-bottom:29px!important;overflow:visible!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-meta,#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-meta:has(>.score-mode-detail){position:static!important;display:flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important;width:auto!important;max-width:100%!important;min-width:0!important;min-height:0!important;margin:2px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;gap:0!important;overflow:visible!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-detail{position:absolute!important;bottom:6px!important;right:7px!important;left:auto!important;max-width:none!important;white-space:nowrap!important;font-size:clamp(8px,.8vw,10px)!important;font-weight:500!important;line-height:1.15!important;text-align:right!important;opacity:.75!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > #startSudden .score-mode-detail,#menuScreen .mode-card.sudden .score-mode-options > #suddenBtn .score-mode-detail{right:69px!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-foot:not(.score-mode-bonus){display:none!important}",
+   "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-bonus{position:relative!important;inset:auto!important;margin:1px auto 0!important}",
+   "#menuScreen #startSudden > .mlab-sudden,#menuScreen #suddenBtn > .mlab-sudden{position:absolute!important;bottom:4px!important;right:7px!important;z-index:5!important;margin:0!important;flex-wrap:nowrap!important;pointer-events:none}",
+   "#hardMenuScreen .hard-level-card,#hardMenu .hard-level-card,#hardMenu .hard-card{position:relative!important;padding-bottom:38px!important}",
+   "#hardMenuScreen .mlab-hard,#hardMenu .mlab-hard{position:absolute!important;right:9px!important;bottom:6px!important;z-index:4!important;margin:0!important;flex-wrap:nowrap!important;pointer-events:none}",
+   "#menuScreen #mathasPointsQuick .mathas-points-quick-item--best{position:relative!important}",
+   "#menuScreen #mathasPointsQuick .mlab-score-awards{position:absolute!important;bottom:7px!important;right:9px!important;z-index:4!important;white-space:nowrap!important;pointer-events:none}",
+   "@media(max-width:370px){#menuScreen .mode-card.sudden .score-mode-options > #startSudden .score-mode-detail,#menuScreen .mode-card.sudden .score-mode-options > #suddenBtn .score-mode-detail{right:63px!important}}",
+   ".mlab-sudden,.mlab-hard,.mlab-score-awards{flex-wrap:nowrap}",
    "#hardMenuScreen .mlab-pair,#hardMenu .mlab-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;width:100%;min-width:0}",
    ".mlab-pair>button{box-sizing:border-box;min-width:0;width:100%;min-height:54px;padding:9px 3px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font:900 .8rem system-ui}",
    ".mlab-pair>.mlab-three{background:linear-gradient(155deg,#754287,#502963)!important;border:1px solid #b28ace!important}",
