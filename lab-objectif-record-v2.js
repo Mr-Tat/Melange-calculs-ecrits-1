@@ -47,7 +47,7 @@ function labUI(){
         ||document.querySelector("#menuScreen #classicLevel")
         ||document.querySelector("#menuScreen #levelSelect");
       const text=selected?.selectedOptions?.[0]?.textContent||"";
-      const parsed=text.match(/(?:Niveau|Niv\\.?)\\s*([123])/i);
+      const parsed=text.match(/(?:Niveau|Niv\.?)\s*([123])/i);
       const numeric=Number(selected?.value);
       // En Addition/Soustraction, les valeurs natives sont des chiffres
       // (2/3/4) ; en Multiplication/Mélange ce sont les niveaux (1/2/3).
