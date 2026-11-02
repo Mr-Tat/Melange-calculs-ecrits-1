@@ -34,25 +34,31 @@ function labUI(){
     }
     let t;try{t=window.MathasPoints?.readTrophies?.()}catch{return}
     if(!t)return;
-    [...document.querySelectorAll("#menuScreen .mathas-v535-table tbody tr:not(.mathas-v535-hard-row)")].forEach((row,i)=>{
-      const level=Number((row.querySelector(".mathas-v535-level-label")?.textContent||"").match(/[123]/)?.[0]||i+1);
-      if(level<1||level>3)return;
-      const cell=row.lastElementChild;if(!cell)return;
-      let slot=cell.querySelector(".mlab-mastery");if(!slot){slot=document.createElement("span");slot.className="mlab-mastery";cell.appendChild(slot)}
+    // La coupe de maîtrise n'est plus dans le tableau des records : elle ne
+    // doit ni élargir ses cellules, ni changer la taille des boutons 4/10/20.
+    document.querySelectorAll("#menuScreen .mathas-v535-table .mlab-mastery,#menuScreen .mlab-mastery-fallback").forEach(node=>node.remove());
+    const panel=document.querySelector("#menuScreen .mode-card.classic .mathas-series-panel")
+      ||document.querySelector("#menuScreen .mathas-series-panel");
+    let mastery=document.querySelector("#menuScreen .mlab-mastery-under-series");
+    if(panel){
+      if(!mastery){mastery=document.createElement("div");mastery.className="mlab-mastery-under-series"}
+      if(mastery.previousElementSibling!==panel)panel.insertAdjacentElement("afterend",mastery);
+      const selected=document.querySelector("#menuScreen #classicMaxDigits")
+        ||document.querySelector("#menuScreen #classicLevel")
+        ||document.querySelector("#menuScreen #levelSelect");
+      const text=selected?.selectedOptions?.[0]?.textContent||"";
+      const parsed=text.match(/(?:Niveau|Niv\\.?)\\s*([123])/i);
+      const numeric=Number(selected?.value);
+      // En Addition/Soustraction, les valeurs natives sont des chiffres
+      // (2/3/4) ; en Multiplication/Mélange ce sont les niveaux (1/2/3).
+      const fallback=selected?.id==="classicMaxDigits"
+        ?(numeric>=2&&numeric<=4?numeric-1:1)
+        :(numeric>=1&&numeric<=3?numeric:1);
+      const level=parsed?Number(parsed[1]):fallback;
       const done=[4,10,20].every(n=>t.mastery?.[n]?.[level-1]===true);
-      upd(slot,cup(level-1,done,"Coupe de maîtrise niveau "+level+" : 4/4, 10/10, 20/20"));
-    });
-    // Repli propre pour Mélange et tout moteur dont le tableau natif n'est pas affiché.
-    const nativeRows=document.querySelectorAll("#menuScreen .mathas-v535-table tbody tr:not(.mathas-v535-hard-row)");
-    const anchor=document.querySelector("#menuScreen .classic-grid")||document.querySelector("#menuScreen .classic-count-picker");
-    let fallback=document.querySelector("#menuScreen .mlab-mastery-fallback");
-    if(nativeRows.length){fallback?.remove()}
-    else if(anchor){
-      if(!fallback){fallback=document.createElement("div");fallback.className="mlab-mastery mlab-mastery-fallback";anchor.insertAdjacentElement("afterend",fallback)}
-      const chosen=Number(document.querySelector("#menuScreen #levelSelect")?.value||document.querySelector("#menuScreen #classicLevel")?.value||1);
-      const level=chosen>=1&&chosen<=3?chosen:1;
-      const done=[4,10,20].every(n=>t.mastery?.[n]?.[level-1]===true);
-      upd(fallback,'<span>Niv. '+level+' · trophée 100 % </span>'+cup(level-1,done,"Maîtrise niveau "+level+" : 4/4, 10/10, 20/20"));
+      upd(mastery,cup(level-1,done,"Coupe de maîtrise niveau "+level+" : 4/4, 10/10 et 20/20"));
+    }else{
+      mastery?.remove();
     }
     const btn=document.getElementById("startSudden")||document.getElementById("suddenBtn");
     if(btn){
@@ -78,7 +84,8 @@ function labUI(){
    ".mlab-cup{width:27px;height:29px;display:inline-flex;position:relative;flex:none;vertical-align:middle;margin:0 2px;filter:drop-shadow(0 1px 2px #0009)}",
    ".mlab-cup svg{display:block;width:100%;height:100%}",
    ".mlab-cup b{position:absolute;right:-3px;bottom:-2px;border-radius:50%;background:#173b2e;color:#bcffd0;border:1px solid #6cba8c;width:14px;height:14px;font:900 11px system-ui;display:grid;place-items:center}",
-   ".mlab-mastery{display:inline-flex;margin-left:8px;vertical-align:middle}",
+   "#menuScreen .mlab-mastery-under-series{display:flex!important;align-items:center!important;justify-content:flex-end!important;grid-column:1/-1!important;flex:0 0 100%!important;min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;min-height:34px!important;padding:1px clamp(7px,1.5vw,18px) 2px!important;margin:2px 0 0!important;pointer-events:none}",
+   "#menuScreen .mlab-mastery-under-series .mlab-cup{width:30px;height:33px;margin:0;pointer-events:auto}",
    ".mlab-mastery-fallback{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:6px 0 0;color:#c3d2e4;font:700 11px system-ui}",
    ".mlab-sudden,.mlab-hard{display:flex;align-items:center;justify-content:center;gap:3px}",
    ".mlab-sudden{margin-top:4px;flex-wrap:nowrap}.mlab-hard{margin-top:10px}",
