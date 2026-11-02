@@ -218,6 +218,14 @@ function patch(game,kind){
   const hookNormal="queueMicrotask(()=>window.MathasLabV2Update?.({mode:session.mode,level:session.level,score:session.score,total:session.total??session.totalCalculs??null,ops:session.ops??null,phase,completed:session.completed??null,hearts:session.hearts??null,hard:false}));";
   const hookHard="queueMicrotask(()=>window.MathasLabV2Update?.({mode:hardSession.mode,level:hardSession.level,score:hardSession.score,hearts:hardSession.hearts,ops:hardSession.ops??null,phase:hardPhase,hard:true}));";
   swap("function updateBar(){","function updateBar(){"+hookNormal,"score normal");
+  // Certains moteurs ne rappellent pas updateBar() a la fin des parties.
+  // Emettre le resultat final depuis leur fonction de cloture (LAB uniquement).
+  if(kind==="mul"||kind==="mix"){
+    const terminalHook="queueMicrotask(()=>window.MathasLabV2Update?.({mode:session.mode,level:session.level,score:session.score,total:session.total??session.totalCalculs??null,ops:session.ops??null,phase,completed:session.completed??null,hearts:session.hearts??null,hard:false}));";
+    swap("function finishClassic(){","function finishClassic(){"+terminalHook,"fin classique");
+    swap("function endSudden(i){","function endSudden(i){"+terminalHook,"fin mort subite");
+  }
+
   const fn=kind==="mix"?"updateHardBar":"updateHardHeader";
   swap("function "+fn+"(){","function "+fn+"(){"+hookHard,"score HARD");
   if(kind==="mix"){
