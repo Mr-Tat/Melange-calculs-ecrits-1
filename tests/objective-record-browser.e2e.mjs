@@ -121,3 +121,29 @@ test('Mélange : moteur réel, 3 cœurs dans le bandeau, PC et téléphone 320 p
   }
  }finally{await browser.close()}
 });
+
+test('LAB V2 — trophées et points visibles',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const mobile of [false,true]){
+   const page=await browser.newPage({viewport:mobile?{width:320,height:650}:{width:1440,height:900},reducedMotion:'reduce'});
+   const traffic=[];page.on('request',req=>{if(/supabase\\.co/i.test(req.url()))traffic.push(req.url())});
+   await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+   const frame=page.frameLocator('#game');
+   await frame.locator('#startThreeLives').waitFor({timeout:30000});
+   const cups=frame.locator('#suddenBtn .mlab-sudden .mlab-cup');
+   await cups.first().waitFor({timeout:30000});
+   assert.equal(await cups.count(),3,'Trois coupes de Mort subite visibles');
+   assert.equal(await frame.locator('#suddenBtn .score-mode-bonus').textContent(),'Score ×2');
+   const mastery=frame.locator('#menuScreen .mlab-mastery .mlab-cup');
+   await mastery.first().waitFor({timeout:30000});
+   assert.equal(await mastery.count(),3,'Trois coupes de maîtrise visibles dans les lignes 1/2/3');
+   await frame.locator('#startThreeLives').click();
+   await frame.locator('#scorePill').waitFor();
+   await frame.locator('#scorePill').getAttribute('title');
+   assert.match(await frame.locator('#scorePill').textContent(),/^Score : 0 pts$/,'Score final affiché dès le départ');
+   assert.deepEqual(traffic,[],'Aucune connexion à Supabase pendant la simulation');
+   await page.close();
+  }
+ }finally{await browser.close()}
+});
