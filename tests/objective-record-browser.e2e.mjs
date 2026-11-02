@@ -135,9 +135,23 @@ test('LAB V2 — trophées et points visibles',async()=>{
    await cups.first().waitFor({timeout:30000});
    assert.equal(await cups.count(),3,'Trois coupes de Mort subite visibles');
    assert.equal(await frame.locator('#suddenBtn .score-mode-bonus').textContent(),'Score ×2');
-   const mastery=frame.locator('#menuScreen .mlab-mastery .mlab-cup');
-   await mastery.first().waitFor({timeout:30000});
-   assert.ok(await mastery.count()>=1,'La coupe du niveau actuellement visible doit être affichée');
+   const mastery=frame.locator('#menuScreen .mlab-mastery-under-series .mlab-cup');
+   await mastery.waitFor({timeout:30000});
+   assert.equal(await mastery.count(),1,'Une seule coupe : celle du niveau sélectionné');
+   assert.equal(await frame.locator('#menuScreen .mathas-v535-table .mlab-cup').count(),0,'Aucune coupe ajoutée au tableau des records');
+   const panel=frame.locator('#menuScreen .mathas-series-panel').first();
+   const nativeSpacing=await panel.evaluate(el=>({gap:el.style.getPropertyValue('gap'),padding:el.style.getPropertyValue('padding-left')}));
+   assert.deepEqual(nativeSpacing,{gap:'',padding:''},'Reprendre les espacements des moteurs GitHub originaux');
+   const buttons=panel.locator('button[data-count]');
+   assert.equal(await buttons.count(),3,'Trois boutons sur une rangée');
+   const boxes=await buttons.evaluateAll(nodes=>nodes.map(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}}));
+   const widths=boxes.map(b=>b.width);
+   assert.ok(Math.max(...widths)-Math.min(...widths)<4,'Boutons 4/10/20 de largeur égale comme le moteur original : '+JSON.stringify(widths));
+   assert.ok(Math.max(...boxes.map(b=>b.y))-Math.min(...boxes.map(b=>b.y))<4,'Les trois boutons restent sur une seule ligne');
+   const cupBox=await mastery.evaluate(el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}});
+   const last=boxes[2];
+   assert.ok(cupBox && cupBox.y>=last.y+last.height-2,'Coupe placée sous les boutons, pas dans le tableau');
+   assert.ok(cupBox.x>=last.x-3 && cupBox.x+cupBox.width<=last.x+last.width+3,'Coupe sous le bouton 20 calculs (zone croix jaune)');
    // Simuler un trophée déjà acquis UNIQUEMENT dans le stockage isolé du jeu.
    await cups.first().evaluate(()=>{
     const api=window.MathasPoints;
