@@ -215,8 +215,8 @@ function labUI(){
 }
 function patch(game,kind){
   function swap(a,b,why){const parts=game.split(a);if(parts.length!==2)throw Error(kind+" "+why+" (matches "+(parts.length-1)+")");game=parts.join(b)}
-  const hookNormal="queueMicrotask(()=>window.MathasLabV2Update?.({mode:session.mode,level:session.level,score:session.score,total:session.total??session.totalCalculs??null,hard:false}));";
-  const hookHard="queueMicrotask(()=>window.MathasLabV2Update?.({mode:hardSession.mode,level:hardSession.level,score:hardSession.score,hearts:hardSession.hearts,hard:true}));";
+  const hookNormal="queueMicrotask(()=>window.MathasLabV2Update?.({mode:session.mode,level:session.level,score:session.score,total:session.total??session.totalCalculs??null,ops:session.ops??null,phase,completed:session.completed??null,hearts:session.hearts??null,hard:false}));";
+  const hookHard="queueMicrotask(()=>window.MathasLabV2Update?.({mode:hardSession.mode,level:hardSession.level,score:hardSession.score,hearts:hardSession.hearts,ops:hardSession.ops??null,phase:hardPhase,hard:true}));";
   swap("function updateBar(){","function updateBar(){"+hookNormal,"score normal");
   const fn=kind==="mix"?"updateHardBar":"updateHardHeader";
   swap("function "+fn+"(){","function "+fn+"(){"+hookHard,"score HARD");
