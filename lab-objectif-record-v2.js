@@ -22,6 +22,16 @@ function labUI(){
   }
   const upd=(n,s)=>{if(n&&n.innerHTML!==s)n.innerHTML=s};
   function trophies(){
+    // Laboratoire isolé : rendre l'entrée HARD essayable, sans changer les
+    // règles internes des niveaux HARD ni les jeux officiels GitHub/Connect.
+    if(window.__mathasThreeLivesDemo){
+      document.querySelectorAll('#menuScreen option[value="__hard__"],#menuScreen .hard-option,#menuScreen .level-option.hard').forEach(el=>{
+        if(el.disabled)el.disabled=false;
+        el.classList.remove('progress-locked');
+        el.removeAttribute('aria-disabled');
+        if(el.title?.includes('Débloque HARD'))el.title='HARD accessible en essai isolé du laboratoire';
+      });
+    }
     let t;try{t=window.MathasPoints?.readTrophies?.()}catch{return}
     if(!t)return;
     [...document.querySelectorAll("#menuScreen .mathas-v535-table tbody tr:not(.mathas-v535-hard-row)")].forEach((row,i)=>{
