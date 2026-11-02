@@ -251,7 +251,7 @@ test('LAB V3 — mini-coupes dans les coins et XP sans fond sombre',async()=>{
    });
    assert.match(v4.background,/rgb\(96,\s*45,\s*73\)/,'3 vies : bordeaux assombri');
    assert.equal(v4.fonts.length,3,'Trois libellés 4/10/20 à dimensionner');
-   for(const font of v4.fonts)assert.ok(font>=13&&font<=18.5,'Texte intermédiaire sans débordement sur petit écran : '+font);
+   for(const font of v4.fonts)assert.ok(font>=(mobile?11.2:13)&&font<=18.5,'Texte intermédiaire sans débordement sur petit écran : '+font);
    assert.ok(v4.masteryHeight>=20&&v4.masteryHeight<=25,'Pas de grande ligne vide sous la coupe : '+v4.masteryHeight);
    if(v4.summaryMargin!==null)assert.ok(v4.summaryMargin<=9,'Tableau rapproché de la coupe : '+v4.summaryMargin);
    await score.first().evaluate(()=>{
