@@ -300,7 +300,7 @@ test('LAB pilot: la session partage son mode, sa phase et son score sans authent
  const browser=await chromium.launch({headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
-  await page.goto(url,{waitUntil:'domcontentloaded'});
+  await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
   const game=page.frameLocator('#game');
   const start=game.locator('#menuScreen .classic-count-btn[data-count="4"],#menuScreen .countBtn[data-count="4"]');
   await start.first().waitFor({timeout:30000});
