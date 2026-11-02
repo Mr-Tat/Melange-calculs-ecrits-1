@@ -28,7 +28,8 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   // Changer vraiment les opérations cochées, sans dériver de l'ancienne sélection.
   await frame.locator('#opsSelector [data-op="mul"]').click();
   const two=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
-  assert.notEqual(prev,two);
+  await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').filter({hasText:/Reste (?!28\\b)\\d+ XP/}).waitFor({timeout:3000});
+   assert.notEqual(prev,await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent());
   // Vérifier les sept choix réellement cochés, sans confondre deux couples
   // ayant la même taille ; montants fictifs de l'aperçu, jamais droits serveur.
   const combinations=[
@@ -229,7 +230,7 @@ test('LAB V3 — mini-coupes dans les coins et XP sans fond sombre',async()=>{
    assert.ok(g.size.w<=17&&g.size.h<=19,'Mini-coupes à 60 %');
    assert.ok(g.cups.x>=g.btn.x&&g.cups.right<=g.btn.right+3,'Coupes dans le bouton');
    assert.ok(g.cups.bottom<=g.btn.bottom+3&&g.btn.bottom-g.cups.bottom<17,'Coupes en bas à droite');
-   assert.ok(g.xp&&g.xp.right<=g.cups.x+2,'XP à gauche des coupes');
+   assert.ok(g.xp&&g.xp.right<=g.cups.x+2,'XP à gauche des coupes : '+JSON.stringify(g));
    assert.match(await sudden.locator('.score-mode-detail').textContent(),/Reste \d+ XP/);
    assert.equal(await frame.locator('#startThreeLives .score-mode-foot:not(.score-mode-bonus)').count(),0);
    assert.equal(await frame.locator('#startThreeLives .score-mode-meta').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
