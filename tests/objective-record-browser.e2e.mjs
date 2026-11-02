@@ -32,7 +32,8 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
    assert.notEqual(afterMul,'add,sub,mul','Le clic sur multiplication doit modifier les opérations sélectionnées');
    await page.locator('#xpMode').dispatchEvent('change');
   const two=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
-  await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').filter({hasText:/Reste (?!28\\b)\\d+ XP/}).waitFor({timeout:3000});
+  const afterXp=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
+   assert.notEqual(afterXp,'Reste 28 XP','XP inchangé après sélection '+JSON.stringify({afterMul,afterXp,mode:await page.locator('#xpMode').inputValue()}));
    assert.notEqual(prev,await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent());
   // Vérifier les sept choix réellement cochés, sans confondre deux couples
   // ayant la même taille ; montants fictifs de l'aperçu, jamais droits serveur.
