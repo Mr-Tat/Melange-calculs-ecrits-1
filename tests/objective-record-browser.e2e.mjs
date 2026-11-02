@@ -319,3 +319,28 @@ test('LAB pilot: la session partage son mode, sa phase et son score sans authent
   await page.close();
  }finally{await browser.close()}
 });
+
+
+test('LAB pilote : les coupes et XP prennent la valeur du serveur, pas du mock',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage({viewport:{width:1200,height:850},reducedMotion:'reduce'});
+  await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+  const mode=page.locator('#xp-preview-mode,#xpMode');
+  if(await mode.count()){await mode.selectOption('free')}
+  const game=page.frameLocator('#game');
+  await game.locator('#menuScreen .classic-count-btn[data-count="4"],#menuScreen .countBtn[data-count="4"]').first().waitFor({timeout:30000});
+  await page.evaluate(()=>{window.MathasPilotState={
+    active:true,app:'test',rights:{level:1,ops:['add','sub','mul'],classic:{'4':17,'10':19,'20':33},sudden:8,threeLives:4},
+    trophies:['score:200','mastery:1:4','sudden:1']};
+  });
+  await game.locator('#menuScreen .classic-count-btn[data-count="4"] .classic-xp-remaining,#menuScreen .countBtn[data-count="4"] .classic-xp-remaining')
+    .first().waitFor({timeout:9000});
+  const xp=await game.locator('#menuScreen .classic-count-btn[data-count="4"] .classic-xp-remaining,#menuScreen .countBtn[data-count="4"] .classic-xp-remaining').first().textContent();
+  assert.equal(xp?.trim(),'Reste 17 XP','Les droits du serveur doivent primer sur les valeurs de démonstration');
+  const cup=game.locator('#menuScreen .mlab-score-awards .mlab-cup').first();
+  await cup.waitFor({timeout:9000});
+  assert.match(await cup.getAttribute('aria-label')||'',/obtenu/,'La coupe de score est acquise selon le serveur');
+  await page.close();
+ }finally{await browser.close()}
+});
