@@ -201,3 +201,44 @@ test('LAB V2 — HARD deux boutons et coupes',async()=>{
   }
  }finally{await browser.close()}
 });
+
+test('LAB V3 — mini-coupes dans les coins et XP sans fond sombre',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const mobile of [false,true]){
+   const page=await browser.newPage({viewport:mobile?{width:320,height:650}:{width:1440,height:900},reducedMotion:'reduce'});
+   await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+   const frame=page.frameLocator('#game');
+   await frame.locator('#startThreeLives').waitFor({timeout:30000});
+   await page.locator('#xpMode').selectOption('fake');
+   const score=frame.locator('#mathasPointsQuick .mlab-score-awards .mlab-cup');
+   await score.first().waitFor({timeout:15000});
+   assert.equal(await score.count(),3,'Coupes de score : 200, 400, 600 points');
+   for(const [i,p] of [200,400,600].entries())assert.match(await score.nth(i).getAttribute('title'),new RegExp(String(p)));
+   const sudden=frame.locator('#suddenBtn');
+   const cups=sudden.locator(':scope > .mlab-sudden .mlab-cup');
+   await cups.first().waitFor();
+   assert.equal(await cups.count(),3);
+   const g=await sudden.evaluate(el=>{
+     const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,w:r.width,h:r.height}};
+     const items=el.querySelector(':scope > .mlab-sudden'),xp=el.querySelector('.score-mode-detail'),meta=el.querySelector('.score-mode-meta');
+     return {btn:rect(el),cups:rect(items),xp:xp?rect(xp):null,bg:getComputedStyle(meta).backgroundColor,border:getComputedStyle(meta).borderTopWidth,size:rect(items.querySelector('.mlab-cup'))};
+   });
+   assert.equal(g.bg,'rgba(0, 0, 0, 0)','Plus de zone sombre derrière Score ×2');
+   assert.equal(g.border,'0px','Plus de bordure interne');
+   assert.ok(g.size.w<=17&&g.size.h<=19,'Mini-coupes à 60 %');
+   assert.ok(g.cups.x>=g.btn.x&&g.cups.right<=g.btn.right+3,'Coupes dans le bouton');
+   assert.ok(g.cups.bottom<=g.btn.bottom+3&&g.btn.bottom-g.cups.bottom<17,'Coupes en bas à droite');
+   assert.ok(g.xp&&g.xp.right<=g.cups.x+2,'XP à gauche des coupes');
+   assert.match(await sudden.locator('.score-mode-detail').textContent(),/Reste \d+ XP/);
+   assert.equal(await frame.locator('#startThreeLives .score-mode-foot:not(.score-mode-bonus)').count(),0);
+   assert.equal(await frame.locator('#startThreeLives .score-mode-meta').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
+   await score.first().evaluate(()=>{
+     const api=window.MathasPoints,t=api.readTrophies();t.scoreOne.bronze=true;
+     localStorage.setItem(api.trophyKey,JSON.stringify(t));
+   });
+   await score.first().locator('b').waitFor({timeout:5000});
+   await page.close();
+  }
+ }finally{await browser.close()}
+});
