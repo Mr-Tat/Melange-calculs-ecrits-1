@@ -263,3 +263,33 @@ test('LAB V3 — mini-coupes dans les coins et XP sans fond sombre',async()=>{
   }
  }finally{await browser.close()}
 });
+
+
+test('LAB V5 — trophées discrets et lisibles sur PC/téléphone',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const mobile of [false,true]){
+   const page=await browser.newPage({viewport:mobile?{width:320,height:650}:{width:1440,height:900},reducedMotion:'reduce'});
+   await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+   const frame=page.frameLocator('#game');
+   const badges=frame.locator('#menuScreen #mathasTrophiesStrip:not(.is-platinum) .mathas-trophy-badge');
+   await badges.first().waitFor({timeout:30000});
+   const metrics=await frame.locator('#menuScreen #mathasTrophiesStrip:not(.is-platinum)').evaluate(strip=>{
+    const r=e=>{const b=e.getBoundingClientRect();return {x:b.x,y:b.y,width:b.width,height:b.height}};
+    const list=[...strip.querySelectorAll('.mathas-trophy-badge')];
+    const footer=strip.querySelector('.mathas-trophies-footer');
+    return {cards:list.map(el=>({height:r(el).height,minHeight:parseFloat(getComputedStyle(el).minHeight),title:el.querySelector('.mathas-trophy-name')?.textContent||''})),
+      footer:footer?{height:r(footer).height,paddingTop:parseFloat(getComputedStyle(footer).paddingTop),label:footer.textContent.trim()}:null,
+      platinum:strip.classList.contains('is-platinum')};
+   });
+   assert.equal(metrics.cards.length,3,'Les trois catégories de trophées restent présentes');
+   assert.equal(metrics.platinum,false,'La règle compacte concerne uniquement les trophées ordinaires');
+   assert.ok(metrics.cards.every(c=>c.height<=75),'Cartes compactes sans couper les contenus : '+JSON.stringify(metrics));
+   assert.ok(metrics.cards.every(c=>c.minHeight>=20&&c.minHeight<=59),'Hauteur réservée maîtrisée : '+JSON.stringify(metrics));
+   assert.ok(metrics.cards.every(c=>c.title.length>0),'Les intitulés restent lisibles');
+   assert.ok(metrics.footer&&metrics.footer.label.length>0,'La bande des défis reste présente');
+   assert.ok(metrics.footer.paddingTop<=6,'Pied de la carte resserré : '+JSON.stringify(metrics.footer));
+   await page.close();
+  }
+ }finally{await browser.close()}
+});
