@@ -163,6 +163,7 @@ function labUI(){
    "#menuScreen .mode-card.sudden .score-mode-options > #startSudden .score-mode-detail,#menuScreen .mode-card.sudden .score-mode-options > #suddenBtn .score-mode-detail{right:69px!important}",
    "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-foot:not(.score-mode-bonus){display:none!important}",
    "#menuScreen .mode-card.sudden .score-mode-options > button .score-mode-bonus{position:relative!important;inset:auto!important;margin:1px auto 0!important}",
+   "#menuScreen #suddenBtn .score-mode-detail{position:absolute!important;bottom:6px!important;right:70px!important;left:auto!important;white-space:nowrap!important;max-width:none!important}",
    "#menuScreen #startSudden > .mlab-sudden,#menuScreen #suddenBtn > .mlab-sudden{position:absolute!important;bottom:4px!important;right:7px!important;z-index:5!important;margin:0!important;flex-wrap:nowrap!important;pointer-events:none}",
    "#hardMenuScreen .hard-level-card,#hardMenu .hard-level-card,#hardMenu .hard-card{position:relative!important;padding-bottom:38px!important}",
    "#hardMenuScreen .mlab-hard,#hardMenu .mlab-hard{position:absolute!important;right:9px!important;bottom:6px!important;z-index:4!important;margin:0!important;flex-wrap:nowrap!important;pointer-events:none}",
