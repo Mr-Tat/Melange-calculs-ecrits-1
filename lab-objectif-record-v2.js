@@ -84,7 +84,7 @@ function labUI(){
    ".mlab-cup{width:27px;height:29px;display:inline-flex;position:relative;flex:none;vertical-align:middle;margin:0 2px;filter:drop-shadow(0 1px 2px #0009)}",
    ".mlab-cup svg{display:block;width:100%;height:100%}",
    ".mlab-cup b{position:absolute;right:-3px;bottom:-2px;border-radius:50%;background:#173b2e;color:#bcffd0;border:1px solid #6cba8c;width:14px;height:14px;font:900 11px system-ui;display:grid;place-items:center}",
-   "#menuScreen .mlab-mastery-under-series{display:flex!important;align-items:center!important;justify-content:flex-end!important;grid-column:1/-1!important;flex:0 0 100%!important;min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;min-height:34px!important;padding:1px clamp(7px,1.5vw,18px) 2px!important;margin:2px 0 0!important;pointer-events:none}",
+   "#menuScreen .mlab-mastery-under-series{display:flex!important;align-items:center!important;justify-content:flex-end!important;grid-column:1/-1!important;flex:0 0 100%!important;min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;min-height:34px!important;padding:1px clamp(18px,2vw,32px) 2px!important;margin:2px 0 0!important;pointer-events:none}",
    "#menuScreen .mlab-mastery-under-series .mlab-cup{width:30px;height:33px;margin:0;pointer-events:auto}",
    ".mlab-mastery-fallback{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:6px 0 0;color:#c3d2e4;font:700 11px system-ui}",
    ".mlab-sudden,.mlab-hard{display:flex;align-items:center;justify-content:center;gap:3px}",
