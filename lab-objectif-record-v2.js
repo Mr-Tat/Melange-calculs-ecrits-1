@@ -130,7 +130,7 @@ function labUI(){
         ||document.querySelector("#menuScreen #classicLevel")
         ||document.querySelector("#menuScreen #levelSelect");
       const title=select?.selectedOptions?.[0]?.textContent||"";
-      const m=title.match(/(?:Niveau|Niv\\.?)\\s*([123])/i);
+      const m=title.match(/(?:Niveau|Niv\.?)\s*([123])/i);
       const v=Number(select?.value);
       const current=m?Number(m[1]):select?.id==="classicMaxDigits"&&v>=2&&v<=4?v-1:v;
       if(current===rights.level){
