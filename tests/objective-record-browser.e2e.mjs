@@ -239,6 +239,21 @@ test('LAB V3 — mini-coupes dans les coins et XP sans fond sombre',async()=>{
    assert.match(await sudden.locator('.score-mode-detail').textContent(),/Reste \d+ XP/);
    assert.equal(await frame.locator('#startThreeLives .score-mode-foot:not(.score-mode-bonus)').count(),0);
    assert.equal(await frame.locator('#startThreeLives .score-mode-meta').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
+   // LAB V4 : gabarit compact + texte intermédiaire + violet bordeaux.
+   const v4=await frame.locator('#startThreeLives').evaluate(btn=>{
+     const counts=[...document.querySelectorAll('#menuScreen .classic-count-btn[data-count],#menuScreen .countBtn[data-count]')];
+     const mastery=document.querySelector('#menuScreen .mlab-mastery-under-series');
+     const summary=document.querySelector('#menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary');
+     return {background:getComputedStyle(btn).backgroundImage,
+       fonts:counts.map(el=>Number.parseFloat(getComputedStyle(el).fontSize)),
+       masteryHeight:mastery?.getBoundingClientRect().height,
+       summaryMargin:summary?Number.parseFloat(getComputedStyle(summary).marginTop):null};
+   });
+   assert.match(v4.background,/rgb\(96,\s*45,\s*73\)/,'3 vies : bordeaux assombri');
+   assert.equal(v4.fonts.length,3,'Trois libellés 4/10/20 à dimensionner');
+   for(const font of v4.fonts)assert.ok(font>=13&&font<=18.5,'Texte intermédiaire sans débordement sur petit écran : '+font);
+   assert.ok(v4.masteryHeight>=20&&v4.masteryHeight<=25,'Pas de grande ligne vide sous la coupe : '+v4.masteryHeight);
+   if(v4.summaryMargin!==null)assert.ok(v4.summaryMargin<=9,'Tableau rapproché de la coupe : '+v4.summaryMargin);
    await score.first().evaluate(()=>{
      const api=window.MathasPoints,t=api.readTrophies();t.scoreOne.bronze=true;
      localStorage.setItem(api.trophyKey,JSON.stringify(t));
