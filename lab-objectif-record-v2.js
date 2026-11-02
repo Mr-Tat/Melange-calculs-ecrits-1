@@ -133,6 +133,19 @@ function labUI(){
       meta.style.setProperty("min-height","0","important");
       meta.style.setProperty("padding","0","important");
     });
+    // Particularité de Mélange : son style natif ancre le crédit XP sur une
+    // sous-zone de bouton. L'aligner explicitement à gauche des trois coupes.
+    const mixButton=document.getElementById("suddenBtn");
+    const mixXp=mixButton?.querySelector(".score-mode-detail");
+    if(mixXp){
+      mixButton.style.setProperty("position","relative","important");
+      mixXp.style.setProperty("position","absolute","important");
+      mixXp.style.setProperty("right","70px","important");
+      mixXp.style.setProperty("left","auto","important");
+      mixXp.style.setProperty("bottom","6px","important");
+      mixXp.style.setProperty("max-width","none","important");
+      mixXp.style.setProperty("white-space","nowrap","important");
+    }
   }
   const css=document.createElement("style");
   css.textContent=[
