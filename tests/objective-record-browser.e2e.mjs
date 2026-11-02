@@ -27,6 +27,7 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   const prev=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
   // Changer vraiment les opérations cochées, sans dériver de l'ancienne sélection.
   await frame.locator('#opsSelector [data-op="mul"]').click();
+   await frame.locator('#opsSelector [data-op="mul"]').dispatchEvent('change');
   const two=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
   await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').filter({hasText:/Reste (?!28\\b)\\d+ XP/}).waitFor({timeout:3000});
    assert.notEqual(prev,await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent());
