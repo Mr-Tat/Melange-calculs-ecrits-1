@@ -10,11 +10,8 @@ function renderPreview(){
  const level=String(doc.querySelector('#levelSelect')?.value||'1');
  const amounts=fakeValues[level]?.[selected],visible=selector.value!=='free'&&Array.isArray(amounts);
  // Sur 320 px, économiser l'espace laissé entre les trois séries.
- doc.querySelectorAll('#menuScreen .mathas-series-panel').forEach(panel=>{
-  panel.style.setProperty('gap','4px','important');
-  panel.style.setProperty('padding-left','4px','important');
-  panel.style.setProperty('padding-right','4px','important');
- });
+ // Espacements des boutons repris du moteur natif, sans contrainte LAB.
+ 
  for(const button of doc.querySelectorAll('#menuScreen .countBtn[data-count]')){
   // Le CSS natif du menu impose parfois un retour à la ligne avec une
   // spécificité supérieure. Le style inline ne concerne que cet essai.
