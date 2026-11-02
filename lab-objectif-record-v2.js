@@ -190,7 +190,7 @@ function labUI(){
    ".mlab-pair>button:disabled{opacity:.4;filter:grayscale(.5);cursor:not-allowed}",
    "@media(max-width:380px){.mlab-cup{width:23px;height:25px}.mlab-pair>button{font-size:.68rem}}",
    "/* LAB V4 : typography, trophy spacing, burgundy three-lives accents. */",
-   "html body #menuScreen .classic-count-btn[data-count],html body #menuScreen .countBtn[data-count]{font-size:clamp(.83rem,2.1vw,1.125rem)!important;line-height:1.12!important}",
+   "html body #menuScreen .mode-card .classic-grid > button.launch.countBtn[data-count],html body #menuScreen .mode-card .classic-grid > button.countBtn[data-count],html body #menuScreen .mathas-series-panel > button.countBtn[data-count],html body #menuScreen .classic-count-btn[data-count],html body #menuScreen .countBtn[data-count]{font-size:clamp(.83rem,2.1vw,1.125rem)!important;line-height:1.12!important}",
    "#menuScreen .mlab-mastery-under-series{flex:0 0 auto!important;height:23px!important;min-height:23px!important;max-height:23px!important;padding-top:0!important;padding-bottom:0!important;margin-top:0!important}",
    "html body #menuScreen .mathas-v535-actions > .mode-card.classic > .mathas-v535-summary{margin-top:6px!important;padding-top:6px!important}",
    "#menuScreen .mode-card.sudden .score-mode-options > #startThreeLives,#menuScreen #startThreeLives{background:linear-gradient(165deg,#602d49 0%,#371c35 100%)!important;border-color:#a16c86!important;box-shadow:inset 0 1px 0 #ffffff17,inset 0 -2px 0 #281423b8,0 4px 0 #281826,0 7px 13px #0004!important}",
