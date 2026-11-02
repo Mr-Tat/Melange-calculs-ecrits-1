@@ -34,6 +34,19 @@ function labUI(){
     }
     let t;try{t=window.MathasPoints?.readTrophies?.()}catch{return}
     if(!t)return;
+    // Dans le pilote authentifie uniquement, la source des coupes est le
+    // registre LAB serveur (jamais le localStorage fictif du prototype).
+    let pilot=null;
+    try{pilot=window.parent?.parent?.MathasPilotState||null}catch{}
+    if(pilot?.active&&Array.isArray(pilot.trophies)){
+      const gained=new Set(pilot.trophies);
+      const mastery={4:[],10:[],20:[]};
+      for(const n of [4,10,20])for(let l=1;l<=3;l++)mastery[n].push(gained.has("mastery:"+l+":"+n));
+      t={...t,mastery,
+        sudden:[1,2,3].map(l=>gained.has("sudden:"+l)),
+        hardAwards:Object.fromEntries(keys.map((name,i)=>[name,[1,2,3].map(l=>gained.has("hard:"+l+":"+[3,5,10][i]))])),
+        scoreOne:Object.fromEntries(keys.map((name,i)=>[name,gained.has("score:"+[200,400,600][i])]))};
+    }
     // Les cinq gabarits ont des CSS tardifs : priorite stable au texte 4/10/20.
     document.querySelectorAll("#menuScreen .classic-count-btn[data-count],#menuScreen .countBtn[data-count]").forEach(button=>{
       button.style.setProperty("font-size","clamp(.72rem,2.1vw,1.125rem)","important");
@@ -107,6 +120,35 @@ function labUI(){
         if(simulation==="free"){xp?.remove();continue}
         if(!xp){xp=document.createElement("span");xp.className="score-mode-detail";meta.appendChild(xp)}
         xp.textContent="Reste "+(simulation==="zero"?0:value)+" XP";
+      }
+    }
+    // Dans le pilote Connect, le serveur renvoie les plafonds restants pour
+    // le niveau et les operations actuellement choisis. Jamais d'estimation locale.
+    if(pilot?.active&&pilot.rights){
+      const rights=pilot.rights;
+      const select=document.querySelector("#menuScreen #classicMaxDigits")
+        ||document.querySelector("#menuScreen #classicLevel")
+        ||document.querySelector("#menuScreen #levelSelect");
+      const title=select?.selectedOptions?.[0]?.textContent||"";
+      const m=title.match(/(?:Niveau|Niv\\.?)\\s*([123])/i);
+      const v=Number(select?.value);
+      const current=m?Number(m[1]):select?.id==="classicMaxDigits"&&v>=2&&v<=4?v-1:v;
+      if(current===rights.level){
+        document.querySelectorAll("#menuScreen .classic-count-btn[data-count],#menuScreen .countBtn[data-count]").forEach(button=>{
+          const amount=rights.classic?.[button.getAttribute("data-count")];
+          if(!Number.isSafeInteger(amount))return;
+          let line=button.querySelector(".classic-xp-remaining");
+          if(!line){line=document.createElement("span");line.className="classic-xp-remaining";button.appendChild(line)}
+          line.textContent="Reste "+amount+" XP";
+        });
+        for(const [button,amount] of [[three,rights.threeLives],[btn,rights.sudden]]){
+          if(!button||!Number.isSafeInteger(amount))continue;
+          const meta=button.querySelector(".score-mode-meta");
+          if(!meta)continue;
+          let line=meta.querySelector(".score-mode-detail");
+          if(!line){line=document.createElement("span");line.className="score-mode-detail";meta.appendChild(line)}
+          line.textContent="Reste "+amount+" XP";
+        }
       }
     }
     // Trois coupes de score (200, 400 et 600 points) dans la carte du score.
