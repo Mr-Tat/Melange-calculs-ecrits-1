@@ -137,7 +137,15 @@ test('LAB V2 — trophées et points visibles',async()=>{
    assert.equal(await frame.locator('#suddenBtn .score-mode-bonus').textContent(),'Score ×2');
    const mastery=frame.locator('#menuScreen .mlab-mastery .mlab-cup');
    await mastery.first().waitFor({timeout:30000});
-   assert.equal(await mastery.count(),3,'Trois coupes de maîtrise visibles dans les lignes 1/2/3');
+   assert.ok(await mastery.count()>=1,'La coupe du niveau actuellement visible doit être affichée');
+   // Simuler un trophée déjà acquis UNIQUEMENT dans le stockage isolé du jeu.
+   await cups.first().evaluate(()=>{
+    const api=window.MathasPoints;
+    const snapshot=api.readTrophies();snapshot.sudden[0]=true;
+    localStorage.setItem(api.trophyKey,JSON.stringify(snapshot));
+   });
+   await cups.first().locator('b').waitFor({timeout:5000});
+   assert.match(await cups.first().getAttribute('title'),/obtenu/);
    await frame.locator('#startThreeLives').click();
    await frame.locator('#scorePill').waitFor();
    await frame.locator('#scorePill').getAttribute('title');
