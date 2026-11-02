@@ -36,16 +36,13 @@ function renderPreview(){
  }
 }
 selector.addEventListener('change',renderPreview);
-// La démonstration doit suivre aussi les variations de classes des trois opérations.
-// Lecture seule ; aucun XP et aucune donnée Connect réels.
-setInterval(()=>{if(!document.hidden)renderPreview()},350);
 frame.addEventListener('load',()=>{
  renderPreview();
- frame.contentDocument?.addEventListener('click',()=>setTimeout(renderPreview,0));
+ frame.contentDocument?.addEventListener('click',()=>setTimeout(renderPreview,0),true);
  frame.contentDocument?.addEventListener('change',renderPreview);
  // Les opérations peuvent changer via une classe CSS sans événement change.
  // Recalculer immédiatement l'XP fictif sur la véritable combinaison active.
- const toggles=frame.contentDocument?.querySelector('#opsSelector');
+ const toggles=frame.contentDocument?.documentElement;
  if(toggles){
    const observer=new MutationObserver(()=>renderPreview());
    observer.observe(toggles,{subtree:true,attributes:true,attributeFilter:['class']});
