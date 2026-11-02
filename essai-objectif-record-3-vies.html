@@ -36,6 +36,9 @@ function renderPreview(){
  }
 }
 selector.addEventListener('change',renderPreview);
+// La démonstration doit suivre aussi les variations de classes des trois opérations.
+// Lecture seule ; aucun XP et aucune donnée Connect réels.
+setInterval(()=>{if(!document.hidden)renderPreview()},350);
 frame.addEventListener('load',()=>{
  renderPreview();
  frame.contentDocument?.addEventListener('click',()=>setTimeout(renderPreview,0));
