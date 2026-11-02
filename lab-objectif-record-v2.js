@@ -32,6 +32,18 @@ function labUI(){
       const done=[4,10,20].every(n=>t.mastery?.[n]?.[level-1]===true);
       upd(slot,cup(level-1,done,"Coupe de maîtrise niveau "+level+" : 4/4, 10/10, 20/20"));
     });
+    // Repli propre pour Mélange et tout moteur dont le tableau natif n'est pas affiché.
+    const nativeRows=document.querySelectorAll("#menuScreen .mathas-v535-table tbody tr:not(.mathas-v535-hard-row)");
+    const anchor=document.querySelector("#menuScreen .classic-grid")||document.querySelector("#menuScreen .classic-count-picker");
+    let fallback=document.querySelector("#menuScreen .mlab-mastery-fallback");
+    if(nativeRows.length){fallback?.remove()}
+    else if(anchor){
+      if(!fallback){fallback=document.createElement("div");fallback.className="mlab-mastery mlab-mastery-fallback";anchor.insertAdjacentElement("afterend",fallback)}
+      const chosen=Number(document.querySelector("#menuScreen #levelSelect")?.value||document.querySelector("#menuScreen #classicLevel")?.value||1);
+      const level=chosen>=1&&chosen<=3?chosen:1;
+      const done=[4,10,20].every(n=>t.mastery?.[n]?.[level-1]===true);
+      upd(fallback,'<span>Niv. '+level+' · trophée 100 % </span>'+cup(level-1,done,"Maîtrise niveau "+level+" : 4/4, 10/10, 20/20"));
+    }
     const btn=document.getElementById("startSudden")||document.getElementById("suddenBtn");
     if(btn){
       const meta=btn.querySelector(".score-mode-meta")||btn;
@@ -55,6 +67,7 @@ function labUI(){
    ".mlab-cup svg{display:block;width:100%;height:100%}",
    ".mlab-cup b{position:absolute;right:-3px;bottom:-2px;border-radius:50%;background:#173b2e;color:#bcffd0;border:1px solid #6cba8c;width:14px;height:14px;font:900 11px system-ui;display:grid;place-items:center}",
    ".mlab-mastery{display:inline-flex;margin-left:8px;vertical-align:middle}",
+   ".mlab-mastery-fallback{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:6px 0 0;color:#c3d2e4;font:700 11px system-ui}",
    ".mlab-sudden,.mlab-hard{display:flex;align-items:center;justify-content:center;gap:3px}",
    ".mlab-sudden{margin-top:4px;flex-wrap:nowrap}.mlab-hard{margin-top:10px}",
    "#hardMenuScreen .mlab-pair,#hardMenu .mlab-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;width:100%;min-width:0}",
