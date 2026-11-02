@@ -293,3 +293,29 @@ test('LAB V5 — trophées discrets et lisibles sur PC/téléphone',async()=>{
   }
  }finally{await browser.close()}
 });
+
+
+// La session pedagogique reste locale : seul son etat de fin est expose au pilote LAB.
+test('LAB pilot: la session partage son mode, sa phase et son score sans authentification',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
+  await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+  const game=page.frameLocator('#game');
+  const start=game.locator('#menuScreen .classic-count-btn[data-count="4"],#menuScreen .countBtn[data-count="4"]');
+  await start.first().waitFor({timeout:30000});
+  await game.locator('body').evaluate(()=>{
+    const original=window.MathasLabV2Update;
+    if(typeof original!=='function')throw Error('LAB telemetry not registered');
+    window.MathasLabV2Update=data=>{window.__labPilotLastUpdate=data;original(data)};
+  });
+  await start.first().click();
+  const data=await game.locator('body').evaluate(()=>window.__labPilotLastUpdate);
+  assert.ok(data,'First scoring update must be exposed to LAB');
+  assert.equal(data.mode,'classic');
+  assert.ok(Object.hasOwn(data,'phase'),'Phase required for end-of-game recording');
+  assert.ok(Object.hasOwn(data,'ops'),'Operations required for mixed calculations');
+  assert.equal(data.hard,false);
+  await page.close();
+ }finally{await browser.close()}
+});
