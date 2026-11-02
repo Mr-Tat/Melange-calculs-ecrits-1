@@ -28,6 +28,9 @@ test('Mélange : 2 modes, aucun XP en libre, 7 sélections distinctes en aperçu
   // Changer vraiment les opérations cochées, sans dériver de l'ancienne sélection.
   await frame.locator('#opsSelector [data-op="mul"]').click();
    await frame.locator('#opsSelector [data-op="mul"]').dispatchEvent('change');
+   const afterMul=await frame.locator('#opsSelector .op-toggle.active').evaluateAll(nodes=>nodes.map(e=>e.dataset.op).join(','));
+   assert.notEqual(afterMul,'add,sub,mul','Le clic sur multiplication doit modifier les opérations sélectionnées');
+   await page.locator('#xpMode').dispatchEvent('change');
   const two=await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent();
   await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').filter({hasText:/Reste (?!28\\b)\\d+ XP/}).waitFor({timeout:3000});
    assert.notEqual(prev,await frame.locator('.countBtn[data-count="4"] .classic-xp-remaining').textContent());
