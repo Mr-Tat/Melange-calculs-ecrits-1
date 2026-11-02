@@ -59,10 +59,12 @@ function labUI(){
       const meta=btn.querySelector(".score-mode-meta")||btn;
       let slot=meta.querySelector(".mlab-sudden");if(!slot){slot=document.createElement("span");slot.className="mlab-sudden";meta.appendChild(slot)}
       upd(slot,keys.map((_,i)=>cup(i,t.sudden?.[i]===true,"Mort subite niveau "+(i+1)+" : 25 calculs")).join(""));
-      const bonus=btn.querySelector(".score-mode-bonus");if(bonus&&bonus.textContent!=="Score ×2")bonus.textContent="Score ×2";
+      let bonus=btn.querySelector(".score-mode-bonus");
+      if(!bonus){bonus=document.createElement("span");bonus.className="score-mode-foot score-mode-bonus";meta.prepend(bonus)}
+      if(bonus.textContent!=="Score ×2")bonus.textContent="Score ×2";
       if(btn.getAttribute("aria-label")?.includes("20 pour cent"))btn.setAttribute("aria-label","Mort subite · Score ×2");
     }
-    document.querySelectorAll("#hardMenuScreen .hard-level-card,#hardMenu .hard-card").forEach((card,i)=>{
+    document.querySelectorAll("#hardMenuScreen .hard-level-card,#hardMenu .hard-level-card,#hardMenu .hard-card").forEach((card,i)=>{
       const level=Number((card.querySelector("h3")?.textContent||"").match(/[123]/)?.[0]||i+1);
       if(level<1||level>3)return;
       let slot=card.querySelector(".mlab-hard");if(!slot){slot=document.createElement("div");slot.className="mlab-hard";card.appendChild(slot)}
@@ -131,6 +133,13 @@ function patch(game,kind){
       swap("const modeLabel=hardSession.mode==='training'?'🧠 Entraînement':hardSession.mode==='challenge'?'🎯 5 calculs':'💀 Mort subite';","const modeLabel=hardSession.mode==='training'?'🧠 Entraînement':hardSession.mode==='three-lives'?'❤️ 3 vies':hardSession.mode==='challenge'?'🎯 5 calculs':'💀 Mort subite';","titre HARD");
     }
   }
+  // Le moteur original recalcule les verrous fréquemment : dans cette page
+  // d'essai seulement, ouvrir HARD sans altérer la progression sauvegardée.
+  game=game.replaceAll("h.disabled=!p.hard;h.textContent=hardLabel(!p.hard)",
+    "h.disabled=!p.hard&&!window.__mathasThreeLivesDemo;h.textContent=hardLabel(!p.hard&&!window.__mathasThreeLivesDemo)");
+  game=game.replaceAll("hb.disabled=!p.hard;","hb.disabled=!p.hard&&!window.__mathasThreeLivesDemo;");
+  game=game.replaceAll("hb.classList.toggle('progress-locked',!p.hard)","hb.classList.toggle('progress-locked',!p.hard&&!window.__mathasThreeLivesDemo)");
+  game=game.replaceAll("hb.textContent=hardLabel(!p.hard)","hb.textContent=hardLabel(!p.hard&&!window.__mathasThreeLivesDemo)");
   swap("</body>","<scr"+"ipt>("+labUI.toString()+")();</scr"+"ipt></body>","chargement");
   return game;
 }
