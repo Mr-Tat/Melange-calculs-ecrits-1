@@ -62,7 +62,13 @@ function labUI(){
     }
     const btn=document.getElementById("startSudden")||document.getElementById("suddenBtn");
     if(btn){
-      const meta=btn.querySelector(".score-mode-meta")||btn;
+      let meta=btn.querySelector(".score-mode-meta");
+      if(!meta){
+        meta=document.createElement("span");meta.className="score-mode-meta";
+        const oldBonus=btn.querySelector(".score-mode-bonus");
+        if(oldBonus)meta.appendChild(oldBonus);
+        btn.appendChild(meta);
+      }
       let slot=btn.querySelector(":scope > .mlab-sudden");if(!slot){slot=document.createElement("span");slot.className="mlab-sudden";btn.appendChild(slot)}
       upd(slot,keys.map((_,i)=>cup(i,t.sudden?.[i]===true,"Mort subite niveau "+(i+1)+" : 25 calculs")).join(""));
       let bonus=btn.querySelector(".score-mode-bonus");
@@ -73,7 +79,24 @@ function labUI(){
     // Le mode 3 vies n'a pas de trophée : inutile de répéter "Sans trophée"
     // dans une sous-carte sombre. La seule annotation reste le crédit XP.
     const three=document.getElementById("startThreeLives");
+    if(three&&!three.querySelector(".score-mode-meta")){
+      const meta=document.createElement("span");meta.className="score-mode-meta";three.appendChild(meta);
+    }
     three?.querySelectorAll(".score-mode-foot:not(.score-mode-bonus)").forEach(node=>node.remove());
+    // Quelques moteurs retirent un conteneur lors de la normalisation du menu.
+    // Récréer seulement le badge XP fictif en mode Connect simulé, sans appel réseau.
+    let simulation=null;
+    try{simulation=window.parent?.document?.getElementById("xp-preview-mode")?.value||null}catch{}
+    if(simulation){
+      for(const [button,value] of [[three,10],[btn,20]]){
+        const meta=button?.querySelector(".score-mode-meta");
+        if(!meta)continue;
+        let xp=meta.querySelector(".score-mode-detail");
+        if(simulation==="free"){xp?.remove();continue}
+        if(!xp){xp=document.createElement("span");xp.className="score-mode-detail";meta.appendChild(xp)}
+        xp.textContent="Reste "+(simulation==="zero"?0:value)+" XP";
+      }
+    }
     // Trois coupes de score (200, 400 et 600 points) dans la carte du score.
     const scoreCard=document.querySelector("#menuScreen #mathasPointsQuick .mathas-points-quick-item--best");
     if(scoreCard){
@@ -90,6 +113,26 @@ function labUI(){
     });
     const note=document.querySelector("#hardMenuScreen .hard-welcome-v6,#hardMenu .hard-welcome-v6");
     if(note?.textContent.includes("La faute est toujours fatale"))note.textContent="Deux défis HARD : 3 vies ou Mort subite.";
+    // L'ancien CSS des cinq moteurs est très spécifique ; les indicateurs
+    // portent leur taille directement, pour garder partout la réduction de 40 %.
+    document.querySelectorAll("#menuScreen .mlab-cup,#hardMenuScreen .mlab-cup,#hardMenu .mlab-cup").forEach(el=>{
+      const mastery=!!el.closest(".mlab-mastery-under-series");
+      el.style.setProperty("width",mastery?"18px":"16px","important");
+      el.style.setProperty("height",mastery?"20px":"18px","important");
+      el.style.setProperty("min-width",mastery?"18px":"16px","important");
+      el.style.setProperty("min-height",mastery?"20px":"18px","important");
+      el.style.setProperty("flex","0 0 auto","important");
+    });
+    // La sous-zone transparente doit primer sur les styles natifs et sur
+    // certaines règles du panneau de démonstration injectées plus tard.
+    document.querySelectorAll("#menuScreen #startThreeLives .score-mode-meta,#menuScreen #startSudden .score-mode-meta,#menuScreen #suddenBtn .score-mode-meta").forEach(meta=>{
+      for(const key of ["background","background-image","box-shadow","outline"])meta.style.setProperty(key,key==="background"?"transparent":key==="background-image"?"none":"none","important");
+      meta.style.setProperty("border","0","important");
+      meta.style.setProperty("position","static","important");
+      meta.style.setProperty("width","auto","important");
+      meta.style.setProperty("min-height","0","important");
+      meta.style.setProperty("padding","0","important");
+    });
   }
   const css=document.createElement("style");
   css.textContent=[
