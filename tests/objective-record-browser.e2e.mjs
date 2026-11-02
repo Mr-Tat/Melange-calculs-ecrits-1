@@ -121,3 +121,69 @@ test('Mélange : moteur réel, 3 cœurs dans le bandeau, PC et téléphone 320 p
   }
  }finally{await browser.close()}
 });
+
+test('LAB V2 — trophées et points visibles',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const mobile of [false,true]){
+   const page=await browser.newPage({viewport:mobile?{width:320,height:650}:{width:1440,height:900},reducedMotion:'reduce'});
+   const traffic=[];page.on('request',req=>{if(/supabase\\.co/i.test(req.url()))traffic.push(req.url())});
+   await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+   const frame=page.frameLocator('#game');
+   await frame.locator('#startThreeLives').waitFor({timeout:30000});
+   const cups=frame.locator('#suddenBtn .mlab-sudden .mlab-cup');
+   await cups.first().waitFor({timeout:30000});
+   assert.equal(await cups.count(),3,'Trois coupes de Mort subite visibles');
+   assert.equal(await frame.locator('#suddenBtn .score-mode-bonus').textContent(),'Score ×2');
+   const mastery=frame.locator('#menuScreen .mlab-mastery .mlab-cup');
+   await mastery.first().waitFor({timeout:30000});
+   assert.ok(await mastery.count()>=1,'La coupe du niveau actuellement visible doit être affichée');
+   // Simuler un trophée déjà acquis UNIQUEMENT dans le stockage isolé du jeu.
+   await cups.first().evaluate(()=>{
+    const api=window.MathasPoints;
+    const snapshot=api.readTrophies();snapshot.sudden[0]=true;
+    localStorage.setItem(api.trophyKey,JSON.stringify(snapshot));
+   });
+   await cups.first().locator('b').waitFor({timeout:5000});
+   assert.match(await cups.first().getAttribute('title'),/obtenu/);
+   await frame.locator('#startThreeLives').click();
+   await frame.locator('#scorePill').waitFor();
+   await frame.locator('#scorePill').getAttribute('title');
+   assert.match(await frame.locator('#scorePill').textContent(),/^Score : 0 pts$/,'Score final affiché dès le départ');
+   assert.deepEqual(traffic,[],'Aucune connexion à Supabase pendant la simulation');
+   await page.close();
+  }
+ }finally{await browser.close()}
+});
+
+test('LAB V2 — HARD deux boutons et coupes',async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  for(const mobile of [false,true]){
+   const page=await browser.newPage({viewport:mobile?{width:320,height:650}:{width:1440,height:900},reducedMotion:'reduce'});
+   await page.goto('http://127.0.0.1:8123/essai-objectif-record-3-vies.html',{waitUntil:'domcontentloaded'});
+   const frame=page.frameLocator('#game');
+   await frame.locator('#startThreeLives').waitFor({timeout:20000});
+   await frame.locator('#levelBtn').click();
+   await frame.locator('#levelMenu .level-option.hard').click();
+   const pair=frame.locator('.mlab-pair');
+   await pair.first().waitFor({timeout:20000});
+   assert.equal(await pair.count(),3,'Un duo de boutons sur chacun des trois HARD');
+   const b=pair.first().locator('button');
+   assert.equal(await b.count(),2,'Le bouton original est partagé en deux moitiés');
+   assert.match(await b.nth(0).textContent(),/3 vies/);
+   assert.match(await b.nth(1).textContent(),/Mort subite/);
+   const a=await b.nth(0).boundingBox(),c=await b.nth(1).boundingBox();
+   assert.ok(a&&c&&a.x+a.width<=c.x+2,'Aucun chevauchement à 320 px');
+   const cups=frame.locator('.mlab-hard .mlab-cup');
+   await cups.first().waitFor({timeout:5000});
+   assert.equal(await cups.count(),9,'Trois coupes dans chaque carte HARD');
+   assert.equal(await b.nth(0).isDisabled(),false,'3 vies HARD 1 accessible');
+   await b.nth(0).click();
+   const score=frame.locator('#hardSessionScore,#hardScore').first();
+   await score.waitFor({timeout:15000});
+   assert.match(await score.textContent(),/^Score : 0 pts$/,'Score HARD direct');
+   await page.close();
+  }
+ }finally{await browser.close()}
+});

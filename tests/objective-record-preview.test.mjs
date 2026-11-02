@@ -8,6 +8,8 @@ import {Script} from 'node:vm';
 const preview=readFileSync(new URL('../essai-objectif-record-3-vies.html',import.meta.url),'utf8');
 const native=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const loaderSource=preview.match(/<script>([\s\S]*?)<\/script>/)?.[1]?.trim();
+const labV2=readFileSync(new URL('../lab-objectif-record-v2.js',import.meta.url),'utf8');
+
 async function compilePreview(motor=native){
  assert.ok(loaderSource,'Le chargeur de la démo doit être présent');
  const state={textContent:'',removed:false,remove(){this.removed=true}};
@@ -18,7 +20,9 @@ async function compilePreview(motor=native){
   if(id==='game')return frame;
   return select;
  }};
- await new Function('document','fetch','return '+loaderSource)(doc,async()=>({ok:true,text:async()=>motor}));
+ const labWindow={};
+ new Function('window',labV2)(labWindow);
+ await new Function('document','fetch','window','return '+loaderSource)(doc,async()=>({ok:true,text:async()=>motor}),labWindow);
  return {state,frame};
 }
 test('essai isolé : carte, trois vies, sous-titre et bonus sans crédit serveur',async()=>{
@@ -48,6 +52,14 @@ test('chaque script injecté et natif reste syntaxiquement compilable',async()=>
   if(/type=["']module/.test(match[1])||/src=/.test(match[1]))continue;
   assert.doesNotThrow(()=>new Script(match[2]),'Script invalide '+i);
  }
+});
+test('nouveaux essais : score visible, 3 vies HARD et trophées sans compte réel',async()=>{
+ const {frame}=await compilePreview();
+ assert.match(frame.srcdoc,/MathasLabV2Update/);
+ assert.match(frame.srcdoc,/mlab-pair/);
+ assert.match(frame.srcdoc,/mlab-cup/);
+ assert.match(frame.srcdoc,/hardSession\.hearts/);
+ assert.doesNotMatch(labV2,/connect-results|supabase\.co|fetch\(/i);
 });
 test('ancrages exacts : un moteur inconnu fait échouer la démo sans affichage fallacieux',async()=>{
  const {state,frame}=await compilePreview('<html><head></head><body>Mauvais moteur</body></html>');
